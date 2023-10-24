@@ -89,21 +89,15 @@ def get_places():
                     open_now = None
             else:
                 open_now = None
-            # contacts = place_id_data["result"]["formatted_phone_number"]
-            # open_now = place_id_data["result"]["current_opening_hours"]["open_now"]
-            # print(f"\n{place_id_data['result']['formatted_phone_number']}\t")
+
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {e}") 
 
-        # places_result.append(f"***\nname: {name}\nplace_id: {place_id}\nrating: {rating}\nlocation: {location}\ncontacts: {contacts}\nopen_now: {open_now}***")
         single_place_result["name"] = name
         single_place_result["rating"] = rating
         single_place_result["open_now"] = open_now
         single_place_result["mobile_number"] = contacts
         places_result.append(single_place_result)
-        
-
-        # places_result.append(f"***\nname: {name}\nplace_id: {place_id}\nrating: {rating}\nlocation: {location}***")
     
     return jsonify(places_result)
     
