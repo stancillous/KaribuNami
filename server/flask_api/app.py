@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
 import requests
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-PLACE = "woobaloobadubdub"
+PLACE = "Hotels"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -104,7 +104,18 @@ def get_places():
                         photographs.append(photo_url)
                         count += 1
 
-
+            # get the place's reviews
+            place_reviews = []
+            if "reviews" in place_id_data["result"]:
+                reviews = place_id_data["result"]["reviews"]
+                for review in reviews:
+                    place_reviews.append({
+                        "author_name": review.get("author_name", "name undisclosed"),
+                        "author_dp": review.get("profile_photo_url", "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"),
+                        "rating": review.get("rating", 3),
+                        "time_posted": review.get("relative_time_description", "a while ago"),
+                        "review_text": review.get("text", "No comment")
+                    })
 
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {e}") 
@@ -115,10 +126,11 @@ def get_places():
         single_place_result["mobile_number"] = contacts
         single_place_result["location"] = maps_url
         single_place_result["photos"] = photographs
+        single_place_result["reviews"] = place_reviews
         places_result.append(single_place_result)
     
     return jsonify(places_result)
     
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
