@@ -10,7 +10,7 @@ app = Flask(__name__)
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-PLACE = "Barbershop"
+PLACE = "woobaloobadubdub"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -67,6 +67,9 @@ def get_places():
         place_id = place["place_id"]
         rating = place["rating"]
         location = place["geometry"]['location']
+        loc_lat = location['lat']
+        loc_long = location['lng']
+        maps_url = f'https://www.google.com/maps?q={loc_lat},{loc_long}'
 
         # Get contact info and open/close status from places details api
         try:
@@ -89,6 +92,19 @@ def get_places():
                     open_now = None
             else:
                 open_now = None
+            
+            if "photos" in place_id_data["result"]:
+                count = 0
+                photographs = []
+                for photo in place_id_data["result"]["photos"]:
+                    if count > 2:
+                        break
+                    else:
+                        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={photo['photo_reference']}&key={API_KEY}"
+                        photographs.append(photo_url)
+                        count += 1
+
+
 
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {e}") 
@@ -97,6 +113,8 @@ def get_places():
         single_place_result["rating"] = rating
         single_place_result["open_now"] = open_now
         single_place_result["mobile_number"] = contacts
+        single_place_result["location"] = maps_url
+        single_place_result["photos"] = photographs
         places_result.append(single_place_result)
     
     return jsonify(places_result)
