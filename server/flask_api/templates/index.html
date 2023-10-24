@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karibu Nami</title>
+</head>
+<body>
+    <h1>karibu nami</h1>
+
+    <div>
+        {% for place in result %}
+        <div style="border: 1px solid black;">
+            <h2>{{place.name}}</h2>
+            <p>{{place.mobile_number}}</p>
+            <a href={{place.location}}>location</a>
+            {% if place.open_now %}
+            <p>is open</p>            
+            {% else %}
+            <p>is closed</p>
+            {% endif %}
+            <img src={{place.photos[0]}} alt="photo of the place">
+            <p>Rating: {{place.rating}}</p>
+
+            <div style="border: 1px solid blue;" class="reviews">
+                {% for review in place.reviews %}
+                <div class="reviewer">
+                    <img src={{review.author_dp}} alt="author's display photo">
+                    <p>{{review.author_name}}</p>
+                    <p>Rate given by user: {{review.rating}}</p>
+                    <p>posted {{review.time_posted}}</p>
+                    <p>{{review.review_text}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

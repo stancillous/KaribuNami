@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 # from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
 import requests
@@ -129,8 +129,8 @@ def get_places():
         single_place_result["reviews"] = place_reviews
         places_result.append(single_place_result)
     
-    return jsonify(places_result)
-    
+    # return jsonify(places_result)
+    return render_template("index.html", result=places_result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
