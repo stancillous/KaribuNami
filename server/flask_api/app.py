@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template
 # from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
+from server.tables import bookmarks, users, places
 import requests
 
 app = Flask(__name__)
