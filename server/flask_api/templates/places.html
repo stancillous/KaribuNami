@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karibu Nami | places</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/places.css">
+</head>
+<body>
+
+    <main class="main-wrp">
+        <div class="places-root-div">
+
+            <section class="places-section">
+    
+                 <div class="place-image-div">
+                    <!-- <img class="logo-img" src="" alt=""> -->
+                </div>
+    
+    
+                <div class="yp-container">
+                    <h1>places</h1>
+                    <div class="yp-content">
+                        {% for place in places %}
+                        
+                        <div class="place">
+                            <a href=""><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a>
+                            <a id="place-name" class="" href="">{{place.name}}</a>
+
+                            <p class="place-rate-number">Rated {{place.rating}}/5</p>
+                        </div>
+                        {% endfor %}
+    
+    
+    
+    
+    
+                    </div>
+                </div>
+            </section>
+    
+        </div>
+    </main>
+    
+</body>
+</html>

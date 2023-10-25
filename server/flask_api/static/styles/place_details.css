@@ -1,0 +1,191 @@
+html {
+  font-size: 10px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lexend Deca", sans-serif;
+}
+
+p {
+  padding: 0.5rem 0;
+}
+
+.place-details-wrp {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+}
+
+section {
+  width: 100%;
+}
+section .logo-image-div {
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 3rem;
+  padding-left: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1400px;
+}
+section .logo-image-div img {
+  width: 12rem;
+}
+section .pts-container .pts-content {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-direction: column;
+}
+section .pts-container .pts-content .place-details {
+  display: flex;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  align-items: center;
+}
+section .pts-container .pts-content .place-details #place-image {
+  width: 22rem;
+  height: 20rem;
+  width: 28rem;
+  height: 25rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+section .pts-container .pts-content .place-details .place-info {
+  padding: 2rem;
+}
+section .pts-container .pts-content .place-details .place-info .place-name {
+  font-size: 2rem;
+  font-size: 3.3rem;
+  font-weight: 700;
+}
+section .pts-container .pts-content .place-details .place-info p {
+  padding: 0.9rem 0;
+}
+section .pts-container .pts-content .place-details .place-info .btns-wrp {
+  margin-top: 2rem;
+  margin-left: -1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn {
+  margin: 0 0.8rem;
+}
+section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn a {
+  color: black;
+  text-decoration: none;
+}
+section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn button {
+  all: unset;
+  cursor: pointer;
+  border: 1px solid;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 1.5rem;
+  border-radius: 1.7rem;
+}
+section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn button span {
+  padding: 0.4rem;
+}
+section .pts-container .pts-content .the-place-reviews {
+  padding-top: 5rem;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content h1 {
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  padding: 0.1rem;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div {
+  border: 0.7px solid gainsboro;
+  border-radius: 0.8rem;
+  padding-bottom: 2rem;
+  padding: 1rem;
+  margin: 2.8rem 0;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs {
+  margin-top: 3rem;
+  text-decoration: none;
+  position: relative;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container .reviewer-dets {
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem;
+  align-items: center;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container .reviewer-dets .reviewer-img {
+  width: rem;
+  height: 6rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container .reviewer-dets .reviewer-name {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container .revs-posted-dets .time-posted {
+  font-style: italic;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .dets-container .revs-posted-dets .given-rating {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .revs-details {
+  padding: 1rem;
+}
+section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div .place-revs .revs-details p {
+  font-size: 1.3rem;
+  line-height: 170%;
+}
+
+@media screen and (max-width: 900px) {
+  .place-details-section {
+    padding: unset;
+    padding-top: 5rem;
+    padding: 3rem 2rem;
+    margin-bottom: 15rem;
+  }
+  .place-details-section .logo-image-div {
+    display: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  .place-details-section {
+    padding-top: 7rem;
+  }
+  .place-details-section .pts-container .pts-content .place-details .place-info .place-name {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  .place-details-section .pts-container .pts-content .place-details {
+    flex-direction: column;
+  }
+  .place-details-section .pts-container .pts-content .place-details #place-image {
+    margin-bottom: 1rem;
+  }
+  .place-details-section .pts-container .pts-content .place-details .place-info .place-name {
+    font-size: 1.6rem;
+  }
+  .place-details-section .pts-container .pts-content .the-place-reviews .pt-container .pt-content h1 {
+    font-size: 1.4rem;
+  }
+}/*# sourceMappingURL=place_details.css.map */
