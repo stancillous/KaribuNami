@@ -130,6 +130,8 @@ def get_places():
         single_place_result["reviews"] = place_reviews
         places_result.append(single_place_result)
     
+    return render_template("places.html", places=places_result)
+    # return render_template("place_details.html", places=places_result)
     # return jsonify(places_result)
     return render_template("index.html", result=places_result)
 

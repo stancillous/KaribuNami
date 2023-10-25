@@ -1,0 +1,291 @@
+html{
+    font-size: 10px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Lexend Deca', sans-serif;
+}
+p{
+    padding: .5rem 0;
+}
+// font weights
+
+$light:300;
+$regular:400;
+$medium:500;
+$bold:700;
+$black:900;
+$padding-top:7rem;
+
+// $web-color:rgb(14, 14, 15);
+
+// body{
+//     background-color: $web-color;
+// }
+
+.place-details-wrp{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+}
+
+section{
+    width: 100%;
+    
+    .logo-image-div{
+        margin: 0 auto;
+        display: flex;
+        // border: 2px solid;
+        margin-bottom: 3rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 1400px;
+
+        img{
+            width: 12rem;
+        }
+    }
+    
+    .pts-container{
+        .pts-content{
+            display: flex;
+            flex-direction: column-reverse;
+            flex-direction: column;
+
+            // flex-direction: column-reverse;
+            // border: 2px solid red;
+
+            //THE DIV SHOWING THE PLAYLIST DETAILS  
+            .place-details{
+                display: flex;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255,.5) ;
+                align-items: center;
+                
+                #place-image{
+                    width: 22rem;
+                    height: 20rem;
+                    width: 28rem;
+                    height: 25rem;
+                    object-fit: cover;
+                }
+
+                .place-info{
+                    padding: 2rem;
+
+                    // border: 2px solid;
+                    
+                    .place-name{
+                        font-size: 2rem;
+                        font-size: 3.3rem;
+                        font-weight: $bold;
+                    }
+                    p{
+                        padding: .9rem 0;
+                    }
+
+                    .btns-wrp{
+                        margin-top:2rem;
+                        margin-left: -1rem;
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 1.3rem;
+                        .topbtn{
+                            margin: 0 .8rem;
+                            a{
+                                color: black;
+                                text-decoration: none;
+                            }
+                            button{
+                                svg{
+    
+    
+                                }
+                                all: unset;
+                                cursor: pointer;
+                                border: 1px solid;
+                                text-align: center;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: .3rem 1.5rem;
+                                border-radius: 1.7rem;
+    
+                                span{
+                                    padding:0.4rem;
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+
+            
+            .the-place-reviews{
+                // border: 2px solid red;
+                padding-top: 5rem;
+                .pt-container{
+                    .pt-content{
+                        // display: flex;
+                        // border: 2px solid red;
+                        // flex-direction: column-reverse;
+            
+                        h1{
+                            font-weight: 500;
+                            font-size: 1.5rem;
+                            text-transform: capitalize;
+                            padding: .1rem ;
+                        }
+                        .pt-reviews-div{
+                            border: .7px solid gainsboro;
+                            border-radius: .8rem;
+                            padding-bottom: 2rem;
+                            padding: 1rem;
+                            margin: 2.8rem 0;
+                            .place-revs{
+                                // display: flex;
+                                // align-items: start;
+                                // margin: 3rem 2rem;
+                                margin-top: 3rem;
+                                text-decoration: none;
+                                position: relative;
+
+                                .dets-container{
+                                    display: flex;
+                                    width: 100%;
+                                    align-items: center;
+                                    justify-content: space-between;
+                                   
+                                   
+                                    .reviewer-dets{
+                                        // border: 1px solid red;
+                                        // min-width: 13rem;
+    
+                                        // margin-right: 1.8rem;
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 1.8rem;
+                                        align-items: center;
+                                        .reviewer-img{
+                                            width: rem;
+                                            height: 6rem;
+                                            object-fit:cover;
+                                            border-radius: 50%;
+                                        }
+                                        .reviewer-name{
+                                            font-size: 1.3rem;
+                                            // text-wrap: nowrap;
+                                            text-transform: capitalize;
+                                        }
+                                    }
+                                    .revs-posted-dets{
+                                        .time-posted{
+                                            font-style: italic;
+                                        }
+                                        .given-rating{
+                                            font-weight: 600;
+                                            font-size: 1.8rem;
+                                        }
+                                    }
+                                }
+                              
+
+                               
+                                .revs-details{
+                                    // border: 2px solid red;
+                                    padding: 1rem;
+                                   
+                                    p{
+                                        font-size: 1.3rem;
+                                        line-height: 170%;
+                                    }
+                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+@media screen and (max-width:900px) {
+    .place-details-section{
+        padding: unset;
+        padding-top: 5rem;
+        padding: 3rem 2rem ;
+        margin-bottom: 15rem;
+
+         .logo-image-div{
+            display: none;
+        }
+
+    }
+}
+
+@media screen and (max-width:700px) {
+    .place-details-section{
+        padding-top: $padding-top;
+ 
+
+
+        .pts-container .pts-content{
+            .place-details{
+                .place-info{
+                    .place-name{
+                        font-size: 2rem;                
+                    }
+                    
+                }
+            }
+
+            
+        }
+        
+
+
+    }
+}
+
+@media screen and (max-width:650px) {
+    .place-details-section .pts-container .pts-content {
+        .place-details{
+            flex-direction: column;
+            #place-image{
+                margin-bottom: 1rem;
+            }
+
+            .place-info{
+                .place-name{
+                    font-size: 1.6rem;
+                }
+               
+            }
+
+        }
+
+        .the-place-reviews{
+            .pt-container .pt-content{
+                h1{
+                    font-size: 1.4rem;
+                }
+
+            
+   
+            }
+
+        }
+    }
+}

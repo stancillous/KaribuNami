@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karibu Nami</title>
+    <link rel="stylesheet" href="../static/styles/place_details.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <main class="place-details-wrp">
+        <div class="playlist-tracks-root-div">
+            <section class="place-details-section">
+                <div class="logo-image-div">
+                    <img class="logo" src="" alt="">
+                </div>
+                        <!-- <div class="playlist-tracks-root-div">
+            <section class="playlist-tracks-section">
+                <div class="spotify-image-div">
+                    <img class="logo" src="" alt="">
+                </div>
+    
+                <div class="pts-container">
+                    {% for place in places %}
+                    <div class="pts-content">
+    
+                        
+                        <div class="playlist-details">
+                            <img id="playlist-image" src={{place.photos[0]}} alt="photo of the place">
+    
+                            <div class="playlist-info">
+                                <p class="playlist-name">{{place.name}}</p>
+                                <p>Contact: {{place.mobile_number}}</p>
+                                <a href={{place.location}}>location</a>
+                                {% if place.open_now %}
+                                <p>is open</p>            
+                                {% else %}
+                                <p>is closed</p>
+                                {% endif %}
+                                <p class="">Rating: {{place.rating}}</p>
+                                
+                                
+                            </div>
+                        </div>
+    
+                        
+    
+                        <div class="the-playlist-songs">
+                            <div class="pt-container">
+                                <div class="pt-content">
+                                    <h1>Reviews</h1>
+                                    {% for review in place.reviews %}
+                                    <div class="pt-songs-div">
+                                        <div class="playlist-tracks">
+                                            <div class="reviewer-dets">
+                                                <img class="reviewer-img" src={{review.author_dp}} alt="author's display photo">
+                                                <p class="reviewer-name">{{review.author_name}}</p>
+                                            </div>
+                                            <div class="song-details">
+                                                <p>Rate given by user: {{review.rating}}</p>
+                                                <p>{{review.time_posted}}</p>
+                                                <p>{{review.review_text}}</p>
+                                            </div>
+                                            <p class="track-duration"></p>
+                                        </div>
+                                        
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div> -->
+    
+                {% for place in places %}
+                <div class="pts-container">
+                    <div class="pts-content">
+    
+                        
+                        <div class="place-details">
+                            <img id="place-image" src={{place.photos[0]}} alt="">
+    
+                            <div class="place-info">
+                                <p class="place-name">{{place.name}}</p>
+                                <p>Contact: {{place.mobile_number}}</p>
+                                {% if place.open_now %}
+                                <p>Is now open</p>            
+                                {% else %}
+                                <p>Is closed</p>
+                                {% endif %}  
+                                <div class="btns-wrp">
+                                    <div class="rating-btn topbtn">
+                                        <button>
+                                            <img style="width: 1.4rem;" src="../static/images/star-svg.svg" alt="">
+                                            <span>{{place.rating}}</span>
+                                        </button>
+                                    </div>
+                                    <div class="save-btn topbtn">
+                                        <button>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" focusable="false" class="zKmjoe NMm5M"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path></svg> 
+                                            <span>Save</span>
+                                        </button>
+                                    </div>
+                                    <div class="directions-btn topbtn">
+                                        <a href={{place.location}} target="_blank">
+                                        <button>
+                                            <svg enable-background="new 0 0 24 24" height="18" viewBox="0 0 24 24" width="18" focusable="false" class="zKmjoe NMm5M"><g><rect fill="none" height="24" width="24"></rect></g><g><g><path d="m21.41 10.59-7.99-8a1.993 1.993 0 00-2.83 0l-8.01 8c-.78.78-.78 2.05 0 2.83l8.01 8c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.99-8c.8-.79.8-2.05.01-2.83zM12.01 20 4 12l8-8 8 8-7.99 8z"></path><path d="M8 11v4h2v-3h3.5v2.5L17 11l-3.5-3.5V10H9c-.55 0-1 .45-1 1z"></path></g></g></svg>
+                                            <span>Directions</span>
+                                        </button>
+                                        </a>
+                                    </div>
+                                </div>       
+                            </div>
+                        </div>
+    
+                    
+                        <div class="the-place-reviews">
+                            <div class="pt-container">
+                                <div class="pt-content">
+                                    <h1>Reviews</h1>
+                                    {% for review in place.reviews %}
+                                    <div class="pt-reviews-div">
+                                        <div class="place-revs">
+                                            <div class="dets-container">
+                                                <div class="reviewer-dets">
+                                                    <img src={{review.author_dp}} alt="reviewer's image" class="reviewer-img">
+                                                    <p class="reviewer-name">{{review.author_name}}</p>
+                                                </div>
+                                                <div class="revs-posted-dets">
+                                                    <p class="given-rating">{{review.rating}}/5 rating</p>
+                                                    <p class="time-posted">{{review.time_posted}}</p>
+    
+                                                </div>
+
+                                            </div>
+                                            <div class="revs-details">
+                                                <p>{{review.review_text}}</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+                                                  
+    </main>
+</body>
+</html>
