@@ -78,17 +78,16 @@
                 </div>
             </section>
         </div> -->
-    
-                {% for place in places %}
-                <div class="pts-container">
+
+
+        <div class="pts-container">
                     <div class="pts-content">
-    
-                        
+                            
                         <div class="place-details">
                             <img id="place-image" src={{place.photos[0]}} alt="">
     
                             <div class="place-info">
-                                <p class="place-name">{{place.name}}</p>
+                                <p class="place-name">{{place.place_name}}</p>
                                 <p>Contact: {{place.mobile_number}}</p>
                                 {% if place.open_now %}
                                 <p>Is now open</p>            
@@ -154,7 +153,6 @@
     
                     </div>
                 </div>
-                {% endfor %}
             </section>
         </div>
                                                   

@@ -12,8 +12,13 @@ logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 Base = declarative_base()
 
 # Credentials for connecting to mysql db
-USERNAME = "botontapwater"
-PASSWORD = "TwoGreen1."
+# USERNAME = "botontapwater"
+# PASSWORD = "TwoGreen1."
+# HOST = "localhost"
+# DB = "karibunami"
+
+USERNAME = "ray"
+PASSWORD = "raypassword"
 HOST = "localhost"
 DB = "karibunami"
 

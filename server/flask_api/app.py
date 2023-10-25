@@ -42,14 +42,16 @@ def home_page():
     search_bar = "***SEARCH BAR WILL BE RIGHT HERE***"
     return jsonify(search_bar)
 
-@app.route('/place', strict_slashes = False)
+
+places_result = []
+@app.route('/place', strict_slashes=False)
 def get_places():
     """Returns results for places near the user"""
     # limit to 5 results for now to avoid visual clutter
     params = {'limit': 3}
 
     # Dict containing filtered results
-    places_result = []
+    # places_result = []
 
     # Make a GET request to API
     try:
@@ -118,10 +120,10 @@ def get_places():
                         "review_text": review.get("text", "No comment")
                     })
 
-        except requests.exceptions.RequestException as e:
+        except requests.exceptiomyns.RequestException as e:
             print(f"Request failed: {e}") 
 
-        single_place_result["name"] = name
+        single_place_result["place_name"] = name
         single_place_result["rating"] = rating
         single_place_result["open_now"] = open_now
         single_place_result["mobile_number"] = contacts
@@ -134,6 +136,14 @@ def get_places():
     # return render_template("place_details.html", places=places_result)
     # return jsonify(places_result)
     return render_template("index.html", result=places_result)
+
+
+@app.route("/<string:place_name>", strict_slashes=False)
+def get_specific_place(place_name):
+    specific_place = [place for place in places_result if place.get("place_name")==place_name]
+    return render_template("place_details.html", place=specific_place[0])
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
