@@ -1,8 +1,15 @@
 from flask import Flask, jsonify, render_template
-# from selenium import webdriver
-# from selenium.webdriver.common.keys import Keys
-from server.tables import bookmarks, users, places
+from server.tables import setup
 import requests
+
+from sqlalchemy import ForeignKey, create_engine, Column, Integer
+from sqlalchemy import String
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import sessionmaker
+import logging
+from sqlalchemy import inspect
+
+
 
 app = Flask(__name__)
 
@@ -146,4 +153,4 @@ def get_specific_place(place_name):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
