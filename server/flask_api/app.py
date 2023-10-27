@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request, redirect
 from server.tables import setup
 import requests
 
@@ -18,7 +18,7 @@ app = Flask(__name__)
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-PLACE = "Hotels"
+PLACE = "malls"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -48,6 +48,8 @@ def home_page():
     """Default home page and more landing page features"""
     search_bar = "***SEARCH BAR WILL BE RIGHT HERE***"
     return jsonify(search_bar)
+
+
 
 
 places_result = []
@@ -145,12 +147,62 @@ def get_places():
     return render_template("index.html", result=places_result)
 
 
-@app.route("/<string:place_name>", strict_slashes=False)
+@app.route("/place/<string:place_name>", strict_slashes=False)
 def get_specific_place(place_name):
     specific_place = [place for place in places_result if place.get("place_name")==place_name]
     return render_template("place_details.html", place=specific_place[0])
 
 
+@app.route("/saved_places", strict_slashes=False)
+def saved_places():
+    """this should return the places that a signed in user has saved/bookmarked
+        Should get them from the DB, and then pass the json to the template below,
+        in the template we'll iterate the saved places and show the user
+
+    """
+    return render_template("saved_places.html")
+
+
+@app.route("/register", methods=["POST", "GET"], strict_slashes=False)
+def sign_up():
+    """
+    this route accepts two methods. if method is GET, we render the register html
+    if method is POST, we know it's from a sign up form
+    """
+    if request.method == "GET":
+        return render_template("register.html")
+    
+    elif request.method == "POST":
+        email = request.form.get("email")
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmPassword = request.form.get("confirm-password")
+
+        if password != confirmPassword:
+            # should return an error page, but rn i'm just returning a str
+            return "passwords must match"
+    
+        # ADD USER TO OUR DB BEFORE SENDING THEM TO  THE HOME PAGE
+        return redirect(location="/home")
+
+
+@app.route("/login", methods=["POST", "GET"], strict_slashes=False)
+def login():
+        
+    """
+    this route accepts two methods. if method is GET, we render the register html
+    if method is POST, we know it's from a login form
+    """
+    if request.method == "GET":
+        return render_template("login.html")
+    
+    elif request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        # CHECK IN DB IF THE INPUTS ARE CORRECT BEFORE
+        # SENDING THEM TO THE HOME PAGE
+    return redirect(location="/home")
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=True)

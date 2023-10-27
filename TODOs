@@ -1,0 +1,33 @@
+HTML:
+there's too much repeated code (like w the google fonts api links). Create a 'shared html' for that
+
+SIGN UPS
+Write Js or Python code to check that password and confirm password fields match
+
+BOOKMARKS
+Add column(DateAdded)
+
+LOGIN/SIGNUP
+1. Could we grab the signed in user's username. Which we can then show them in the templates
+eg check the /saved_places route
+2. Maybe put checks for the length of the password
+
+PLACE DETAILS HTML
+The /place route will show all the places to the user. The user
+can then click a place for more details. I had tried implementing that but it still has issues/errors. 
+We should check that
+
+CODE CHECKING
+We might consider adding checks both in the server and client (with both Python and JS)
+
+URL
+I feel like we'll have too many urls(pages), like /saved_places, /register, /login, /home etc. We'll see if we can maybe do sth like in typeracer, where we change a page but maybe the url will still be showing the homepage. eg when a user wants to login or sign up.
+
+NOSCRIPT
+Add a <noscript> to all our html. Users must have Js enabled in their browsers if they want to use our site
+
+404
+Create our 404 page
+
+LOCATION
+I feel like we should just get the user's location automatically, like we shouldn't give the user the option of "setting the location manually"

@@ -1,0 +1,82 @@
+@import url('../styles/common.css');
+
+
+
+.login-main-section{
+    margin:0 auto;
+    height: calc(100vh - 8rem);
+    max-width: var(--maxWidth);
+    display: grid;
+    place-items: center;
+    padding: 4rem 0;
+    // background-color: white;
+    .lms-wrapper{
+        .lg-title{
+            font-weight: 600;
+            font-size: 1.7rem;
+            text-align: center;
+            margin: rem 0;
+        }
+        .login-container{
+            padding: 4rem 2.5rem;
+            min-width: 38rem;
+           
+            label{
+                font-size: 1.2rem;
+            }
+            input{
+                background-color: transparent;
+                padding: 1rem .4rem;
+                border: 1px solid rgba(241, 221, 221, 0.375);
+                font-weight: 400;
+                font-size: 1.3rem;
+                width: 100%;
+                color: whitesmoke;
+                margin-bottom: 2rem;
+                
+                &:focus{
+                    border: 1px solid rgb(0, 0, 0);
+                }
+            }
+
+
+
+            .login-button-wrapper{
+                margin-bottom: 1rem;
+                display: flex;
+                button{
+                    all: unset;
+                    padding: .8rem 2.5rem;
+                    font-size: 1.3rem;
+                    // font-weight: bold;
+                    text-transform: capitalize;
+                    background-color: whitesmoke;
+                    cursor: pointer;
+                    color: black;
+                    width:100%;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                    &:hover{
+                        opacity: .8;
+                    }
+                }
+
+                
+
+            }
+
+            p{
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: whitesmoke;
+                // opacity: .8;
+
+                a{
+                    opacity: 1;
+                    color: whitesmoke;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}

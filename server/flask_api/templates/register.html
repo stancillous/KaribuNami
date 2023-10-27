@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karibu Nami | Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+       
+    <link rel="stylesheet" href="../static/styles/register.css">
+
+</head>
+<body>
+    <main class="main">
+        <div class="signup-form-container">
+            <h3 class="sign-up-title">Sign Up</h3>
+            <div class="signup-form">
+                <!-- form for signing up. Will POST the methods to the /register route -->
+                <form action="/register" method="post" id="signup-form">
+                    
+                    <div class="username-div">
+                        <label for="user-name">Username</label>
+                        <input name="username" required id="user-name" placeholder="" type="text">
+                    </div>
+
+                    <div class="email-div">
+                        <label for="signup-email">Email</label>
+                        <input name="email" required id="signup-email" type="email" placeholder="">
+                    </div>
+
+                    <div class="password-div">
+                        <label for="user-password">Password</label>
+                        <input name="password" required id="user-password" type="password" placeholder="">
+                    </div>
+
+                    <div class="confirm-password-div">
+                        <label for="confirm-user-password">Confirm Password</label>
+                        <input name="confirm-password" required id="confirm-user-password" type="password" placeholder="">
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="register-btn" type="submit">Sign Up</button>
+                    </div>
+                </form>
+                <p>Have an account? <a href="./login.html">Login</a> </p>
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>

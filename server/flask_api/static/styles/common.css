@@ -1,0 +1,37 @@
+
+:root{
+    --webColor:rgb(14, 14, 15);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+}
+
+body{
+    overflow-x: hidden;
+    background-color: var(--webColor);
+    color: white;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+body a{
+    color: white;
+}
+body::-webkit-scrollbar{
+    width: 1rem;  
+    height: 1rem;   
+}
+body::-webkit-scrollbar-track{
+    /* background:rgb(14, 14, 15); */
+    background: var(--webColor);
+
+}
+body::-webkit-scrollbar-thumb{
+    background-color: #504b4b;
+
+}

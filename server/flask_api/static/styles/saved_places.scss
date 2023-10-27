@@ -1,0 +1,125 @@
+@import url('../styles/common.css');
+
+$light:300;
+$regular:400;
+$medium:500;
+$bold:700;
+$black:900;
+
+$web-color:rgb(21, 20, 23);
+$padding-top:7rem;
+
+
+
+.saved-places-section{
+    width: 100vw;
+    padding-bottom: 8rem;
+    // border: 2px solid;
+
+   
+    .tts-container{
+        .tts-content{
+            // border: 2px solid;
+            max-width: 1400px;
+            width: 100%;
+            min-height: 100vh;
+            margin: 0 auto;
+            opacity:.9;
+
+            .tts-header{
+                display: flex;
+                // align-items: center;
+                flex-direction:column;
+                // justify-content: space-between;
+                // border: 2px solid;
+                padding-right: 4rem;
+                
+                h1{
+                    font-weight: $black;
+                    font-size: 2rem;
+                    text-transform: capitalize;
+                    padding: 2rem;
+                }
+                
+                //the text to be shown if user has no saved places
+                .no-saved-places{
+                    display: none;
+                    padding:2rem;
+                    opacity:.7;
+                    font-size: 1.4rem;
+
+                }
+
+                .period{
+                    p{
+                        font-size: 1.4rem;
+                        font-weight: $medium;
+                        text-transform: capitalize;
+                        display: inline-block;
+                        padding: 0 1rem;
+                        cursor: pointer;
+                    }
+                }
+
+                a{
+                    font-size: 1.4rem;
+                    font-weight: $medium;
+                    text-decoration: none;
+                    padding: 1rem;
+                    text-transform: capitalize;
+                }
+                
+            }
+
+
+            .tt-section-div{
+                .saved-place{
+                    
+                    display: flex;
+                    align-items: center;
+                    margin: 3rem 2rem;
+                    position: relative;
+                    text-decoration: none;
+
+                    &:hover{
+                        opacity: .8;
+                    }
+                    #saved-place-image{
+                        width: 6rem;
+                        height: 6rem;
+                        object-fit:cover;
+                        color: white;
+                    }
+   
+                    
+                    .date-saved{
+                        font-size: 1.2rem;
+                        position: absolute;
+                        top:30% ;
+                        right: 4rem;
+                        opacity: .9;
+                    }
+
+                    .place-details{
+                        padding-left: 1.7rem;
+                        .place-name{
+                            display: block;
+                            font-size: 1.5rem;
+                            text-transform: capitalize;
+                            font-weight: $bold;
+                            padding-bottom: .5rem;
+
+                        }
+                        .place-rating{
+                            padding-top:1rem;
+                            font-size:1.2rem;
+                        }
+
+
+
+                    }
+                }
+            }
+        }
+    }
+}

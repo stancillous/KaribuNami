@@ -17,67 +17,6 @@
                 <div class="logo-image-div">
                     <img class="logo" src="" alt="">
                 </div>
-                        <!-- <div class="playlist-tracks-root-div">
-            <section class="playlist-tracks-section">
-                <div class="spotify-image-div">
-                    <img class="logo" src="" alt="">
-                </div>
-    
-                <div class="pts-container">
-                    {% for place in places %}
-                    <div class="pts-content">
-    
-                        
-                        <div class="playlist-details">
-                            <img id="playlist-image" src={{place.photos[0]}} alt="photo of the place">
-    
-                            <div class="playlist-info">
-                                <p class="playlist-name">{{place.name}}</p>
-                                <p>Contact: {{place.mobile_number}}</p>
-                                <a href={{place.location}}>location</a>
-                                {% if place.open_now %}
-                                <p>is open</p>            
-                                {% else %}
-                                <p>is closed</p>
-                                {% endif %}
-                                <p class="">Rating: {{place.rating}}</p>
-                                
-                                
-                            </div>
-                        </div>
-    
-                        
-    
-                        <div class="the-playlist-songs">
-                            <div class="pt-container">
-                                <div class="pt-content">
-                                    <h1>Reviews</h1>
-                                    {% for review in place.reviews %}
-                                    <div class="pt-songs-div">
-                                        <div class="playlist-tracks">
-                                            <div class="reviewer-dets">
-                                                <img class="reviewer-img" src={{review.author_dp}} alt="author's display photo">
-                                                <p class="reviewer-name">{{review.author_name}}</p>
-                                            </div>
-                                            <div class="song-details">
-                                                <p>Rate given by user: {{review.rating}}</p>
-                                                <p>{{review.time_posted}}</p>
-                                                <p>{{review.review_text}}</p>
-                                            </div>
-                                            <p class="track-duration"></p>
-                                        </div>
-                                        
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    {% endfor %}
-                </div>
-            </section>
-        </div> -->
 
 
         <div class="pts-container">
@@ -87,7 +26,7 @@
                             <img id="place-image" src={{place.photos[0]}} alt="">
     
                             <div class="place-info">
-                                <p class="place-name">{{place.place_name}}</p>
+                                <h1 class="place-name">{{place.place_name}}</h1>
                                 <p>Contact: {{place.mobile_number}}</p>
                                 {% if place.open_now %}
                                 <p>Is now open</p>            
@@ -96,7 +35,7 @@
                                 {% endif %}  
                                 <div class="btns-wrp">
                                     <div class="rating-btn topbtn">
-                                        <button>
+                                        <button class="rate-btn-nopointer">
                                             <img style="width: 1.4rem;" src="../static/images/star-svg.svg" alt="">
                                             <span>{{place.rating}}</span>
                                         </button>

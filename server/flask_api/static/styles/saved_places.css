@@ -1,0 +1,82 @@
+@import url("../styles/common.css");
+.saved-places-section {
+  width: 100vw;
+  padding-bottom: 8rem;
+}
+.saved-places-section .tts-container .tts-content {
+  max-width: 1400px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+.saved-places-section .tts-container .tts-content .tts-header {
+  display: flex;
+  flex-direction: column;
+  padding-right: 4rem;
+}
+.saved-places-section .tts-container .tts-content .tts-header h1 {
+  font-weight: 900;
+  font-size: 2rem;
+  text-transform: capitalize;
+  padding: 2rem;
+}
+.saved-places-section .tts-container .tts-content .tts-header .no-saved-places {
+  display: none;
+  padding: 2rem;
+  opacity: 0.7;
+  font-size: 1.4rem;
+}
+.saved-places-section .tts-container .tts-content .tts-header .period p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: inline-block;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.saved-places-section .tts-container .tts-content .tts-header a {
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 1rem;
+  text-transform: capitalize;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place {
+  display: flex;
+  align-items: center;
+  margin: 3rem 2rem;
+  position: relative;
+  text-decoration: none;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place:hover {
+  opacity: 0.8;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place #saved-place-image {
+  width: 6rem;
+  height: 6rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  color: white;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .date-saved {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 30%;
+  right: 4rem;
+  opacity: 0.9;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details {
+  padding-left: 1.7rem;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details .place-name {
+  display: block;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details .place-rating {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+}/*# sourceMappingURL=saved_places.css.map */

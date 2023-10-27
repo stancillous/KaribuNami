@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/login.css">
+    <title>Karibu Nami | Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+       
+</head>
+<body>
+
+    <main>
+        <div>
+
+            <div class="login-main-section">
+                <div class="lms-wrapper">
+    
+                    <h2 class="lg-title">Login</h2>
+                    <div class="login-container">
+                        <div class="login-content">
+                            <!-- form to login. Will POST the data to the /login route -->
+                            <form action="/login" method="post">
+    
+                                <div class="email-container">
+                                    <label for="user-email">Email Address</label>
+                                    <input name="email" required placeholder="" class="user-email" type="email">
+                                </div>
+                                
+                                <div class="password-container">
+                                    
+                                    <div class="password-wrapper">
+                                        <label for="passcode-input">Password</label>
+                                        <input name="password" required id="passcode-input" placeholder="" class="user-password" type="password">
+                                    </div>
+                                </div>
+            
+                                <div class="login-button-wrapper">
+                                    <button type="submit">log in</button>
+                                    
+                                </div>
+                            </form>
+                            <p>Don't have an account? <a href="./register.html">Sign up.</a> </p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>

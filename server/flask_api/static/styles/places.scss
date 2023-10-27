@@ -1,6 +1,7 @@
-body{
-    font-family: 'Lexend Deca', sans-serif;
-}
+
+@import url('../styles/common.css');
+
+
 $light:300;
 $regular:400;
 $medium:500;
@@ -67,7 +68,7 @@ $web-color:rgb(23, 20, 20);
                 align-items: center;
 
                 a{
-                    color: black;
+                    color: white;
                 }
                 &:hover{
                     opacity: .8;

@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karibu Nami | places</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/styles/places.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+        
+<link rel="stylesheet" href="../static/styles/places.css">
 </head>
 <body>
 
@@ -27,7 +28,7 @@
                         {% for place in places %}
                         
                         <div class="place">
-                            <a href="{{place.place_name}}"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a>
+                            <a href="/place/{{place.place_name}}"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a>
                             <!-- <a href="/Glam Hotel"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a> -->
                             <a id="place-name" class="" href={{place.place_name}}>{{place.place_name}}</a>
 

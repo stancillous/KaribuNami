@@ -1,7 +1,4 @@
-body {
-  font-family: "Lexend Deca", sans-serif;
-}
-
+@import url("../styles/common.css");
 .main-wrp {
   max-width: 1300px;
   margin: 0 auto;
@@ -51,7 +48,7 @@ body {
   align-items: center;
 }
 .places-section .yp-container .yp-content .place a {
-  color: black;
+  color: white;
 }
 .places-section .yp-container .yp-content .place:hover {
   opacity: 0.8;

@@ -16,6 +16,8 @@ PASSWORD = config("PASSWORD")
 HOST = config("HOST")
 DB = config("DB")
 
+
+
 SQLALCHEMY_DATABASE_URI = f'mysql+mysqlconnector://{USERNAME}:{PASSWORD}@{HOST}/{DB}'
 
 # Create engine

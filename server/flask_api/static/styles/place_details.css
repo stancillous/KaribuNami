@@ -1,17 +1,4 @@
-html {
-  font-size: 10px;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Lexend Deca", sans-serif;
-}
-
+@import url("../styles/common.css");
 p {
   padding: 0.5rem 0;
 }
@@ -25,6 +12,7 @@ p {
 
 section {
   width: 100%;
+  opacity: 0.9;
 }
 section .logo-image-div {
   margin: 0 auto;
@@ -47,7 +35,6 @@ section .pts-container .pts-content {
 section .pts-container .pts-content .place-details {
   display: flex;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   align-items: center;
 }
 section .pts-container .pts-content .place-details #place-image {
@@ -62,12 +49,12 @@ section .pts-container .pts-content .place-details .place-info {
   padding: 2rem;
 }
 section .pts-container .pts-content .place-details .place-info .place-name {
-  font-size: 2rem;
-  font-size: 3.3rem;
+  font-size: 4rem;
   font-weight: 700;
 }
 section .pts-container .pts-content .place-details .place-info p {
   padding: 0.9rem 0;
+  opacity: 0.9;
 }
 section .pts-container .pts-content .place-details .place-info .btns-wrp {
   margin-top: 2rem;
@@ -80,13 +67,13 @@ section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn
   margin: 0 0.8rem;
 }
 section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn button {
   all: unset;
   cursor: pointer;
-  border: 1px solid;
+  border: 1px solid rgba(220, 220, 220, 0.5);
   text-align: center;
   display: flex;
   align-items: center;
@@ -94,20 +81,25 @@ section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn
   padding: 0.3rem 1.5rem;
   border-radius: 1.7rem;
 }
+section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn button svg {
+  color: white;
+  fill: white;
+}
 section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn button span {
   padding: 0.4rem;
 }
 section .pts-container .pts-content .the-place-reviews {
   padding-top: 5rem;
+  opacity: 0.8;
 }
 section .pts-container .pts-content .the-place-reviews .pt-container .pt-content h1 {
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-transform: capitalize;
   padding: 0.1rem;
 }
 section .pts-container .pts-content .the-place-reviews .pt-container .pt-content .pt-reviews-div {
-  border: 0.7px solid gainsboro;
+  border: 0.7px solid rgba(220, 220, 220, 0.2);
   border-radius: 0.8rem;
   padding-bottom: 2rem;
   padding: 1rem;
