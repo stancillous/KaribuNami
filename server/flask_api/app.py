@@ -1,17 +1,19 @@
 from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template,request, render_template, redirect, url_for, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from server.tables import setup
 import requests
+import flask
 
 from sqlalchemy import ForeignKey, create_engine, Column, Integer
-from sqlalchemy import String
+from sqlalchemy import String, select
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session
 import logging
 from sqlalchemy import inspect
 
-
-
 app = Flask(__name__)
+app.secret_key = 'toosecretive'
 
 # Temporary location data
 # To be replaced with geolocation api
@@ -41,6 +43,44 @@ LATITUDE = ""
 LONGITUDE = ""
 
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        with Session(setup.engine) as session:
+            newuser = setup.User(username=username, password=hashed_password)
+            session.add(newuser)
+            session.commit()
+        print("SIGNUP SUCCESS REDIRECT TO HOME PAGE!!!")
+        return redirect(url_for('home_page'))
+    return jsonify("Sign Up Failed!!!")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(username=username)
+
+            user = session.scalars(query).one()
+            # print(f"***{user.password}***")
+            
+            if user and check_password_hash(user.password, password):
+                # print(f"**Login almost done***")
+                flask.session['user_id'] = user.id
+                print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
+                return redirect(url_for('home_page'))
+            else: 
+                return 'Login failed. Please check your credentials.'
+    
+    return jsonify("Login Failed!!!")
+
 
 
 @app.route('/home', strict_slashes = False)
