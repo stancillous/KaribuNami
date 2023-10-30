@@ -178,6 +178,11 @@ def get_places():
         single_place_result["location"] = maps_url
         single_place_result["photos"] = photographs
         single_place_result["reviews"] = place_reviews
+
+        # This field is only availabe for signed in users
+        if 'user_id' in flask.session:
+            single_place_result["bookmarked"] = 0
+        
         places_result.append(single_place_result)
 
         if 'user_id' in flask.session:
