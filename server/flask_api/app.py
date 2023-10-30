@@ -10,7 +10,8 @@ from sqlalchemy import String, select
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session
 import logging
-from sqlalchemy import inspect
+from sqlalchemy import inspect, update
+import json
 
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
@@ -56,8 +57,9 @@ def register():
             session.add(newuser)
             session.commit()
         print("SIGNUP SUCCESS REDIRECT TO HOME PAGE!!!")
-        return redirect(url_for('home_page'))
+        return redirect(url_for('login'))
     return jsonify("Sign Up Failed!!!")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -82,14 +84,11 @@ def login():
     return jsonify("Login Failed!!!")
 
 
-
 @app.route('/home', strict_slashes = False)
 def home_page():
     """Default home page and more landing page features"""
     search_bar = "***SEARCH BAR WILL BE RIGHT HERE***"
     return jsonify(search_bar)
-
-
 
 
 places_result = []
@@ -180,6 +179,22 @@ def get_places():
         single_place_result["photos"] = photographs
         single_place_result["reviews"] = place_reviews
         places_result.append(single_place_result)
+
+        if 'user_id' in flask.session:
+            user_id = flask.session['user_id']
+            with Session(setup.engine) as session:
+                new_place = setup.Place(name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
+
+                session.add(new_place)
+                session.flush()
+                new_place_id = new_place.id
+
+                # query = select(setup.User).filter_by(id='user_id')
+                # user = session.scalars(query).one()
+
+                new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
+                session.add(new_bkmk)
+                session.commit()
     
     return render_template("places.html", places=places_result)
     # return render_template("place_details.html", places=places_result)
@@ -202,46 +217,74 @@ def saved_places():
     """
     return render_template("saved_places.html")
 
+@app.route("/bookmark/<place_id>", strict_slashes=False)
+def bookmark_place(place_id):
+    """Allows user to bookmark a place for future reference"""
+    # Check if user is logged in
+    if 'user_id' in flask.session:
+        print(f"User is signed in!!!")
 
-@app.route("/register", methods=["POST", "GET"], strict_slashes=False)
-def sign_up():
-    """
-    this route accepts two methods. if method is GET, we render the register html
-    if method is POST, we know it's from a sign up form
-    """
-    if request.method == "GET":
-        return render_template("register.html")
+        with Session(setup.engine) as session:
+
+            query = select(setup.Bookmark).filter_by(place_id=place_id)
+
+            bkmk = session.scalars(query).one()
+
+            if bkmk.bookmarked == 0:
+                print(f"Place NOT bookmarked!!!")
+                bkmk.bookmarked = 1
+                session.commit()
+                return jsonify("Place added to saved places")
+            
+            else:
+                print(f"Place already BOOKMARKED!!!")
+                bkmk.bookmarked = 0
+                session.commit()
+                return jsonify("Place removed from saved places")
     
-    elif request.method == "POST":
-        email = request.form.get("email")
-        username = request.form.get("username")
-        password = request.form.get("password")
-        confirmPassword = request.form.get("confirm-password")
-
-        if password != confirmPassword:
-            # should return an error page, but rn i'm just returning a str
-            return "passwords must match"
-    
-        # ADD USER TO OUR DB BEFORE SENDING THEM TO  THE HOME PAGE
-        return redirect(location="/home")
-
-
-@app.route("/login", methods=["POST", "GET"], strict_slashes=False)
-def login():
+    return jsonify(f"Sign in to use this feature!!!")
         
-    """
-    this route accepts two methods. if method is GET, we render the register html
-    if method is POST, we know it's from a login form
-    """
-    if request.method == "GET":
-        return render_template("login.html")
+
+
+# @app.route("/register", methods=["POST", "GET"], strict_slashes=False)
+# def sign_up():
+#     """
+#     this route accepts two methods. if method is GET, we render the register html
+#     if method is POST, we know it's from a sign up form
+#     """
+#     if request.method == "GET":
+#         return render_template("register.html")
     
-    elif request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        # CHECK IN DB IF THE INPUTS ARE CORRECT BEFORE
-        # SENDING THEM TO THE HOME PAGE
-    return redirect(location="/home")
+#     elif request.method == "POST":
+#         email = request.form.get("email")
+#         username = request.form.get("username")
+#         password = request.form.get("password")
+#         confirmPassword = request.form.get("confirm-password")
+
+#         if password != confirmPassword:
+#             # should return an error page, but rn i'm just returning a str
+#             return "passwords must match"
+    
+#         # ADD USER TO OUR DB BEFORE SENDING THEM TO  THE HOME PAGE
+#         return redirect(location="/home")
+
+
+# @app.route("/login", methods=["POST", "GET"], strict_slashes=False)
+# def login():
+        
+#     """
+#     this route accepts two methods. if method is GET, we render the register html
+#     if method is POST, we know it's from a login form
+#     """
+#     if request.method == "GET":
+#         return render_template("login.html")
+    
+#     elif request.method == "POST":
+#         email = request.form.get("email")
+#         password = request.form.get("password")
+#         # CHECK IN DB IF THE INPUTS ARE CORRECT BEFORE
+#         # SENDING THEM TO THE HOME PAGE
+#     return redirect(location="/home")
 
 
 if __name__ == '__main__':

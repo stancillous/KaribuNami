@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, create_engine, Column, Integer, CheckConstraint
-from sqlalchemy import String
+from sqlalchemy import String, Text
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 import logging
@@ -21,5 +21,5 @@ class Place(Base):
     open_now = Column(String(256), nullable=True)
     mobile_number = Column(String(256), nullable=True)
     location = Column(String(256), nullable=False)
-    photos = Column(String(256), nullable=True)
-    reviews = Column(String(256), nullable=True)
+    photos = Column(Text, nullable=True)
+    reviews = Column(Text, nullable=True)
