@@ -4,6 +4,9 @@ there's too much repeated code (like w the google fonts api links). Create a 'sh
 SIGN UPS
 Write Js or Python code to check that password and confirm password fields match
 
+LOGIN
+Use email and password to login. Not username and password. Since we might have diff users with same usernames
+
 BOOKMARKS
 Add column(DateAdded)
 
@@ -34,3 +37,14 @@ I feel like we should just get the user's location automatically, like we should
 
 PLACES (ALREADY IMPLEMENTED, TO BE COUNTER CHECKED BY RAYMOND)
 In the /places api route, add a field (bookmarks) for the returned results, this field will only be available if the user is signed in, this will allow the user to bookmark places for easy future reference
+
+URL FOR CLICKED PLACE
+it's currently set to /place/place_name
+set it to /place/place_id
+
+ADD IMAGE SLIDER FOR SPECIFIC PLACE
+Will depend on the number of pics that place has
+Loop and for each create a new image
+
+FORMS
+clicking enter key should do the same thing as when user clicks the submit  button

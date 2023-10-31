@@ -1,0 +1,240 @@
+@import url('../styles/common.css');
+
+
+.header {
+    color: var(--buttonColor);
+    height: 8rem;
+    background-color: var(--navColor);
+    background-color: var(--bgColor);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 54;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.297);
+}
+.header .nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--maxWidth);
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+.header .nav .logo-container {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+.header .nav .logo-container .hamburger-button {
+    cursor: pointer;
+    display: none;
+}
+.header .nav .logo-container .hamburger-button span {
+    width: 2.5rem;
+    opacity: 0.8;
+    height: 0.3rem;
+    background-color: white;
+    margin: 0.2rem;
+    padding: 0.1rem;
+    display: block;
+}
+.header .nav .logo-container .logo {
+    text-transform: capitalize;
+    font-weight: bolder;
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: bolder;
+    padding: 0 2rem;
+}
+
+.header .nav .icons-container {
+    padding: 0 1rem;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+}
+
+.header .nav .icons-container .search-form-icon .explore {
+    position: relative;
+}
+.header .nav .icons-container .search-form-icon .explore:hover .search-form-container {
+    opacity: 1;
+    visibility: visible;
+}
+.header .nav .icons-container .search-form-icon .explore .icon-div {
+    display: flex;
+    padding: 0 1rem;
+    flex-direction: column;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.header .nav .icons-container .search-form-icon .explore .icon-div span {
+    color: white;
+    font-size: 1.1rem;
+}
+.header .nav .icons-container .search-form-icon .explore .search-form-container {
+    position: absolute;
+    top: 100%;
+    right: -30%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.header .nav .icons-container .search-form-icon .explore .search-form-container form{
+    padding: 2rem;
+    background-color: whitesmoke;
+    color: black;
+    width: 30rem;
+    font-size: 1.3rem;
+}
+.header .nav .icons-container .search-form-icon .explore .search-form-container form button{
+    all: unset;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    font-size: 1.3rem;
+}
+.header .nav .icons-container .search-form-icon .explore .search-form-container form input{
+    padding: 1rem ;
+    width: 100%;
+    border: 1px solid gainsboro;
+    margin: 2rem 0;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    color: black;
+}
+
+
+.header .nav .icons-container a {
+    text-decoration: none;
+    font-size: 1rem;
+}
+.header .nav .icons-container svg {
+    width: 2rem;
+    color: white;
+    fill: white;
+    stroke:white;
+    height: 2rem;
+}
+.header .nav .icons-container .login-icon {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    margin: 0 1rem;
+    align-items: flex-start;
+    padding: 0 0.4rem;
+}
+.header .nav .icons-container .login-icon span {
+    color: white;
+    font-size: 1.1rem;
+}
+.header .nav .menu-links ul li .categories-container .categories-title-div .categories-arrow.arrowClicked {
+    transform: rotate(180deg);
+}
+.header .nav .menu-links ul li .categories-container .categories-content.showNavCategoriesContent {
+    opacity: 1;
+    visibility: visible;
+}
+#login-div-c:hover .login-container {
+    opacity: 1;
+    visibility: visible;
+}
+.header .nav .logo-container .logo.lightLogo {
+    color: white;
+}
+.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span {
+    background-color: white;
+    width: 2.2rem;
+}
+.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(1) {
+    transform: translateY(0.4rem) rotate(45deg);
+}
+.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(2) {
+    opacity: 0;
+}
+.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(3) {
+    transform: translateY(-0.6rem) rotate(-45deg);
+}
+.header .nav .menu-links.showMenuLinks {
+    clip-path: inset(0 0 0 0);
+}
+@media screen and (max-width: 650px) {
+    .header .nav .logo-container {
+        z-index: 122;
+   }
+    .header .nav .logo-container .hamburger-button {
+        display: block;
+   }
+    .header .nav .logo-container .logo {
+        font-size: 1.7rem;
+   }
+    .header .nav .menu-links {
+        height: 100vh;
+        background-color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70vw;
+        display: grid;
+        place-items: center;
+        color: white;
+        clip-path: inset(0 100% 0 0);
+        transition: all 0.3s ease;
+   }
+    .header .nav .menu-links ul {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-left: 2rem;
+   }
+    .header .nav .menu-links ul li a {
+        color: white;
+        opacity: 1;
+   }
+    .header .nav .menu-links ul li .categories-container .categories-title-div {
+        justify-content: flex-start;
+   }
+    .header .nav .menu-links ul li .categories-container .categories-title-div .categories-title {
+        color: white;
+        opacity: 1;
+        padding-left: 1rem;
+   }
+    .header .nav .menu-links ul li .categories-container .categories-title-div .categories-arrow {
+        border-top: 7px solid #e2d6d6;
+        margin-left: 1rem;
+        margin-top: 0.2rem;
+   }
+    .header .nav .menu-links ul li .categories-container .categories-content {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+        padding: 1rem;
+        width: 100%;
+        background-color: whitesmoke;
+   }
+    .header .nav .menu-links ul li .categories-container .categories-content::before {
+        content: '';
+        display: none;
+   }
+    .header .nav .menu-links ul li .categories-container a {
+        color: white;
+        border-bottom: 1px solid;
+        width: 100%;
+   }
+    .header .nav .menu-links ul li .categories-container a p {
+        display: block;
+        padding: 0.7rem 0;
+   }
+    .header .nav .menu-links ul li .categories-container a .nav-img {
+        display: none;
+   }
+}

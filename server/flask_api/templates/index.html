@@ -4,41 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karibu Nami</title>
+    <link rel="stylesheet" href="../static/styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
        
 </head>
 <body>
-    <h1>karibu nami</h1>
-
     <div>
-        {% for place in result %}
-        <div style="border: 1px solid black;">
-            <h2>{{place.name}}</h2>
-            <p>{{place.mobile_number}}</p>
-            <a href={{place.location}}>location</a>
-            {% if place.open_now %}
-            <p>is open</p>            
-            {% else %}
-            <p>is closed</p>
-            {% endif %}
-            <img src={{place.photos[0]}} alt="photo of the place">
-            <p>Rating: {{place.rating}}</p>
+        <header class="header">
+            <nav class="nav">
+                <div class="logo-container">
+                    <div class="hamburger-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
 
-            <div style="border: 1px solid blue;" class="reviews">
-                {% for review in place.reviews %}
-                <div class="reviewer">
-                    <img src={{review.author_dp}} alt="author's display photo">
-                    <p>{{review.author_name}}</p>
-                    <p>Rate given by user: {{review.rating}}</p>
-                    <p>posted {{review.time_posted}}</p>
-                    <p>{{review.review_text}}</p>
+                    <a href="" class="logo" >Karibu Nami</a>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
+               
+                <div class="icons-container">
+
+                    <!-- login container -->
+                    <div id="login-div-c">
+                        <a href="/login" id="nav-login" class="login-icon">
+                            <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
+                                <g transform="translate(1 1)" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+                                    <path d="M0 18c0-4.5188182 3.663-8.18181818 8.18181818-8.18181818h1.63636364C14.337 9.81818182 18 13.4811818 18 18"></path>
+                                    <circle cx="9" cy="4.90909091" r="4.90909091"></circle>
+                                </g>
+                            </svg>
+                            <span style="padding-top: .6rem;" class="log-t">log in</span>
+                        </a>
+
+
+                    </div>
+
+                    <div class="search-form-icon">
+
+                        <div class="explore">
+                            <div class="icon-div">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-magnifying-glass"><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" opacity=".8"></path></svg>
+                                <span style="padding-top: .6rem;" class="form-t">Explore</span>
+
+                            </div>
+
+                            <div class="search-form-container">
+                                <form action="/place" method="post">
+                                    <label for="place_name">Explore places</label> <br>
+                                    <input name="place_name" id="place_name" type="text"> <br>
+                                    <button type="submit">Search</button>
+
+                                </form>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </nav>
+        </header>
+
     </div>
     
 </body>
