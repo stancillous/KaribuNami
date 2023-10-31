@@ -21,7 +21,8 @@ app.secret_key = 'toosecretive'
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-PLACE = "hotels"
+
+PLACE = "malls"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -199,8 +200,11 @@ def get_places():
             user_id = flask.session['user_id']
             with Session(setup.engine) as session:
                 query = select(setup.Place).filter_by(google_api_place_id=place_id)
-
-                existing_place = session.scalars(query).one()
+                try: 
+                    existing_place = session.scalars(query).one()
+                
+                except:
+                    existing_place = None
 
                 print(existing_place)
 
@@ -239,7 +243,7 @@ def get_specific_place(place_id):
         places_dict["reviews"] = place.reviews
         places_dict["google_api_place_id"] = place.google_api_place_id
 
-        return render_template("place_details.html", place=places_dict)
+        return render_template("place_details.html", places=places_dict)
         return jsonify(places_dict)
     
 

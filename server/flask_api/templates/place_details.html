@@ -20,7 +20,9 @@
 
 
         <div class="pts-container">
+                {% for place in places %}
                     <div class="pts-content">
+
                             
                         <div class="place-details">
                             <!-- {% if place.photos %} -->
@@ -58,7 +60,6 @@
                                 </div>       
                             </div>
                         </div>
-    
                     
                         <div class="the-place-reviews">
                             <div class="pt-container">
@@ -90,6 +91,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
     
                     </div>
                 </div>
