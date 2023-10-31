@@ -87,10 +87,6 @@ def login():
                 # print(f"**Login almost done***")
                 flask.session['user_id'] = user.id
 
-
-                # **************************
-                flask.session['username'] = username
-                # **************************
                 
                 # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
                 return redirect(url_for('home_page'))
@@ -303,6 +299,7 @@ def bookmark_place(place_id):
                 # print(f"Place NOT bookmarked!!!")
                 bkmk.bookmarked = 1
                 session.commit()
+                return redirect(url_for('saved_places'))
                 return redirect(location="/saved_places")
                 return jsonify("Place added to saved places")
             
@@ -310,6 +307,7 @@ def bookmark_place(place_id):
                 # print(f"Place already BOOKMARKED!!!")
                 bkmk.bookmarked = 0
                 session.commit()
+                return redirect(url_for('saved_places'))
                 return redirect(location="/saved_places")
                 return jsonify("Place removed from saved places")
     
