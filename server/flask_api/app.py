@@ -221,9 +221,26 @@ def get_places():
     return render_template("index.html", result=places_result)
 
 
-@app.route("/place/<string:place_name>", strict_slashes=False)
-def get_specific_place(place_name):
-    specific_place = [place for place in places_result if place.get("place_name")==place_name]
+@app.route("/place/<string:place_id>", strict_slashes=False)
+def get_specific_place(place_id):
+    # specific_place = [place for place in places_result if place.get("place_name")==place_name]
+    with Session(setup.engine) as session:
+        query = select(setup.Place).filter_by(google_api_place_id=place_id)
+
+        place = session.scalars(query).one()
+
+        places_dict = {}
+        places_dict["place_name"] = place.name
+        places_dict["rating"] = place.rating
+        places_dict["open_now"] = place.open_now
+        places_dict["mobile_number"] = place.mobile_number
+        places_dict["location"] = place.location
+        places_dict["photos"] = place.photos
+        places_dict["reviews"] = place.reviews
+        places_dict["google_api_place_id"] = place.google_api_place_id
+
+        return jsonify(places_dict)
+    
     return render_template("place_details.html", place=specific_place[0])
 
 
