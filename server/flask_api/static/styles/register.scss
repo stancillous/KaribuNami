@@ -71,6 +71,7 @@
             text-align: center;
             padding: 1.2rem 0;
             width: 100%;
+            // display: none;
            
             span{
                 font-size: 1.3rem;
@@ -78,6 +79,10 @@
                 color: red;
                 font-weight: 600;
             }
+        }
+        // classlist to be toggled to show form errors
+        .showFormErrors{
+            display: block;
         }
         p{
             font-size: 1.2rem;
