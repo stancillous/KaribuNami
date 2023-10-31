@@ -16,10 +16,15 @@
   padding-right: 4rem;
 }
 .saved-places-section .tts-container .tts-content .tts-header h1 {
-  font-weight: 900;
   font-size: 2rem;
   text-transform: capitalize;
   padding: 2rem;
+  font-weight: 500;
+}
+.saved-places-section .tts-container .tts-content .tts-header h1 span {
+  -webkit-text-decoration: dotted;
+          text-decoration: dotted;
+  text-decoration: underline;
 }
 .saved-places-section .tts-container .tts-content .tts-header .no-saved-places {
   display: none;
