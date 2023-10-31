@@ -21,7 +21,7 @@ app.secret_key = 'toosecretive'
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-PLACE = "schools"
+PLACE = "malls"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -99,7 +99,7 @@ places_result = []
 def get_places():
     """Returns results for places near the user"""
     # PLACE = request.form.get("place_name")
-    PLACE = "malls"
+    # PLACE = "malls"
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
@@ -211,9 +211,7 @@ def get_places():
                 session.add(new_bkmk)
                 session.commit()
     
-    # return render_template("places.html", places=places_result)
-    # return render_template("place_details.html", places=places_result)
-    return jsonify(places_result)
+    return render_template("places.html", places=places_result)
 
 
 @app.route("/place/<string:place_id>", strict_slashes=False)
