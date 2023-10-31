@@ -28,18 +28,12 @@
                         {% for place in places %}
                         
                         <div class="place">
-                            <a href="/places/{{place.place_name}}"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a>
-                            <!-- <a href="/Glam Hotel"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a> -->
+                            <a href="/place/{{place.place_name}}"><img id="place-image" src={{place.photos[0]}} alt="photo of the place"></a>
                             <a id="place-name" class="" href={{place.place_name}}>{{place.place_name}}</a>
 
                             <p class="place-rate-number">Rated {{place.rating}}/5</p>
                         </div>
                         {% endfor %}
-    
-    
-    
-    
-    
                     </div>
                 </div>
             </section>

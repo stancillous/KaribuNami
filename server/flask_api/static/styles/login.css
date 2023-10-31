@@ -33,6 +33,21 @@
 .login-main-section .lms-wrapper .login-container input:focus {
   border: 1px solid rgb(0, 0, 0);
 }
+.login-main-section .lms-wrapper .login-container .login-error {
+  margin: 2rem 0;
+  margin-bottom: 3rem;
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  padding: 1.5rem 0;
+}
+.login-main-section .lms-wrapper .login-container .login-error span {
+  padding: 2rem 0;
+  font-size: 1.3rem;
+  width: 100%;
+  color: red;
+  font-weight: 600;
+}
 .login-main-section .lms-wrapper .login-container .login-button-wrapper {
   margin-bottom: 1rem;
   display: flex;

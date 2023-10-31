@@ -48,6 +48,18 @@
 .main .signup-form-container .signup-form #signup-form div button:hover {
   opacity: 0.8;
 }
+.main .signup-form-container .register-form-error {
+  background-color: white;
+  text-align: center;
+  padding: 1.2rem 0;
+  width: 100%;
+}
+.main .signup-form-container .register-form-error span {
+  font-size: 1.3rem;
+  width: 100%;
+  color: red;
+  font-weight: 600;
+}
 .main .signup-form-container p {
   font-size: 1.2rem;
   font-weight: 500;

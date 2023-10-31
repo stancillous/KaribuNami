@@ -43,6 +43,8 @@
                         }
                     }
 
+
+
                     button{
                         all: unset;
                         text-align: center;
@@ -62,6 +64,19 @@
                     }
                     
                 }
+            }
+        }
+        .register-form-error{
+            background-color: white;
+            text-align: center;
+            padding: 1.2rem 0;
+            width: 100%;
+           
+            span{
+                font-size: 1.3rem;
+                width: 100%;
+                color: red;
+                font-weight: 600;
             }
         }
         p{

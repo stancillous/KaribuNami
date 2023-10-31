@@ -95,16 +95,13 @@ def home_page():
 
 
 places_result = []
-@app.route('/place', strict_slashes=False, methods=["POST"])
+@app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 def get_places():
     """Returns results for places near the user"""
-    PLACE = request.form.get("place_name")
+    # PLACE = request.form.get("place_name")
+    PLACE = "malls"
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
-
-
-
-
 
 
     # limit to 5 results for now to avoid visual clutter
@@ -213,11 +210,9 @@ def get_places():
                 session.add(new_bkmk)
                 session.commit()
     
-    print("places is ", places_result[0])
-    return render_template("places.html", places=places_result)
+    # return render_template("places.html", places=places_result)
     # return render_template("place_details.html", places=places_result)
-    # return jsonify(places_result)
-    return render_template("index.html", result=places_result)
+    return jsonify(places_result)
 
 
 @app.route("/place/<string:place_name>", strict_slashes=False)
