@@ -15,7 +15,7 @@ class Place(Base):
     """Table places"""
     __tablename__ = "places"
 
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    google_api_place_id = Column(String(256), primary_key=True, nullable=False)
     name = Column(String(256), nullable=False)
     rating = Column(String(256), nullable=False)
     open_now = Column(String(256), nullable=True)
