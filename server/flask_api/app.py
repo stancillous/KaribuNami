@@ -2,8 +2,11 @@ from flask import Flask, jsonify, render_template, request, redirect
 from flask import Flask, jsonify, render_template,request, render_template, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from server.tables import setup
+import json
 import requests
 import flask
+
+import markupsafe
 
 from sqlalchemy import ForeignKey, create_engine, Column, Integer
 from sqlalchemy import String, select
@@ -15,6 +18,8 @@ import json
 
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
+
+
 
 # Temporary location data
 # To be replaced with geolocation api
@@ -59,7 +64,7 @@ def register():
             newuser = setup.User(username=username, password=hashed_password)
             session.add(newuser)
             session.commit()
-        print("SIGNUP SUCCESS REDIRECT TO HOME PAGE!!!")
+        # print("SIGNUP SUCCESS REDIRECT TO HOME PAGE!!!")
         return redirect(url_for('login'))
     return jsonify("Sign Up Failed!!!")
 
@@ -81,7 +86,13 @@ def login():
             if user and check_password_hash(user.password, password):
                 # print(f"**Login almost done***")
                 flask.session['user_id'] = user.id
-                print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
+
+
+                # **************************
+                flask.session['username'] = username
+                # **************************
+                
+                # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
                 return redirect(url_for('home_page'))
             else: 
                 return 'Login failed. Please check your credentials.'
@@ -96,10 +107,11 @@ def home_page():
 
 
 places_result = []
-@app.route('/place', strict_slashes=False, methods=["POST", "GET"])
+# @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
+@app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
-    # PLACE = request.form.get("place_name")
+    PLACE = request.form.get("place_name")
     # PLACE = "malls"
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
@@ -197,6 +209,12 @@ def get_places():
         places_result.append(single_place_result)
 
         if 'user_id' in flask.session:
+            # print("\t\tbefore")
+            # print("\t\tuser is ", flask.session['user_id'])
+            # print("\t\tusername is ", flask.session['username'])
+
+            # print("\t\tafter")
+
             user_id = flask.session['user_id']
             with Session(setup.engine) as session:
                 query = select(setup.Place).filter_by(google_api_place_id=place_id)
@@ -206,7 +224,6 @@ def get_places():
                 except:
                     existing_place = None
 
-                print(existing_place)
 
                 if not existing_place:                    
                     new_place = setup.Place(google_api_place_id=place_id, name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
@@ -243,26 +260,38 @@ def get_specific_place(place_id):
         places_dict["reviews"] = place.reviews
         places_dict["google_api_place_id"] = place.google_api_place_id
 
-        return render_template("place_details.html", places=places_dict)
-        return jsonify(places_dict)
+        if 'user_id' in flask.session:
+            user_authenticated = True
+        else:
+            user_authenticated = False
+        
+        return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
+        # return jsonify(json.loads(json.dumps(places_dict)))
     
 
 
-@app.route("/saved_places/<user_id>", strict_slashes=False)
+@app.route("/saved_places", strict_slashes=False)
 def saved_places():
     """this should return the places that a signed in user has saved/bookmarked
         Should get them from the DB, and then pass the json to the template below,
         in the template we'll iterate the saved places and show the user
 
     """
-    return render_template("saved_places.html")
+    # idk how we'll implement this.
+    # get user_id, select from bookmarks places where value is 1, get 
+    # the corresponding place_id, then fetch that place from DB
+
+
+    username = flask.session['username'] # this name will be displayed to the user
+
+    return render_template("saved_places.html", username=username)
 
 @app.route("/bookmark/<place_id>", strict_slashes=False)
 def bookmark_place(place_id):
     """Allows user to bookmark a place for future reference"""
     # Check if user is logged in
     if 'user_id' in flask.session:
-        print(f"User is signed in!!!")
+        # print(f"User is signed in!!!")
 
         with Session(setup.engine) as session:
 
@@ -271,60 +300,22 @@ def bookmark_place(place_id):
             bkmk = session.scalars(query).one()
 
             if bkmk.bookmarked == 0:
-                print(f"Place NOT bookmarked!!!")
+                # print(f"Place NOT bookmarked!!!")
                 bkmk.bookmarked = 1
                 session.commit()
+                return redirect(location="/saved_places")
                 return jsonify("Place added to saved places")
             
             else:
-                print(f"Place already BOOKMARKED!!!")
+                # print(f"Place already BOOKMARKED!!!")
                 bkmk.bookmarked = 0
                 session.commit()
+                return redirect(location="/saved_places")
                 return jsonify("Place removed from saved places")
     
+
     return jsonify(f"Sign in to use this feature!!!")
         
-
-
-# @app.route("/register", methods=["POST", "GET"], strict_slashes=False)
-# def sign_up():
-#     """
-#     this route accepts two methods. if method is GET, we render the register html
-#     if method is POST, we know it's from a sign up form
-#     """
-#     if request.method == "GET":
-#         return render_template("register.html")
-    
-#     elif request.method == "POST":
-#         email = request.form.get("email")
-#         username = request.form.get("username")
-#         password = request.form.get("password")
-#         confirmPassword = request.form.get("confirm-password")
-
-#         if password != confirmPassword:
-#             # should return an error page, but rn i'm just returning a str
-#             return "passwords must match"
-    
-#         # ADD USER TO OUR DB BEFORE SENDING THEM TO  THE HOME PAGE
-#         return redirect(location="/home")
-
-
-# @app.route("/login", methods=["POST", "GET"], strict_slashes=False)
-# def login():
-        
-#     """
-#     this route accepts two methods. if methodplace_id = place["place_id"] is GET, we render the register html
-#     if method is POST, we know it's from a login form
-#     """
-#     if request.method == "GET":
-#         return render_template("login.html")
-    
-#     elif request.method == "POST":
-#         email = request.form.get("email")
-#         password = request.form.get("password")
-#         # CHECK IN DB IF THE INPUTS ARE CORRECT BEFORE
-#         # SENDING THEM TO THE HOME PAGE
-#     return redirect(location="/home")
 
 
 if __name__ == '__main__':
