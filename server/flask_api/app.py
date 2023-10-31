@@ -198,18 +198,25 @@ def get_places():
         if 'user_id' in flask.session:
             user_id = flask.session['user_id']
             with Session(setup.engine) as session:
-                new_place = setup.Place(google_api_place_id=place_id, name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
+                query = select(setup.Place).filter_by(google_api_place_id=place_id)
 
-                session.add(new_place)
-                session.flush()
-                new_place_id = new_place.google_api_place_id
+                existing_place = session.scalars(query).one()
 
-                # query = select(setup.User).filter_by(id='user_id')
-                # user = session.scalars(query).one()
+                print(existing_place)
 
-                new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
-                session.add(new_bkmk)
-                session.commit()
+                if not existing_place:                    
+                    new_place = setup.Place(google_api_place_id=place_id, name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
+
+                    session.add(new_place)
+                    session.flush()
+                    new_place_id = new_place.google_api_place_id
+
+                    # query = select(setup.User).filter_by(id='user_id')
+                    # user = session.scalars(query).one()
+
+                    new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
+                    session.add(new_bkmk)
+                    session.commit()
     
     return render_template("places.html", places=places_result)
 
