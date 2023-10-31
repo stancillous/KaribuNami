@@ -4,6 +4,9 @@ there's too much repeated code (like w the google fonts api links). Create a 'sh
 SIGN UPS
 Write Js or Python code to check that password and confirm password fields match
 
+LOGIN
+Use email and password to login. Not username and password. Since we might have diff users with same usernames
+
 BOOKMARKS
 Add column(DateAdded)
 
@@ -37,3 +40,14 @@ In the /places api route, add a field (bookmarks) for the returned results, this
 
 USERNAME
 During registration check if username already exists to avoid duplicates
+
+URL FOR CLICKED PLACE
+it's currently set to /place/place_name
+set it to /place/place_id
+
+ADD IMAGE SLIDER FOR SPECIFIC PLACE
+Will depend on the number of pics that place has
+Loop and for each create a new image
+
+FORMS
+clicking enter key should do the same thing as when user clicks the submit  button

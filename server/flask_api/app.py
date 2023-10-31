@@ -26,7 +26,7 @@ LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 
-nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
+# nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
 # Parameters for place details api
 PLACE_ID = ""
@@ -47,6 +47,8 @@ maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == "GET":
+        return render_template("register.html")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -63,6 +65,8 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == "GET":
+        return render_template("login.html")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -84,17 +88,25 @@ def login():
     return jsonify("Login Failed!!!")
 
 
-@app.route('/home', strict_slashes = False)
+@app.route('/', strict_slashes = False)
 def home_page():
     """Default home page and more landing page features"""
-    search_bar = "***SEARCH BAR WILL BE RIGHT HERE***"
-    return jsonify(search_bar)
+    return render_template("index.html")
 
 
 places_result = []
-@app.route('/place', strict_slashes=False)
+@app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
+    PLACE = request.form.get("place_name")
+
+    nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
+
+
+
+
+
+
     # limit to 5 results for now to avoid visual clutter
     params = {'limit': 3}
 
@@ -202,6 +214,7 @@ def get_places():
                 session.add(new_bkmk)
                 session.commit()
     
+    print("places is ", places_result[0])
     return render_template("places.html", places=places_result)
     # return render_template("place_details.html", places=places_result)
     # return jsonify(places_result)
@@ -279,7 +292,7 @@ def bookmark_place(place_id):
 # def login():
         
 #     """
-#     this route accepts two methods. if method is GET, we render the register html
+#     this route accepts two methods. if methodplace_id = place["place_id"] is GET, we render the register html
 #     if method is POST, we know it's from a login form
 #     """
 #     if request.method == "GET":
