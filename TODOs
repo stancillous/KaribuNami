@@ -38,6 +38,9 @@ I feel like we should just get the user's location automatically, like we should
 PLACES (ALREADY IMPLEMENTED, TO BE COUNTER CHECKED BY RAYMOND)
 In the /places api route, add a field (bookmarks) for the returned results, this field will only be available if the user is signed in, this will allow the user to bookmark places for easy future reference
 
+USERNAME
+During registration check if username already exists to avoid duplicates
+
 URL FOR CLICKED PLACE
 it's currently set to /place/place_name
 set it to /place/place_id

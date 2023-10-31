@@ -21,7 +21,7 @@ app.secret_key = 'toosecretive'
 sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
-# PLACE = "malls"
+PLACE = "schools"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -187,6 +187,7 @@ def get_places():
         single_place_result["location"] = maps_url
         single_place_result["photos"] = photographs
         single_place_result["reviews"] = place_reviews
+        single_place_result["google_api_place_id"] = place_id
 
         # This field is only availabe for signed in users
         if 'user_id' in flask.session:
@@ -197,11 +198,11 @@ def get_places():
         if 'user_id' in flask.session:
             user_id = flask.session['user_id']
             with Session(setup.engine) as session:
-                new_place = setup.Place(name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
+                new_place = setup.Place(google_api_place_id=place_id, name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
 
                 session.add(new_place)
                 session.flush()
-                new_place_id = new_place.id
+                new_place_id = new_place.google_api_place_id
 
                 # query = select(setup.User).filter_by(id='user_id')
                 # user = session.scalars(query).one()
@@ -215,13 +216,30 @@ def get_places():
     return jsonify(places_result)
 
 
-@app.route("/place/<string:place_name>", strict_slashes=False)
-def get_specific_place(place_name):
-    specific_place = [place for place in places_result if place.get("place_name")==place_name]
+@app.route("/place/<string:place_id>", strict_slashes=False)
+def get_specific_place(place_id):
+    # specific_place = [place for place in places_result if place.get("place_name")==place_name]
+    with Session(setup.engine) as session:
+        query = select(setup.Place).filter_by(google_api_place_id=place_id)
+
+        place = session.scalars(query).one()
+
+        places_dict = {}
+        places_dict["place_name"] = place.name
+        places_dict["rating"] = place.rating
+        places_dict["open_now"] = place.open_now
+        places_dict["mobile_number"] = place.mobile_number
+        places_dict["location"] = place.location
+        places_dict["photos"] = place.photos
+        places_dict["reviews"] = place.reviews
+        places_dict["google_api_place_id"] = place.google_api_place_id
+
+        return jsonify(places_dict)
+    
     return render_template("place_details.html", place=specific_place[0])
 
 
-@app.route("/saved_places", strict_slashes=False)
+@app.route("/saved_places/<user_id>", strict_slashes=False)
 def saved_places():
     """this should return the places that a signed in user has saved/bookmarked
         Should get them from the DB, and then pass the json to the template below,
@@ -286,7 +304,7 @@ def bookmark_place(place_id):
 # def login():
         
 #     """
-#     this route accepts two methods. if method is GET, we render the register html
+#     this route accepts two methods. if methodplace_id = place["place_id"] is GET, we render the register html
 #     if method is POST, we know it's from a login form
 #     """
 #     if request.method == "GET":
