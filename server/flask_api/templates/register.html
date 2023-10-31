@@ -38,13 +38,15 @@
                         <label for="confirm-user-password">Confirm Password</label>
                         <input name="confirm-password" required id="confirm-user-password" type="password" placeholder="">
                     </div>
-                    <div class="register-form-error">
+                    <div class="register-form-error username-present">
                         <span class="username-error">Username exists. Try a different one.</span> <br> <br>
 
                     </div>
-                    <div class="register-form-error">
-                        <span class="password-error">Password should be at least 6 characters.</span>
-
+                    <div class="register-form-error short-password">
+                        <span class="short-password-error">Password should be at least 6 characters long!</span>
+                    </div>
+                    <div class="register-form-error passwords-mismatch">
+                        <span>Passwords should match!</span>
                     </div>
 
                     <div class="btn-container">
@@ -56,5 +58,6 @@
         </div>
     </main>
     
+    <script src="../static/scripts/register.js"></script>
 </body>
 </html>
