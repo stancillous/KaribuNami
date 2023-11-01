@@ -32,7 +32,42 @@
                             <a id="place-name" class="" href={{place.place_name}}>{{place.place_name}}</a>
 
                             <p class="place-rate-number">Rated {{place.rating}}/5</p>
-                        </div>
+                        </div>INFO:werkzeug: * Debugger PIN: 470-434-697
+                        2023-10-31 12:24:01,547 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+                        INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+                        2023-10-31 12:24:01,550 INFO sqlalchemy.engine.Engine SELECT places.google_api_place_id, places.name, places.rating, places.open_now, places.mobile_number, places.location, places.photos, places.reviews 
+                        FROM places 
+                        WHERE places.google_api_place_id = %(google_api_place_id_1)s
+                        INFO:sqlalchemy.engine.Engine:SELECT places.google_api_place_id, places.name, places.rating, places.open_now, places.mobile_number, places.location, places.photos, places.reviews 
+                        FROM places 
+                        WHERE places.google_api_place_id = %(google_api_place_id_1)s
+                        2023-10-31 12:24:01,550 INFO sqlalchemy.engine.Engine [generated in 0.00022s] {'google_api_place_id_1': 'ChIJE5DWSxUXLxgROyJ1RuPNm8Q'}
+                        INFO:sqlalchemy.engine.Engine:[generated in 0.00022s] {'google_api_place_id_1': 'ChIJE5DWSxUXLxgROyJ1RuPNm8Q'}
+                        2023-10-31 12:24:01,550 INFO sqlalchemy.engine.Engine ROLLBACK
+                        INFO:sqlalchemy.engine.Engine:ROLLBACK
+                        INFO:werkzeug:127.0.0.1 - - [31/Oct/2023 12:24:01] "GET /place HTTP/1.1" 500 -
+                        Traceback (most recent call last):
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 2213, in __call__
+                            return self.wsgi_app(environ, start_response)
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 2193, in wsgi_app
+                            response = self.handle_exception(e)
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+                            response = self.full_dispatch_request()
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+                            rv = self.handle_user_exception(e)
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+                            rv = self.dispatch_request()
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+                            return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+                          File "/home/bot-on-tapwater/Desktop/alx_projects/KaribuNami/server/flask_api/app.py", line 203, in get_places
+                            existing_place = session.scalars(query).one()
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/sqlalchemy/engine/result.py", line 1827, in one
+                            return self._only_one_row(
+                          File "/home/bot-on-tapwater/.local/lib/python3.10/site-packages/sqlalchemy/engine/result.py", line 760, in _only_one_row
+                            raise exc.NoResultFound(
+                        sqlalchemy.exc.NoResultFound: No row was found when one was required
+                        
+                        
                         {% endfor %}
                     </div>
                 </div>

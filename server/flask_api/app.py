@@ -262,8 +262,7 @@ def get_specific_place(place_id):
             user_authenticated = False
         
         return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
-        # return jsonify(json.loads(json.dumps(places_dict)))
-    
+        # return jsonify(json.loads(json.dumps(places_dict)))    
 
 
 @app.route("/saved_places", strict_slashes=False)
