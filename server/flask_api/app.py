@@ -87,9 +87,6 @@ def login():
                 # print(f"**Login almost done***")
                 flask.session['user_id'] = user.id
 
-                # this will be used to display the username on the /saved_places route
-                flask.session['username'] = username
-
                 
                 # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
                 return redirect(url_for('home_page'))
@@ -239,7 +236,6 @@ def get_places():
                     session.commit()
     
     return render_template("places.html", places=places_result)
-    # return jsonify(places_result)
 
 
 @app.route("/place/<string:place_id>", strict_slashes=False)
@@ -282,6 +278,35 @@ def saved_places():
 
 
     username = flask.session['username'] # this name will be displayed to the user
+
+    with Session(setup.engine) as session:
+        query = select(setup.Bookmark).filter(setup.Bookmark.user_id == flask.session["user_id"]).filter(setup.Bookmark.bookmarked == 1)
+
+        bookmarks = session.scalars(query).all()
+
+        all_bookmarks = []
+
+        for bookmark in bookmarks:
+            qry = select(setup.Place).filter_by(google_api_place_id=bookmark.place_id)
+
+            place = session.scalars(qry).one()
+
+            places_dict = {}
+            places_dict["place_name"] = place.name
+            places_dict["rating"] = place.rating
+            places_dict["open_now"] = place.open_now
+            places_dict["mobile_number"] = place.mobile_number
+            places_dict["location"] = place.location
+            places_dict["photos"] = place.photos
+            places_dict["reviews"] = place.reviews
+            places_dict["google_api_place_id"] = place.google_api_place_id
+
+            all_bookmarks.append(places_dict)
+        
+        return jsonify(all_bookmarks)
+
+
+
 
     return render_template("saved_places.html", username=username)
 
