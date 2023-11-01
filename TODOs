@@ -64,3 +64,5 @@ LOGGING OUT
 
 HTML ESCAPING
 
+
+Sometimes the results shown in the /place route are diff from what the user entered
