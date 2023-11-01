@@ -87,6 +87,9 @@ def login():
                 # print(f"**Login almost done***")
                 flask.session['user_id'] = user.id
 
+                # this will be used to display the username on the /saved_places route
+                flask.session['username'] = username
+
                 
                 # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
                 return redirect(url_for('home_page'))
@@ -236,6 +239,7 @@ def get_places():
                     session.commit()
     
     return render_template("places.html", places=places_result)
+    # return jsonify(places_result)
 
 
 @app.route("/place/<string:place_id>", strict_slashes=False)
