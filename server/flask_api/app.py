@@ -276,34 +276,36 @@ def saved_places():
     # get user_id, select from bookmarks places where value is 1, get 
     # the corresponding place_id, then fetch that place from DB
 
+    if 'user_id' in flask.session:
+        username = flask.session['username'] # this name will be displayed to the user
 
-    username = flask.session['username'] # this name will be displayed to the user
+        with Session(setup.engine) as session:
+            query = select(setup.Bookmark).filter(setup.Bookmark.user_id == flask.session["user_id"]).filter(setup.Bookmark.bookmarked == 1)
 
-    with Session(setup.engine) as session:
-        query = select(setup.Bookmark).filter(setup.Bookmark.user_id == flask.session["user_id"]).filter(setup.Bookmark.bookmarked == 1)
+            bookmarks = session.scalars(query).all()
 
-        bookmarks = session.scalars(query).all()
+            all_bookmarks = []
 
-        all_bookmarks = []
+            for bookmark in bookmarks:
+                qry = select(setup.Place).filter_by(google_api_place_id=bookmark.place_id)
 
-        for bookmark in bookmarks:
-            qry = select(setup.Place).filter_by(google_api_place_id=bookmark.place_id)
+                place = session.scalars(qry).one()
 
-            place = session.scalars(qry).one()
+                places_dict = {}
+                places_dict["place_name"] = place.name
+                places_dict["rating"] = place.rating
+                places_dict["open_now"] = place.open_now
+                places_dict["mobile_number"] = place.mobile_number
+                places_dict["location"] = place.location
+                places_dict["photos"] = place.photos
+                places_dict["reviews"] = place.reviews
+                places_dict["google_api_place_id"] = place.google_api_place_id
 
-            places_dict = {}
-            places_dict["place_name"] = place.name
-            places_dict["rating"] = place.rating
-            places_dict["open_now"] = place.open_now
-            places_dict["mobile_number"] = place.mobile_number
-            places_dict["location"] = place.location
-            places_dict["photos"] = place.photos
-            places_dict["reviews"] = place.reviews
-            places_dict["google_api_place_id"] = place.google_api_place_id
-
-            all_bookmarks.append(places_dict)
-        
-        return jsonify(all_bookmarks)
+                all_bookmarks.append(places_dict)
+            
+            return jsonify(all_bookmarks)
+    
+    return jsonify("Sign in to use this route/feature!!")
 
 
 
