@@ -55,10 +55,12 @@ clicking enter key should do the same thing as when user clicks the submit  butt
 
 
 ADD COMMENTS TO THE CODE
-
+<!-- 
 @LOGIN_REQUIRED
 The route /saved_places should only be accessible to logged in users.
-If a user enters it manually on the page and they are not logged in, they should be redirected to the login page
+If a user enters it manually on the page and they are not logged in, they should be redirected to the login page -->
+
+LOGGING OUT
 
 HTML ESCAPING
 
