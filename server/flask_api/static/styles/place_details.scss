@@ -18,6 +18,82 @@ $padding-top:7rem;
 //     background-color: $web-color;
 // }
 
+
+// STYLING FOR MODAL TO BE SHOWN TO USER WHO CLICKS THE SAVE BUTTON WHEN NNOT SIGNED UP 
+
+.addmodal{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    z-index: 23;
+    background-color: rgba(0, 0, 0, 0.552);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s ease;
+    .adm-lg{
+        border: 1px solid black;
+        background-color: whitesmoke;
+        color: black;
+        padding: 2rem;
+        margin: 1rem;
+        .adm-lg-container{
+            .content{
+                .close-modal-div{
+                    border-bottom: 1px solid gainsboro;
+                    margin-bottom: 0.5rem;
+                    text-align: right;
+                    .close-modal{
+                        font-weight: bolder;
+                        font-size: 2rem;
+                        cursor: pointer;
+
+                    }
+                    
+                }
+                h2{
+                    font-weight: 600;
+                    
+                }
+                p{
+                    font-weight: 500;
+                    font-size: 1.3rem;
+                    opacity: 0.8;
+                    padding-top: 1rem;
+                }
+                .login-container{
+                    margin: 2rem 0;
+                    display: flex;
+
+                    .modal-btn{
+                        all: unset;
+                        padding: .8rem 2.5rem;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        text-transform: capitalize;
+                        background-color: black;
+                        cursor: pointer;
+                        color: white;
+
+                        &:hover{
+                            opacity:.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//class to show modal
+.addmodal.showModal{
+    opacity: 1;
+    visibility: visible;
+}
+
 .place-details-wrp{
     max-width: 1300px;
     margin: 0 auto;
@@ -53,7 +129,6 @@ section{
             // flex-direction: column-reverse;
             // border: 2px solid red;
 
-            //THE DIV SHOWING THE PLAYLIST DETAILS  
             .place-details{
                 display: flex;
                 padding-bottom: 1rem;

@@ -60,6 +60,9 @@
   color: red;
   font-weight: 600;
 }
+.main .signup-form-container .showFormErrors {
+  display: block;
+}
 .main .signup-form-container p {
   font-size: 1.2rem;
   font-weight: 500;

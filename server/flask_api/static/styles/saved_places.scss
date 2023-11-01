@@ -35,10 +35,15 @@ $padding-top:7rem;
                 padding-right: 4rem;
                 
                 h1{
-                    font-weight: $black;
                     font-size: 2rem;
                     text-transform: capitalize;
                     padding: 2rem;
+                    font-weight: 500;
+
+                    span{
+                        text-decoration: dotted;
+                        text-decoration: underline;
+                    }
                 }
                 
                 //the text to be shown if user has no saved places
