@@ -27,7 +27,6 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # Parameters for nearby places api
 
-# PLACE = "malls"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -113,9 +112,12 @@ def get_places():
     # PLACE = "malls"
 
 
+    # LOCATION = "{},{}".format(new_lat, new_long)
 
-    print("\t\tnew lat is ", new_lat)
-    print("\t\tnew long is ", new_long)
+    # print("\t\tnew lat is ", new_lat)
+    # print("\t\tnew long is ", new_long)
+    # print("\t\t\tlocation is ", LOCATION)
+
 
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
