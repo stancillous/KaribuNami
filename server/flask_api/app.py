@@ -243,6 +243,8 @@ def get_specific_place(place_id):
         places_dict["reviews"] = place.reviews
         places_dict["google_api_place_id"] = place.google_api_place_id
 
+        print(f"\n\tlength: {len(places_dict['reviews'])}\n")
+
         return render_template("place_details.html", places=places_dict)
         return jsonify(places_dict)
     
