@@ -108,7 +108,15 @@ places_result = []
 def get_places():
     """Returns results for places near the user"""
     PLACE = request.form.get("place_name")
+    new_lat = request.form.get("location-lat")
+    new_long = request.form.get("location-long")
     # PLACE = "malls"
+
+
+
+    print("\t\tnew lat is ", new_lat)
+    print("\t\tnew long is ", new_long)
+
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
@@ -303,9 +311,12 @@ def saved_places():
 
                 all_bookmarks.append(places_dict)
             
-            return jsonify(all_bookmarks)
+            return render_template("saved_places.html", username=flask.session['username'], bookmarks=all_bookmarks)
+            # return jsonify(all_bookmarks)
+        
     
-    return jsonify("Sign in to use this route/feature!!")
+    return redirect(url_for('login'))
+    # return jsonify("Sign in to use this route/feature!!")
 
 
 
