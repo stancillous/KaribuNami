@@ -27,7 +27,7 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # Parameters for nearby places api
 
-PLACE = "malls"
+# PLACE = "malls"
 LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
@@ -240,7 +240,7 @@ def get_places():
 
 @app.route("/place/<string:place_id>", strict_slashes=False)
 def get_specific_place(place_id):
-    # specific_place = [place for place in places_result if place.get("place_name")==place_name]
+    # specific_place = [place for place in homeplaces_result if place.get("place_name")==place_name]
     with Session(setup.engine) as session:
         query = select(setup.Place).filter_by(google_api_place_id=place_id)
 
