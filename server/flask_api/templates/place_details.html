@@ -18,125 +18,123 @@
                     <img class="logo" src="" alt="">
                 </div>
 
-
-
                 <div class="pts-container">
-                            <div class="pts-content">
-                                    
-                                <div class="place-details">
-                                    <img id="place-image" src={{place.photos[0]}} alt="image of the place">
-                                    <div class="place-info">
-                                        <h1 class="place-name">{{place.place_name}}</h1>
-                                        <p>Contact: {{place.mobile_number}}</p>
-                                        {% if place.open_now %}
-                                        <p>Is now open</p>            
-                                        {% else %}
-                                        <p>Is closed</p>
-                                        {% endif %}  
-                                        <div class="btns-wrp">
-                                            <div class="rating-btn topbtn">
-                                                <button class="rate-btn-nopointer">
-                                                    <img style="width: 1.4rem;" src="../static/images/star-svg.svg" alt="icon for the place's overall rating">
-                                                    <span>{{place.rating}}</span>
-                                                </button>
-                                            </div>
-
-                                        {% if user_authenticated %}
-                                        <!-- BUTTON TO BE SHOWN TO SIGNED UP USERS -->
-                                            <div class="save-btn topbtn">
-                                                <a href="/bookmark/{{place.google_api_place_id}}">
-                                                <button class="save-place-btn">
-                                                    <svg class="spacing_noMargin__Q_PsJ" viewBox="0 0 24 24" width="19" height="19"><path id="favorite_border-bcbe810b1c8684d420b21248b530177d_Tracé_2228" d="M19.519,9.6A5.717,5.717,0,0,0,14,4.858h0a5.238,5.238,0,0,0-1.8.278A5.692,5.692,0,0,0,9.616,6.8l-.1-.116a5.377,5.377,0,0,0-4.229-1.85,4.188,4.188,0,0,0-.481.019A5.451,5.451,0,0,0,1.057,6.8,6.306,6.306,0,0,0,.035,13.032a13.481,13.481,0,0,0,2.558,4.048,35.618,35.618,0,0,0,6.85,5.754.31.31,0,0,0,.173.058.27.27,0,0,0,.173-.058,36.676,36.676,0,0,0,5.47-4.276A18.5,18.5,0,0,0,18.636,14.4,7.4,7.4,0,0,0,19.519,9.6Zm-2.753,3.753a15.6,15.6,0,0,1-3.057,3.724,36.039,36.039,0,0,1-4.1,3.379,33.6,33.6,0,0,1-5.322-4.64,10.684,10.684,0,0,1-2.183-3.225,3.947,3.947,0,0,1,.487-4.367,2.955,2.955,0,0,1,2.38-1.222H5.3A4.416,4.416,0,0,1,8.53,8.741l.077.1.039.039,1.04,1.117.982-1.155a5.186,5.186,0,0,1,2.014-1.58A4.432,4.432,0,0,1,14,7.006a3.486,3.486,0,0,1,3.426,2.857A5.088,5.088,0,0,1,16.765,13.357Z" transform="translate(2 -.865)"></path></svg>
-                                                    <span>Save</span>
-                                                </button>
-                                            </a>
-                                            </div>
-
-                                            {% else %}
-                                            <!-- BUTTON TO BE SHOWN FOR USERS NOT SIGNED UP -->
-                                            <div class="save-btn topbtn">
-                                                <button class="save-place-btn" id="user-not-signed-in">
-                                                    <svg class="spacing_noMargin__Q_PsJ" viewBox="0 0 24 24" width="19" height="19"><path id="favorite_border-bcbe810b1c8684d420b21248b530177d_Tracé_2228" d="M19.519,9.6A5.717,5.717,0,0,0,14,4.858h0a5.238,5.238,0,0,0-1.8.278A5.692,5.692,0,0,0,9.616,6.8l-.1-.116a5.377,5.377,0,0,0-4.229-1.85,4.188,4.188,0,0,0-.481.019A5.451,5.451,0,0,0,1.057,6.8,6.306,6.306,0,0,0,.035,13.032a13.481,13.481,0,0,0,2.558,4.048,35.618,35.618,0,0,0,6.85,5.754.31.31,0,0,0,.173.058.27.27,0,0,0,.173-.058,36.676,36.676,0,0,0,5.47-4.276A18.5,18.5,0,0,0,18.636,14.4,7.4,7.4,0,0,0,19.519,9.6Zm-2.753,3.753a15.6,15.6,0,0,1-3.057,3.724,36.039,36.039,0,0,1-4.1,3.379,33.6,33.6,0,0,1-5.322-4.64,10.684,10.684,0,0,1-2.183-3.225,3.947,3.947,0,0,1,.487-4.367,2.955,2.955,0,0,1,2.38-1.222H5.3A4.416,4.416,0,0,1,8.53,8.741l.077.1.039.039,1.04,1.117.982-1.155a5.186,5.186,0,0,1,2.014-1.58A4.432,4.432,0,0,1,14,7.006a3.486,3.486,0,0,1,3.426,2.857A5.088,5.088,0,0,1,16.765,13.357Z" transform="translate(2 -.865)"></path></svg>
-                                                    <span>Save</span>
-                                                </button>
-                                            </div>
-
-                                            {% endif %}
-
-
-                                            <div class="directions-btn topbtn">
-                                                <a href={{place.location}} target="_blank">
-                                                <button>
-                                                    <svg enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" focusable="false" class="zKmjoe NMm5M"><g><rect fill="none" height="24" width="24"></rect></g><g><g><path d="m21.41 10.59-7.99-8a1.993 1.993 0 00-2.83 0l-8.01 8c-.78.78-.78 2.05 0 2.83l8.01 8c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.99-8c.8-.79.8-2.05.01-2.83zM12.01 20 4 12l8-8 8 8-7.99 8z"></path><path d="M8 11v4h2v-3h3.5v2.5L17 11l-3.5-3.5V10H9c-.55 0-1 .45-1 1z"></path></g></g></svg>
-                                                    <span>Directions</span>
-                                                </button>
-                                                </a>
-                                            </div>
-                                        </div>       
-                                    </div>
-                                </div>
-
-                                <!-- MODAL TO BE SHOWN TO USER WHO CLICKS THE SAVE BUTTON WHEN NNOT SIGNED UP -->
-                                <div>
-                                    <div class="addmodal">
-                                        <div class="adm-lg">
-                                            <div class="adm-lg-container">
-                                                <div class="content">
-                                                    <div class="close-modal-div">
-                                                        <span class="close-modal">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="fr-ec-icon fr-ec-icon--default fr-ec-button-icon__icon"><title>Close</title><g fill-rule="evenodd"><polygon points="21 4.6 19.4 3 12 10.4 4.6 3 3 4.6 10.4 12 3 19.4 4.6 21 12 13.6 19.4 21 21 19.4 13.6 12"></polygon></g>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <h2>Login</h2>
-                                                    <p>Please login to your account to use this feature.</p>
-                                                
-                                                    <div class="login-container">
-                                                        <a href="/login" class="modal-btn">login</a>
-                                                        <div class="arrow-div">
-                                                            <div class="arrow"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="pts-content">
                             
-                                </div>
+                        <div class="place-details">
+                            <img id="place-image" src={{place.photos[0]}} alt="image of the place">
+                            <div class="place-info">
+                                <h1 class="place-name">{{place.place_name}}</h1>
+                                <p>Contact: {{place.mobile_number}}</p>
+                                {% if place.open_now %}
+                                <p>Is now open</p>            
+                                {% else %}
+                                <p>Is closed</p>
+                                {% endif %}  
+                                <div class="btns-wrp">
+                                    <div class="rating-btn topbtn">
+                                        <button class="rate-btn-nopointer">
+                                            <img style="width: 1.4rem;" src="../static/images/star-svg.svg" alt="icon for the place's overall rating">
+                                            <span>{{place.rating}}</span>
+                                        </button>
+                                    </div>
+
+                                {% if user_authenticated %}
+                                <!-- BUTTON TO BE SHOWN TO SIGNED UP USERS -->
+                                    <div class="save-btn topbtn">
+                                        <a href="/bookmark/{{place.google_api_place_id}}">
+                                        <button class="save-place-btn">
+                                            <svg class="spacing_noMargin__Q_PsJ" viewBox="0 0 24 24" width="19" height="19"><path id="favorite_border-bcbe810b1c8684d420b21248b530177d_Tracé_2228" d="M19.519,9.6A5.717,5.717,0,0,0,14,4.858h0a5.238,5.238,0,0,0-1.8.278A5.692,5.692,0,0,0,9.616,6.8l-.1-.116a5.377,5.377,0,0,0-4.229-1.85,4.188,4.188,0,0,0-.481.019A5.451,5.451,0,0,0,1.057,6.8,6.306,6.306,0,0,0,.035,13.032a13.481,13.481,0,0,0,2.558,4.048,35.618,35.618,0,0,0,6.85,5.754.31.31,0,0,0,.173.058.27.27,0,0,0,.173-.058,36.676,36.676,0,0,0,5.47-4.276A18.5,18.5,0,0,0,18.636,14.4,7.4,7.4,0,0,0,19.519,9.6Zm-2.753,3.753a15.6,15.6,0,0,1-3.057,3.724,36.039,36.039,0,0,1-4.1,3.379,33.6,33.6,0,0,1-5.322-4.64,10.684,10.684,0,0,1-2.183-3.225,3.947,3.947,0,0,1,.487-4.367,2.955,2.955,0,0,1,2.38-1.222H5.3A4.416,4.416,0,0,1,8.53,8.741l.077.1.039.039,1.04,1.117.982-1.155a5.186,5.186,0,0,1,2.014-1.58A4.432,4.432,0,0,1,14,7.006a3.486,3.486,0,0,1,3.426,2.857A5.088,5.088,0,0,1,16.765,13.357Z" transform="translate(2 -.865)"></path></svg>
+                                            <span>Save</span>
+                                        </button>
+                                    </a>
+                                    </div>
+
+                                    {% else %}
+                                    <!-- BUTTON TO BE SHOWN FOR USERS NOT SIGNED UP -->
+                                    <div class="save-btn topbtn">
+                                        <button class="save-place-btn" id="user-not-signed-in">
+                                            <svg class="spacing_noMargin__Q_PsJ" viewBox="0 0 24 24" width="19" height="19"><path id="favorite_border-bcbe810b1c8684d420b21248b530177d_Tracé_2228" d="M19.519,9.6A5.717,5.717,0,0,0,14,4.858h0a5.238,5.238,0,0,0-1.8.278A5.692,5.692,0,0,0,9.616,6.8l-.1-.116a5.377,5.377,0,0,0-4.229-1.85,4.188,4.188,0,0,0-.481.019A5.451,5.451,0,0,0,1.057,6.8,6.306,6.306,0,0,0,.035,13.032a13.481,13.481,0,0,0,2.558,4.048,35.618,35.618,0,0,0,6.85,5.754.31.31,0,0,0,.173.058.27.27,0,0,0,.173-.058,36.676,36.676,0,0,0,5.47-4.276A18.5,18.5,0,0,0,18.636,14.4,7.4,7.4,0,0,0,19.519,9.6Zm-2.753,3.753a15.6,15.6,0,0,1-3.057,3.724,36.039,36.039,0,0,1-4.1,3.379,33.6,33.6,0,0,1-5.322-4.64,10.684,10.684,0,0,1-2.183-3.225,3.947,3.947,0,0,1,.487-4.367,2.955,2.955,0,0,1,2.38-1.222H5.3A4.416,4.416,0,0,1,8.53,8.741l.077.1.039.039,1.04,1.117.982-1.155a5.186,5.186,0,0,1,2.014-1.58A4.432,4.432,0,0,1,14,7.006a3.486,3.486,0,0,1,3.426,2.857A5.088,5.088,0,0,1,16.765,13.357Z" transform="translate(2 -.865)"></path></svg>
+                                            <span>Save</span>
+                                        </button>
+                                    </div>
+
+                                    {% endif %}
 
 
-                                <div class="the-place-reviews">
-                                    <div class="pt-container">
-                                        <div class="pt-content">
-                                            <h1>Reviews</h1>
-                                            {% for review in place.reviews%}
-                                            <div class="pt-reviews-div">
-                                                <div class="place-revs">
-                                                    <div class="dets-container">
-                                                        <div class="reviewer-dets">
-                                                            <img src={{review.author_dp|safe}} alt="reviewer's image" class="reviewer-img">
-                                                            <p class="reviewer-name">{{review.author_name}}</p>
-                                                        </div>
-                                                        <div class="revs-posted-dets">
-                                                            <p class="given-rating">{{review.rating|safe}}/5 rating</p>
-                                                            <p class="time-posted">{{review.time_posted|safe}}</p>
-            
-                                                        </div>
+                                    <div class="directions-btn topbtn">
+                                        <a href={{place.location}} target="_blank">
+                                        <button>
+                                            <svg enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" focusable="false" class="zKmjoe NMm5M"><g><rect fill="none" height="24" width="24"></rect></g><g><g><path d="m21.41 10.59-7.99-8a1.993 1.993 0 00-2.83 0l-8.01 8c-.78.78-.78 2.05 0 2.83l8.01 8c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.99-8c.8-.79.8-2.05.01-2.83zM12.01 20 4 12l8-8 8 8-7.99 8z"></path><path d="M8 11v4h2v-3h3.5v2.5L17 11l-3.5-3.5V10H9c-.55 0-1 .45-1 1z"></path></g></g></svg>
+                                            <span>Directions</span>
+                                        </button>
+                                        </a>
+                                    </div>
+                                </div>       
+                            </div>
+                        </div>
 
-                                                    </div>
-                                                    <div class="revs-details">
-                                                        <p>{{review.review_text|safe}}</p>
-                                                    </div>
-                                                </div>
-                                                
+                        <!-- MODAL TO BE SHOWN TO USER WHO CLICKS THE SAVE BUTTON WHEN NNOT SIGNED UP -->
+                        <div>
+                            <div class="addmodal">
+                                <div class="adm-lg">
+                                    <div class="adm-lg-container">
+                                        <div class="content">
+                                            <div class="close-modal-div">
+                                                <span class="close-modal">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="fr-ec-icon fr-ec-icon--default fr-ec-button-icon__icon"><title>Close</title><g fill-rule="evenodd"><polygon points="21 4.6 19.4 3 12 10.4 4.6 3 3 4.6 10.4 12 3 19.4 4.6 21 12 13.6 19.4 21 21 19.4 13.6 12"></polygon></g>
+                                                    </svg>
+                                                </span>
                                             </div>
-                                            {% endfor %}
-                                            
+                                            <h2>Login</h2>
+                                            <p>Please login to your account to use this feature.</p>
+                                        
+                                            <div class="login-container">
+                                                <a href="/login" class="modal-btn">login</a>
+                                                <div class="arrow-div">
+                                                    <div class="arrow"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
+                    
+                        </div>
+
+
+                        <div class="the-place-reviews">
+                            <div class="pt-container">
+                                <div class="pt-content">
+                                    <h1>Reviews</h1>
+                                    {% for review in place.reviews%}
+                                    <div class="pt-reviews-div">
+                                        <div class="place-revs">
+                                            <div class="dets-container">
+                                                <div class="reviewer-dets">
+                                                    <img src={{review.author_dp|safe}} alt="reviewer's image" class="reviewer-img">
+                                                    <p class="reviewer-name">{{review.author_name}}</p>
+                                                </div>
+                                                <div class="revs-posted-dets">
+                                                    <p class="given-rating">{{review.rating|safe}}/5 rating</p>
+                                                    <p class="time-posted">{{review.time_posted|safe}}</p>
+    
+                                                </div>
+
+                                            </div>
+                                            <div class="revs-details">
+                                                <p>{{review.review_text|safe}}</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
             </section>
         </div>
