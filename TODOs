@@ -1,24 +1,24 @@
 HTML:
 there's too much repeated code (like w the google fonts api links). Create a 'shared html' for that
 
-SIGN UPS
-Write Js or Python code to check that password and confirm password fields match
+<!-- SIGN UPS
+Write Js or Python code to check that password and confirm password fields match -->
 
-LOGIN
-Use email and password to login. Not username and password. Since we might have diff users with same usernames
+<!-- LOGIN
+Use email and password to login. Not username and password. Since we might have diff users with same usernames -->
 
 BOOKMARKS
 Add column(DateAdded)
 
 LOGIN/SIGNUP
-1. Could we grab the signed in user's username. Which we can then show them in the templates
-eg check the /saved_places route
+<!-- 1. Could we grab the signed in user's username. Which we can then show them in the templates -->
+<!-- eg check the /saved_places route -->
 2. Maybe put checks for the length of the password
 
-PLACE DETAILS HTML
+<!-- PLACE DETAILS HTML
 The /place route will show all the places to the user. The user
 can then click a place for more details. I had tried implementing that but it still has issues/errors. 
-We should check that
+We should check that -->
 
 CODE CHECKING
 We might consider adding checks both in the server and client (with both Python and JS)
@@ -41,20 +41,24 @@ In the /places api route, add a field (bookmarks) for the returned results, this
 USERNAME
 During registration check if username already exists to avoid duplicates
 
-URL FOR CLICKED PLACE
+<!-- URL FOR CLICKED PLACE
 it's currently set to /place/place_name
-set it to /place/place_id
+set it to /place/place_id -->
 
-ADD IMAGE SLIDER FOR SPECIFIC PLACE
+<!-- ADD IMAGE SLIDER FOR SPECIFIC PLACE
 Will depend on the number of pics that place has
-Loop and for each create a new image
+Loop and for each create a new image -->
 
-FORMS
-clicking enter key should do the same thing as when user clicks the submit  button
+<!-- FORMS
+clicking enter key should do the same thing as when user clicks the submit  button -->
 
 
-
-/saved_places/
-too much details in the url
 
 ADD COMMENTS TO THE CODE
+
+@LOGIN_REQUIRED
+The route /saved_places should only be accessible to logged in users.
+If a user enters it manually on the page and they are not logged in, they should be redirected to the login page
+
+HTML ESCAPING
+
