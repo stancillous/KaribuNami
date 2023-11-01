@@ -24,6 +24,7 @@
                     <a href="" class="logo" >Karibu Nami</a>
                 </div>
                
+
                 <div class="icons-container">
 
                     <!-- login container -->
@@ -51,9 +52,11 @@
                             </div>
 
                             <div class="search-form-container">
-                                <form action="/place" method="post">
+                                <form class="send-location-dets" action="/place" method="post">
                                     <label for="place_name">Explore places</label> <br>
                                     <input name="place_name" autocomplete="off" id="place_name" type="text"> <br>
+                                    <input value="44" type="text" class="location-lat" name="location-lat">
+                                    <input value="88" type="text" class="location-long" name="location-long">
                                     <button type="submit">Search</button>
 
                                 </form>
@@ -69,5 +72,6 @@
 
     </div>
     
+    <script src="../static/scripts/index.js"></script>
 </body>
 </html>
