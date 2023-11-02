@@ -33,12 +33,12 @@ Add a <noscript> to all our html. Users must have Js enabled in their browsers i
 Create our 404 page
 
 LOCATION
-I feel like we should just get the user's location automatically, like we shouldn't give the user the option of "setting the location manually"
+I feel like we should just get the user's location automatically. we shouldn't give the user the option of "setting the location manually"
 
 PLACES (ALREADY IMPLEMENTED, TO BE COUNTER CHECKED BY RAYMOND)
 In the /places api route, add a field (bookmarks) for the returned results, this field will only be available if the user is signed in, this will allow the user to bookmark places for easy future reference
 
-USERNAME
+USERNAME (/register)
 During registration check if username already exists to avoid duplicates
 
 <!-- URL FOR CLICKED PLACE
@@ -66,3 +66,5 @@ HTML ESCAPING
 
 
 Sometimes the results shown in the /place route are diff from what the user entered
+
+The 'save place' doesn't work well
