@@ -57,6 +57,11 @@
     display: flex;
 }
 
+.header .nav .icons-container .saved-icons .si-icon{
+    display: flex;
+    font-size: 1.1rem;
+    flex-direction: column;
+}
 .header .nav .icons-container .search-form-icon .explore {
     position: relative;
 }
