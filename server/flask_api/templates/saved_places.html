@@ -23,26 +23,26 @@
           <div class="tts-container">
             <div class="tts-content">
               <div class="tts-header">
+              {% if len_bookmarks == 0 %}
+                <h3 class="no-saved-places">Hi <span style="text-transform: capitalize;" >{{username}}</span>. You have not saved any places :(</h3>
+              {% else %}
                 <h1 class="tts-h">
-                  Hi <span class="user-username">{{username}}</span>. Here are the places you've saved:
+                  Hi <span  style="text-transform: capitalize;" class="user-username">{{username}}</span>. Here are the places you've saved:
                 </h1>
-                <h3 class="no-saved-places">
-                  You have not saved any places :(
-                </h3>
                 <div class="period"></div>
               </div>
 
               <div class="tt-section-div">
                 <!-- DIV WITH EACH SAVED PLACE -->
                 <!-- the href below will point to sth 
-                            like /places/place_name -->
+                            like /places/place_id -->
                           
                 {% for place in bookmarks %}
-                <a href="" class="saved-place">
+                <a href="/place/{{place.google_api_place_id}}" class="saved-place">
                   <img
                     id="saved-place-image"
                     src={{place.photos}}
-                    alt="image of place  you've saved"
+                    alt="image of this place"
                   />
                   <div class="place-details">
                     <p class="place-name">{{place.place_name}}</p>
@@ -55,6 +55,8 @@
 
 
               </div>
+
+              {% endif %}
             </div>
           </div>
         </section>
