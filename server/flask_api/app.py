@@ -48,15 +48,41 @@ places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={
 LATITUDE = ""
 LONGITUDE = ""
 
+# function to check if user is logged in
+def checkUserStatus():
+    """check if user is in signed in /in session"""
+    if 'user_id' in flask.session:
+            return True
+    return False
+
+
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
+    error = None
     if request.method == "GET":
         return render_template("register.html")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        confirm_password = request.form['confirm-password']
+
+
+        if password != confirm_password:
+            error = "Both passwords should match"
+            return render_template("register.html", error=error)
+        if len(password) < 6:
+            error = "Password should be at least 6 characters long"
+            return render_template("register.html", error=error)
+        
+        # check if username exists
+        # if username in Database:
+        # error = "Username exists. Choose another one."
+        # return render_template("register.html", err#or=error)
+
+
         hashed_password = generate_password_hash(password, method='sha256')
 
         with Session(setup.engine) as session:
@@ -70,6 +96,7 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None  # if login fails, update this and send the error to our front-end
     if request.method == "GET":
         return render_template("login.html")
     if request.method == 'POST':
@@ -80,25 +107,25 @@ def login():
             query = select(setup.User).filter_by(username=username)
 
             user = session.scalars(query).one()
-            # print(f"***{user.password}***")
             
             if user and check_password_hash(user.password, password):
-                # print(f"**Login almost done***")
                 flask.session['user_id'] = user.id
-
+                flask.session['username'] = user.username
                 
                 # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
                 return redirect(url_for('home_page'))
-            else: 
-                return 'Login failed. Please check your credentials.'
-    
-    return jsonify("Login Failed!!!")
+            else:
+                error = 'Login failed. Please check your credentials.'
+    return render_template("login.html", error=error)
 
 
 @app.route('/', strict_slashes = False)
 def home_page():
     """Default home page and more landing page features"""
-    return render_template("index.html")
+
+    # check if user is signed in
+    user_authenticated = checkUserStatus()
+    return render_template("index.html", user_authenticated=user_authenticated)
 
 
 places_result = []
@@ -109,8 +136,6 @@ def get_places():
     PLACE = request.form.get("place_name")
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
-    # PLACE = "malls"
-
 
     # LOCATION = "{},{}".format(new_lat, new_long)
 
@@ -123,7 +148,7 @@ def get_places():
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
 
-    # limit to 5 results for now to avoid visual clutter
+    # limit results for now to avoid visual clutter
     params = {'limit': 3}
 
     # Dict containing filtered results
@@ -266,10 +291,8 @@ def get_specific_place(place_id):
         places_dict["reviews"] = place.reviews
         places_dict["google_api_place_id"] = place.google_api_place_id
 
-        if 'user_id' in flask.session:
-            user_authenticated = True
-        else:
-            user_authenticated = False
+        # check if user is signed in
+        user_authenticated = checkUserStatus()
         
         return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
         # return jsonify(json.loads(json.dumps(places_dict)))    
@@ -278,17 +301,14 @@ def get_specific_place(place_id):
 @app.route("/saved_places", strict_slashes=False)
 def saved_places():
     """this should return the places that a signed in user has saved/bookmarked
-        Should get them from the DB, and then pass the json to the template below,
-        in the template we'll iterate the saved places and show the user
-
     """
-    # idk how we'll implement this.
-    # get user_id, select from bookmarks places where value is 1, get 
-    # the corresponding place_id, then fetch that place from DB
 
     if 'user_id' in flask.session:
-        username = flask.session['username'] # this name will be displayed to the user
+        # username = flask.session['username'] # this name will be displayed to the user
 
+        print("user id is => ", flask.session['user_id'])
+
+        # print("username is => ", flask.session['username'])
         with Session(setup.engine) as session:
             query = select(setup.Bookmark).filter(setup.Bookmark.user_id == flask.session["user_id"]).filter(setup.Bookmark.bookmarked == 1)
 
@@ -313,17 +333,16 @@ def saved_places():
 
                 all_bookmarks.append(places_dict)
             
-            return render_template("saved_places.html", username=flask.session['username'], bookmarks=all_bookmarks)
+            return render_template("saved_places.html", 
+            username=flask.session['username'],
+            bookmarks=all_bookmarks,
+            len_bookmarks=len(all_bookmarks))
             # return jsonify(all_bookmarks)
         
-    
+    # if non signed in user tries to access this route, redirect them here
     return redirect(url_for('login'))
-    # return jsonify("Sign in to use this route/feature!!")
 
 
-
-
-    return render_template("saved_places.html", username=username)
 
 @app.route("/bookmark/<place_id>", strict_slashes=False)
 def bookmark_place(place_id):

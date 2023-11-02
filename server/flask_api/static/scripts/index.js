@@ -18,3 +18,9 @@ sendForm.addEventListener("submit", (e)=>{
 
 })
 
+logoutBtn = document.querySelector(".user-logout-icon")
+
+logoutBtn.addEventListener("click", ()=>{
+  // fetch url (log user out)  
+})
+
