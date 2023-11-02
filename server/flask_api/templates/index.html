@@ -28,6 +28,7 @@
                 <div class="icons-container">
 
                     <!-- login container -->
+                    {% if not user_authenticated %}
                     <div id="login-div-c">
                         <a href="/login" id="nav-login" class="login-icon">
                             <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
@@ -42,11 +43,23 @@
 
                     </div>
 
-                    <div class="search-form-icon">
+                    {% else %}
+                    <div class="saved-icons">
+                        <a href="/saved_places">
+                            <div class="si-icon">
+                                <svg width="20" height="20" viewBox="0 0 512.00 512.00" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="59.391999999999996"><title>ionicons-v5-h</title><path d="M128,80V64a48.14,48.14,0,0,1,48-48H400a48.14,48.14,0,0,1,48,48V432l-80-64" style="fill:none;stroke:#ffffff;stroke-linejoin:round;stroke-width:32px"></path><path d="M320,96H112a48.14,48.14,0,0,0-48,48V496L216,368,368,496V144A48.14,48.14,0,0,0,320,96Z" style="fill:none;stroke:#ffffff;stroke-linejoin:round;stroke-width:32px"></path></g><g id="SVGRepo_iconCarrier"><title>ionicons-v5-h</title><path d="M128,80V64a48.14,48.14,0,0,1,48-48H400a48.14,48.14,0,0,1,48,48V432l-80-64" style="fill:none;stroke:#ffffff;stroke-linejoin:round;stroke-width:32px"></path><path d="M320,96H112a48.14,48.14,0,0,0-48,48V496L216,368,368,496V144A48.14,48.14,0,0,0,320,96Z" style="fill:none;stroke:#ffffff;stroke-linejoin:round;stroke-width:32px"></path></g></svg>
+                                <span style="padding-top: .6rem;">Saved</span>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
 
+                    <div class="search-form-icon">
                         <div class="explore">
+                            
                             <div class="icon-div">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-magnifying-glass"><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" opacity=".8"></path></svg>
+                                <svg width="20" height="20" viewBox="0 0 32.00 32.00" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>search</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke-width=".44" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-256.000000, -1139.000000)" fill="#ffffff"> <path d="M269.46,1163.45 C263.17,1163.45 258.071,1158.44 258.071,1152.25 C258.071,1146.06 263.17,1141.04 269.46,1141.04 C275.75,1141.04 280.85,1146.06 280.85,1152.25 C280.85,1158.44 275.75,1163.45 269.46,1163.45 L269.46,1163.45 Z M287.688,1169.25 L279.429,1161.12 C281.591,1158.77 282.92,1155.67 282.92,1152.25 C282.92,1144.93 276.894,1139 269.46,1139 C262.026,1139 256,1144.93 256,1152.25 C256,1159.56 262.026,1165.49 269.46,1165.49 C272.672,1165.49 275.618,1164.38 277.932,1162.53 L286.224,1170.69 C286.629,1171.09 287.284,1171.09 287.688,1170.69 C288.093,1170.3 288.093,1169.65 287.688,1169.25 L287.688,1169.25 Z" id="search" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
+                                <!-- <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-magnifying-glass"><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" opacity=".8"></path></svg> -->
                                 <span style="padding-top: .6rem;" class="form-t">Explore</span>
 
                             </div>
@@ -64,6 +77,18 @@
                                 </form>
                                
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="logout-div">
+                        <div style="display: flex;flex-direction:column;cursor:pointer" class="user-logout-icon">
+                            <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
+                                <g transform="translate(1 1)" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+                                    <path d="M0 18c0-4.5188182 3.663-8.18181818 8.18181818-8.18181818h1.63636364C14.337 9.81818182 18 13.4811818 18 18"></path>
+                                    <circle cx="9" cy="4.90909091" r="4.90909091"></circle>
+                                </g>
+                            </svg>
+                            <span style="padding-top: .6rem; font-size:11px">Log out</span>
                         </div>
                     </div>
 
