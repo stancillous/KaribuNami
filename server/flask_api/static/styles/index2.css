@@ -2,13 +2,13 @@
 .header {
   color: var(--buttonColor);
   height: 8rem;
-  background-color: var(--navColor);
-  background-color: rgb(14, 14, 15);
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   z-index: 54;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .header .nav {
@@ -25,21 +25,6 @@
   padding: 0.5rem;
   display: flex;
   align-items: center;
-}
-
-.header .nav .logo-container .hamburger-button {
-  cursor: pointer;
-  display: none;
-}
-
-.header .nav .logo-container .hamburger-button span {
-  width: 2.5rem;
-  opacity: 0.8;
-  height: 0.3rem;
-  background-color: white;
-  margin: 0.2rem;
-  padding: 0.1rem;
-  display: block;
 }
 
 .header .nav .logo-container .logo {
@@ -171,23 +156,6 @@
   color: white;
 }
 
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span {
-  background-color: white;
-  width: 2.2rem;
-}
-
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(1) {
-  transform: translateY(0.4rem) rotate(45deg);
-}
-
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(2) {
-  opacity: 0;
-}
-
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(3) {
-  transform: translateY(-0.6rem) rotate(-45deg);
-}
-
 .header .nav .menu-links.showMenuLinks {
   -webkit-clip-path: inset(0 0 0 0);
           clip-path: inset(0 0 0 0);
@@ -196,9 +164,6 @@
 @media screen and (max-width: 650px) {
   .header .nav .logo-container {
     z-index: 122;
-  }
-  .header .nav .logo-container .hamburger-button {
-    display: block;
   }
   .header .nav .logo-container .logo {
     font-size: 1.7rem;
@@ -274,11 +239,10 @@ body {
 .main-body {
   background-color: whitesmoke;
   color: black;
-  padding-top: 8rem;
 }
 
 .top-page-section .tps-wrapper .tps-container .bg-video-wrp {
-  height: 80vh;
+  height: 86vh;
   width: 100vw;
   position: relative;
 }
@@ -322,6 +286,7 @@ body {
 .top-page-section .tps-wrapper .tps-container .display-middle .dg h2 {
   text-transform: capitalize;
   font-size: 7rem;
+  font-size: 5vw;
 }
 .top-page-section .tps-wrapper .tps-container .display-middle .dg p {
   width: 60%;
@@ -333,15 +298,15 @@ body {
 
 .about-us-section {
   max-width: 1000px;
-  margin: 4rem auto;
+  margin: 10rem auto;
   padding: 2rem;
-  border: 2px solid;
 }
 .about-us-section .aus-wrapper .aus-wrp .grid {
   display: grid;
   grid-template-columns: 40% 60%;
 }
 .about-us-section .aus-wrapper .aus-wrp .grid div {
+  margin: 1rem;
   padding: 0.2rem;
 }
 .about-us-section .aus-wrapper .aus-wrp .grid .grid-ttl {
@@ -351,4 +316,79 @@ body {
 .about-us-section .aus-wrapper .aus-wrp .grid p {
   font-size: 1.5rem;
   margin-bottom: 3rem;
+}
+
+.features-section .fs-wrapper {
+  background-color: #121315;
+  color: white;
+  width: 100vw;
+  margin: 3rem auto;
+}
+.features-section .fs-wrapper .fs-wrp {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.features-section .fs-wrapper .fs-wrp .feature-div {
+  padding: 9rem 2rem;
+}
+.features-section .fs-wrapper .fs-wrp .feature-div .fd-ttl {
+  font-weight: 400;
+  font-size: 1.6rem;
+  opacity: 0.7;
+}
+
+.how-to-use-section {
+  margin: 8rem auto;
+  max-width: 1300px;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-ttl h2 {
+  font-size: 3.3rem;
+  padding: 3rem;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-grid .hut-dets {
+  padding: 2rem;
+  margin: 2rem;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-grid .hut-dets .step {
+  opacity: 0.6;
+  font-size: 2.4rem;
+  padding: unset;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-grid .hut-dets .step-name {
+  padding: 0.5rem 0;
+  font-size: 2.8rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+.how-to-use-section .htu-wrapper .htu-wrp .htu-grid .hut-dets p {
+  padding: 4rem 0;
+  font-size: 1.4rem;
+  line-height: 150%;
+}
+
+@media screen and (max-width: 1000px) {
+  .features-section .fs-wrapper .fs-wrp {
+    grid-template-columns: 1fr 1fr;
+  }
+  .features-section .fs-wrapper .fs-wrp .feature-div {
+    padding: 5rem 2rem;
+  }
+  .how-to-use-section .htu-wrapper .htu-wrp .htu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 800px) {
+  .top-page-section .tps-wrapper .tps-container .display-middle .dg p {
+    width: 90%;
+  }
+  .about-us-section .aus-wrapper .aus-wrp .grid {
+    grid-template-columns: 1fr;
+  }
+  .about-us-section .aus-wrapper .aus-wrp .grid .grid-ttl {
+    font-size: 2rem;
+  }
 }/*# sourceMappingURL=index2.css.map */
