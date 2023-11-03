@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karibu Nami</title>
-    <link rel="stylesheet" href="../static/styles/index.css">
+    <link rel="stylesheet" href="../static/styles/index2.css">
+    <!-- <link rel="stylesheet" href="../static/styles/index.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -80,6 +81,7 @@
                         </div>
                     </div>
 
+                    {% if user_authenticated %}
                     <div class="logout-div">
                         <div style="display: flex;flex-direction:column;cursor:pointer" class="user-logout-icon">
                             <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
@@ -91,11 +93,52 @@
                             <span style="padding-top: .6rem; font-size:11px">Log out</span>
                         </div>
                     </div>
+                    {% endif %}
 
 
                 </div>
             </nav>
         </header>
+
+        <section class="main-body">
+
+            <div class="top-page-section">
+                <div class="tps-wrapper">
+                    <div class="tps-container">
+                        
+                        <div class="bg-video-wrp">
+                            <div class="bgv">
+                                <video autoplay loop muted src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/homepage/gen-2-homepage-hero-sequence-1.mp4"></video>
+                            </div>
+                        </div>
+
+                        <div class="display-middle">
+                            <div class="dg">
+                                <h2>Your guide to local discoveries <br>Wherever you go</h2>
+                                <p>Karibu Nami aims to address the challenge of efficiently accessing and understanding information about local businesses and services when one visits an unfamiliar place</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-us-section">
+                <div class="aus-wrapper">
+                    <div class="aus-wrp">
+                        <div class="grid">
+                            <div class="title">
+                                <h2 class="grid-ttl">About Karibu Nami</h1>
+                            </div>
+                            <div class="info">
+                                <p>Our app is designed to assist travelers, tourists, and anyone exploring new areas who seek quick and user-friendly access to information about local establishments. It is adaptable to various locales and regions</p>
+                                <p>Current search methods provide fragmented data on places like hotels, barbershops, supermarkets, and schools near the user's location. The problem is that this information is often not well visualized and challenging for users to digest and utilize effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </div>
     

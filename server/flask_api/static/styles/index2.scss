@@ -5,12 +5,10 @@
     color: var(--buttonColor);
     height: 8rem;
     background-color: var(--navColor);
-    background-color: red;
-    background-color: var(--bgColor);
+    background-color:rgb(14, 14, 15);
     position: fixed;
     top: 0;
     left: 0;
-    border: 1px solid red;
     width: 100vw;
     z-index: 54;
 }
@@ -244,4 +242,143 @@
     .header .nav .menu-links ul li .categories-container a .nav-img {
         display: none;
    }
+}
+
+body{
+    background-color: whitesmoke;
+}
+
+// scss code starts here
+.main-body{
+    background-color: whitesmoke;
+    color: black;
+    padding-top: 8rem;
+}
+
+.top-page-section{
+    .tps-wrapper{
+        .tps-container{
+
+            .bg-video-wrp{
+                height: 80vh;
+                width: 100vw;
+                position: relative;
+
+                &::after{
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, .5)
+                }
+                .bgv{
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    
+                    video{
+                        height: 100%;
+                        object-fit: cover;
+                        width: 100%;
+                        background-position: 50% 50%;
+                        z-index: -100;
+                    }
+                }
+            }
+
+            // .bg-video-wrp{
+            // position: fixed;
+            // left: 0%;
+            // top: 0%;
+            // right: 0%;
+            // bottom: 0%;
+            // display: block;
+            // min-width: 100%;
+            // min-height: 100%;
+            // min-height: 80vh;
+            // border: 8px solid red;
+            // background-color: hsla(0, 0%, 100%, 0.52);
+            // opacity: 0.11;
+            // -webkit-filter: invert(100%);
+            // filter: invert(100%);
+            // // display: none;
+            // // .bgv{
+            // //         border: 8px solid red;
+            // //         video{
+            // //             background-size: cover;
+            // //             background-position: 50% 50%;
+            // //             position: absolute;
+            // //             margin: auto;
+            // //             width: 100%;
+            // //             height: 100%;
+            // //             right: -100%;
+            // //             bottom: -100%;
+            // //             top: -100%;
+            // //             left: -100%;
+            // //             object-fit: cover;
+            // //             z-index: -100;
+            // //         }
+            // //     }
+            // }
+          
+            .display-middle{
+                position: absolute;
+                top: 8rem;
+                height: 80vh;
+                width: 100vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                color: white;
+                .dg{
+                    h2{
+                        text-transform: capitalize;
+                        font-size: 7rem;
+                    }
+                    p{
+                        width: 60%;
+                        line-height: 160%;
+                        margin: 0 auto;
+                        font-size: 1.5rem;
+                        padding: 1.8rem 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.about-us-section{
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    border: 2px solid;
+    .aus-wrapper{
+        .aus-wrp{
+            .grid{
+                display: grid;
+                grid-template-columns: 40% 60%;
+                div{
+                    padding: .2rem;
+                }
+                .grid-ttl{
+                    font-size: 2.6rem;
+                    opacity: .9;
+                }
+                p{
+                    font-size: 1.5rem;
+                    margin-bottom: 3rem;
+                }
+            }
+        }
+    }
 }
