@@ -114,16 +114,21 @@ def login():
         with Session(setup.engine) as session:
             query = select(setup.User).filter_by(username=username)
 
-            user = session.scalars(query).one()
+            try:
+                user = session.scalars(query).one()
+
+                if user and check_password_hash(user.password, password):
+                    flask.session['user_id'] = user.id
+                    flask.session['username'] = user.username
+                    
+                    # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
+                    return redirect(url_for('home_page'))
+                else:
+                    error = 'Login failed. Please check your credentials.'            
+            except:
+                error = 'Login failed. Please check your credentials.'          
             
-            if user and check_password_hash(user.password, password):
-                flask.session['user_id'] = user.id
-                flask.session['username'] = user.username
-                
-                # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
-                return redirect(url_for('home_page'))
-            else:
-                error = 'Login failed. Please check your credentials.'
+                # return jsonify(error)
     return render_template("login.html", error=error)
 
 
