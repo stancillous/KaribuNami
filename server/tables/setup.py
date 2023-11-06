@@ -1,3 +1,5 @@
+import logging
+logging.getLogger('sqlalchemy').setLevel(logging.CRITICAL)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 # from sqlalchemy.orm import declarative_base
