@@ -77,17 +77,21 @@
                     </div>
 
                     {% if user_authenticated %}
-                    <div class="logout-div">
-                        <div style="display: flex;flex-direction:column;cursor:pointer" class="user-logout-icon">
-                            <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
-                                <g transform="translate(1 1)" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
-                                    <path d="M0 18c0-4.5188182 3.663-8.18181818 8.18181818-8.18181818h1.63636364C14.337 9.81818182 18 13.4811818 18 18"></path>
-                                    <circle cx="9" cy="4.90909091" r="4.90909091"></circle>
-                                </g>
-                            </svg>
-                            <span style="padding-top: .6rem; font-size:11px">Log out</span>
+                    <form action="/logout">
+                        <div class="logout-div">
+                            <div style="display: flex;flex-direction:column;cursor:pointer" class="user-logout-icon">
+                                <button style="all:unset" type="submit">
+                                    <svg class="Icon Icon--account" role="presentation" viewBox="0 0 20 20">
+                                        <g transform="translate(1 1)" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+                                            <path d="M0 18c0-4.5188182 3.663-8.18181818 8.18181818-8.18181818h1.63636364C14.337 9.81818182 18 13.4811818 18 18"></path>
+                                            <circle cx="9" cy="4.90909091" r="4.90909091"></circle>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <span style="padding-top: .6rem; font-size:11px">Log out</span>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     {% endif %}
 
 
@@ -128,11 +132,18 @@
                             <div class="info">
                                 <p>Our app is designed to assist travelers, tourists, and anyone exploring new areas who seek quick and user-friendly access to information about local establishments. It is adaptable to various locales and regions</p>
                                 <p>Current search methods provide fragmented data on places like hotels, barbershops, supermarkets, and schools near the user's location. The problem is that this information is often not well visualized and challenging for users to digest and utilize effectively.</p>
+                                <p>Our application is proudly open-source. We invite you to explore our repository on GitHub and actively contribute to enhance the app's functionality and make it better. Click on the link below.</p>
+                                <div class="gh-link">
+                                    <a href="https://github.com/stancillous/KaribuNami" target="_blank">GitHub repository</a>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
 
             <div class="features-section">
                 <div class="fs-wrapper">
@@ -190,6 +201,72 @@
                 </div>
             </div>
 
+            <div class="team-section">
+                <div class="ts-wrapper">
+                    <h4>Team:</h4>
+                    <div class="ts-wrp">
+                        <div class="team-member">
+                            <div class="tm-img">
+                                <img src="../static/images/munda.png" alt="">
+
+                                <div class="socials">
+                                    <div class="name">
+                                        <p>Brandon Munda</p>
+                                    </div>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><title>GitHub</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    </a>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><title>LinkedIn</title><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><title>Instagram</title><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="tm-info">
+
+                            </div>
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="tm-info">
+
+                            </div>
+                            <div class="tm-img">
+                                <img src="../static/images/raymond.png" alt="">
+
+                                <div class="socials">
+                                    <div class="name">
+                                        <p>Stancillous Raymond</p>
+                                    </div>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><title>GitHub</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    </a>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><title>LinkedIn</title><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><title>Instagram</title><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <div class="fs-wrapper">
+                    <div class="fs-wrp">
+                        <p>KaribuNami@<span class="cp-year">2023</span></p>
+                        <p><a href="https://github.com/stancillous/KaribuNami" target="_blank">GitHub</a></p>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </div>
