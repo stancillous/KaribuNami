@@ -27,7 +27,6 @@
   text-decoration: underline;
 }
 .saved-places-section .tts-container .tts-content .tts-header .no-saved-places {
-  display: none;
   padding: 2rem;
   opacity: 0.7;
   font-size: 1.4rem;

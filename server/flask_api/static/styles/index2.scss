@@ -4,15 +4,15 @@
 .header {
     color: var(--buttonColor);
     height: 8rem;
-    background-color: var(--navColor);
-    background-color: red;
-    background-color: var(--bgColor);
+    // background-color: var(--navColor);
+    // background-color:rgb(14, 14, 15);
+    background-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
-    border: 1px solid red;
     width: 100vw;
     z-index: 54;
+    background-color: rgba(0,0, 0, .8);
 }
 .header .nav {
     height: 100%;
@@ -28,19 +28,7 @@
     display: flex;
     align-items: center;
 }
-.header .nav .logo-container .hamburger-button {
-    cursor: pointer;
-    display: none;
-}
-.header .nav .logo-container .hamburger-button span {
-    width: 2.5rem;
-    opacity: 0.8;
-    height: 0.3rem;
-    background-color: white;
-    margin: 0.2rem;
-    padding: 0.1rem;
-    display: block;
-}
+
 .header .nav .logo-container .logo {
     text-transform: capitalize;
     font-weight: bolder;
@@ -156,19 +144,7 @@
 .header .nav .logo-container .logo.lightLogo {
     color: white;
 }
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span {
-    background-color: white;
-    width: 2.2rem;
-}
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(1) {
-    transform: translateY(0.4rem) rotate(45deg);
-}
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(2) {
-    opacity: 0;
-}
-.header .nav .logo-container .hamburger-button.hamburgerButtonClicked span:nth-child(3) {
-    transform: translateY(-0.6rem) rotate(-45deg);
-}
+
 .header .nav .menu-links.showMenuLinks {
     clip-path: inset(0 0 0 0);
 }
@@ -176,9 +152,7 @@
     .header .nav .logo-container {
         z-index: 122;
    }
-    .header .nav .logo-container .hamburger-button {
-        display: block;
-   }
+    
     .header .nav .logo-container .logo {
         font-size: 1.7rem;
    }
@@ -244,4 +218,208 @@
     .header .nav .menu-links ul li .categories-container a .nav-img {
         display: none;
    }
+}
+
+body{
+    background-color: whitesmoke;
+}
+
+// scss code starts here
+.main-body{
+    background-color: whitesmoke;
+    color: black;
+    // padding-top: 8rem;
+}
+
+.top-page-section{
+    .tps-wrapper{
+        .tps-container{
+
+            .bg-video-wrp{
+                height: 86vh;
+                width: 100vw;
+                position: relative;
+
+                &::after{
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, .5)
+                }
+                .bgv{
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    
+                    video{
+                        height: 100%;
+                        object-fit: cover;
+                        width: 100%;
+                        background-position: 50% 50%;
+                        z-index: -100;
+                    }
+                }
+            }
+
+          
+            .display-middle{
+                position: absolute;
+                top: 8rem;
+                height: 80vh;
+                width: 100vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                color: white;
+                .dg{
+                    h2{
+                        text-transform: capitalize;
+                        font-size: 7rem;
+                        font-size: 5vw;
+                    }
+                    p{
+                        width: 60%;
+                        line-height: 160%;
+                        margin: 0 auto;
+                        font-size: 1.5rem;
+                        padding: 1.8rem 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.about-us-section{
+    max-width: 1000px;
+    margin: 10rem auto;
+    padding: 2rem;
+    .aus-wrapper{
+        .aus-wrp{
+            .grid{
+                display: grid;
+                grid-template-columns: 40% 60%;
+                div{
+
+                    margin: 1rem;
+                    padding: .2rem;
+                }
+                .grid-ttl{
+                    font-size: 2.6rem;
+                    opacity: .9;
+                }
+                p{
+                    font-size: 1.5rem;
+                    margin-bottom: 3rem;
+                }
+            }
+        }
+    }
+}
+
+.features-section{
+    .fs-wrapper{
+        // max-width: 1100px;
+        background-color: #121315;
+        color: white;
+        width: 100vw;
+        margin: 3rem auto;
+        .fs-wrp{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            .feature-div{
+                padding: 9rem 2rem;
+                .fd-ttl{
+                    font-weight: 400;
+                    font-size: 1.6rem;
+                    opacity: .7;
+                }
+            }
+        }
+    }
+}
+
+.how-to-use-section{
+    margin: 8rem auto;
+    max-width: 1300px;
+
+    .htu-wrapper{
+        .htu-wrp{
+            .htu-ttl{
+                h2{
+                    font-size: 3.3rem;
+                    padding: 3rem;
+                }
+            }
+
+            .htu-grid{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                .hut-dets{
+                    padding: 2rem;
+                    margin: 2rem;
+                    .step{
+                        opacity: .6;
+                        font-size: 2.4rem;
+                        padding: unset;
+                    }
+                    .step-name{
+                        padding: .5rem 0;
+                        font-size: 2.8rem;
+                        opacity: .8;
+                        font-weight: 400;
+                    }
+                    p{
+                        padding: 4rem 0;
+                        font-size: 1.4rem;
+                        line-height: 150%;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1000px) {
+
+    .features-section .fs-wrapper .fs-wrp{
+        grid-template-columns: 1fr 1fr;
+
+        .feature-div{
+            padding: 5rem 2rem;
+        }
+    }
+    
+
+    .how-to-use-section .htu-wrapper .htu-wrp .htu-grid{
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media screen and (max-width:800px) {
+
+    .top-page-section .tps-wrapper .tps-container .display-middle .dg p{
+        width: 90%;
+    }
+
+
+    .about-us-section .aus-wrapper .aus-wrp .grid{
+        grid-template-columns: 1fr;
+        .grid-ttl{
+            font-size: 2rem;
+        }
+    }
+    
 }

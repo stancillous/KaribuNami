@@ -23,45 +23,40 @@
           <div class="tts-container">
             <div class="tts-content">
               <div class="tts-header">
+              {% if len_bookmarks == 0 %}
+                <h3 class="no-saved-places">Hi <span style="text-transform: capitalize;" >{{username}}</span>. You have not saved any places :(</h3>
+              {% else %}
                 <h1 class="tts-h">
-                  Hi <span class="user-username">{{username}}</span>. Here are the places you've saved:
+                  Hi <span  style="text-transform: capitalize;" class="user-username">{{username}}</span>. Here are the places you've saved:
                 </h1>
-                <h3 class="no-saved-places">
-                  You have not saved any places :(
-                </h3>
                 <div class="period"></div>
               </div>
 
               <div class="tt-section-div">
                 <!-- DIV WITH EACH SAVED PLACE -->
                 <!-- the href below will point to sth 
-                            like /places/place_name -->
-                <a href="" class="saved-place">
+                            like /places/place_id -->
+                          
+                {% for place in bookmarks %}
+                <a href="/place/{{place.google_api_place_id}}" class="saved-place">
                   <img
                     id="saved-place-image"
-                    src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AcJnMuFEO4Kg3IJ7mlklKauFHH2wGeuiZSVNsJML4pHDQXuZwQmrDgkXwje3qSQA9aylqPWFvLGfDtmELXDuqTqASpiAVnC4nL4jqIeYs2NHqPstH3MJV_h33D9n4mLDGfmQlfGQ8q7CUM8GnmwHNcpVU3ZcDRc6COLK0gx2qPUCl4NoytIk&key=AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
-                    alt="image of place  you've saved"
+                    src={{place.photos}}
+                    alt="image of this place"
                   />
                   <div class="place-details">
-                    <p class="place-name">Aga Khan Academy, Nairobi</p>
-                    <p class="place-rating">3.9/5</p>
+                    <p class="place-name">{{place.place_name}}</p>
+                    <p class="place-rating">{{place.rating}}/5</p>
                   </div>
                   <p class="date-saved">Date saved: 10/11/2023</p>
                 </a>
 
-                <a href="" class="saved-place">
-                  <img
-                    id="saved-place-image"
-                    src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AcJnMuFEO4Kg3IJ7mlklKauFHH2wGeuiZSVNsJML4pHDQXuZwQmrDgkXwje3qSQA9aylqPWFvLGfDtmELXDuqTqASpiAVnC4nL4jqIeYs2NHqPstH3MJV_h33D9n4mLDGfmQlfGQ8q7CUM8GnmwHNcpVU3ZcDRc6COLK0gx2qPUCl4NoytIk&key=AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
-                    alt="image of place  you've saved"
-                  />
-                  <div class="place-details">
-                    <p class="place-name">Aga Khan Academy, Nairobi</p>
-                    <p class="place-rating">3.9/5</p>
-                  </div>
-                  <p class="date-saved">Date saved: 10/11/2023</p>
-                </a>
+                {% endfor %}
+
+
               </div>
+
+              {% endif %}
             </div>
           </div>
         </section>
