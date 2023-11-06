@@ -86,6 +86,14 @@ def register():
         hashed_password = generate_password_hash(password, method='sha256')
 
         with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(username=username)
+
+            user = session.scalars(query).one()
+            
+            if user:
+                return jsonify("Username taken, create a unique username!!!")
+
+        with Session(setup.engine) as session:
             newuser = setup.User(username=username, password=hashed_password)
             session.add(newuser)
             session.commit()
@@ -377,7 +385,10 @@ def bookmark_place(place_id):
     return jsonify(f"Sign in to use this feature!!!")
 
         
-
+@app.route('/logout', strict_slashes=False)
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
