@@ -69,7 +69,6 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm-password']
 
-
         if password != confirm_password:
             error = "Both passwords should match"
             return render_template("register.html", error=error)
@@ -77,11 +76,6 @@ def register():
             error = "Password should be at least 6 characters long"
             return render_template("register.html", error=error)
         
-        # check if username exists
-        # if username in Database:
-        # error = "Username exists. Choose another one."
-        # return render_template("register.html", err#or=error)
-
 
         hashed_password = generate_password_hash(password, method='sha256')
 
@@ -90,8 +84,10 @@ def register():
 
             user = session.scalars(query).one()
             
+            # check if username exists
             if user:
-                return jsonify("Username taken, create a unique username!!!")
+                error = "Username taken, create a unique username."
+                return render_template("register.html", error=error)
 
         with Session(setup.engine) as session:
             newuser = setup.User(username=username, password=hashed_password)
