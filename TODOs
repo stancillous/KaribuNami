@@ -68,3 +68,6 @@ HTML ESCAPING
 Sometimes the results shown in the /place route are diff from what the user entered
 
 The 'save place' doesn't work well
+
+/LOGIN
+handle the error well when trying to log in with a username that don't exist
