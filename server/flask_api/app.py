@@ -111,6 +111,7 @@ def login():
             query = select(setup.User).filter_by(username=username)
 
             user = session.scalars(query).one()
+
             
             if user and check_password_hash(user.password, password):
                 flask.session['user_id'] = user.id
