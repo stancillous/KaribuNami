@@ -18,7 +18,7 @@
         <section class="saved-places-section">
           <!-- spotify attribution logo -->
           <div class="logo-image-div">
-            <img src="" alt="karibu nami logo" />
+            <!-- <a href="/" class="logo" >Karibu Nami</a> -->
           </div>
           <div class="tts-container">
             <div class="tts-content">
@@ -41,7 +41,7 @@
                 <a href="/place/{{place.google_api_place_id}}" class="saved-place">
                   <img
                     id="saved-place-image"
-                    src={{place.photos}}
+                    src={{place.photos[0]}}
                     alt="image of this place"
                   />
                   <div class="place-details">
