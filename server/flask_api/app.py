@@ -296,15 +296,14 @@ def get_specific_place(place_id):
         places_dict["open_now"] = place.open_now
         places_dict["mobile_number"] = place.mobile_number
         places_dict["location"] = place.location
-        places_dict["photos"] = place.photos
-        places_dict["reviews"] = place.reviews
+        places_dict["photos"] = json.loads(place.photos)
+        places_dict["reviews"] = json.loads(place.reviews)
         places_dict["google_api_place_id"] = place.google_api_place_id
 
         # check if user is signed in
         user_authenticated = checkUserStatus()
-        
+
         return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
-        # return jsonify(json.loads(json.dumps(places_dict)))    
 
 
 @app.route("/saved_places", strict_slashes=False)
@@ -336,8 +335,8 @@ def saved_places():
                 places_dict["open_now"] = place.open_now
                 places_dict["mobile_number"] = place.mobile_number
                 places_dict["location"] = place.location
-                places_dict["photos"] = place.photos
-                places_dict["reviews"] = place.reviews
+                places_dict["photos"] = json.loads(place.photos)
+                places_dict["reviews"] = json.loads(place.reviews)
                 places_dict["google_api_place_id"] = place.google_api_place_id
 
                 all_bookmarks.append(places_dict)
@@ -346,7 +345,7 @@ def saved_places():
             username=flask.session['username'],
             bookmarks=all_bookmarks,
             len_bookmarks=len(all_bookmarks))
-            # return jsonify(all_bookmarks)
+            return jsonify(all_bookmarks)
         
     # if non signed in user tries to access this route, redirect them here
     return redirect(url_for('login'))

@@ -19,6 +19,16 @@ body{
     font-family: 'Lexend Deca', sans-serif;
 }
 
+.logo {
+    text-transform: capitalize;
+    font-weight: bolder;
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: bolder;
+    padding: 0 2rem;
+}
+
 body a{
     color: white;
 }

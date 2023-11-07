@@ -68,3 +68,10 @@ HTML ESCAPING
 Sometimes the results shown in the /place route are diff from what the user entered
 
 The 'save place' doesn't work well
+
+/LOGIN
+handle the error well when trying to log in with a username that don't exist
+
+LOCATION
+How do we continuously ask the user to grant us location permission, i.e., when they first don't allow the app to access it [we could also allow the user to use a default location (which we willl set), ie if they only want to see the app's functionality, we could use an already defined location to make that happen]
+
