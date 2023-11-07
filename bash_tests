@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Define the directories and files to create
+test_dir="tests"
+server_test_dir="${test_dir}/server"
+tables_test_dir="${test_dir}/tables"
+server_test_files=("test_app.py" "test_setup.py" "test_users.py" "test_bookmarks.py" "test_places.py")
+client_test_dir="${test_dir}/client"
+client_test_files=("test_index.js" "test_place_details.js" "test_register.js")
+
+# Create the test directory
+mkdir -p $test_dir
+
+# Create the server test directory
+mkdir -p $server_test_dir
+
+# Create the server test files
+for file in "${server_test_files[@]}"; do
+  touch "${server_test_dir}/${file}"
+done
+
+# Create the tables test directory
+mkdir -p $tables_test_dir
+
+# Create the tables test files
+touch "${tables_test_dir}/test_bookmarks.py"
+touch "${tables_test_dir}/test_places.py"
+touch "${tables_test_dir}/test_setup.py"
+touch "${tables_test_dir}/test_users.py"
+
+# Create the client test directory
+mkdir -p $client_test_dir
+
+# Create the client test files
+for file in "${client_test_files[@]}"; do
+  touch "${client_test_dir}/${file}"
+done
+
+echo "Test directory and files created successfully!"
