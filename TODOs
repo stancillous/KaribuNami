@@ -75,3 +75,11 @@ handle the error well when trying to log in with a username that don't exist
 LOCATION
 How do we continuously ask the user to grant us location permission, i.e., when they first don't allow the app to access it [we could also allow the user to use a default location (which we willl set), ie if they only want to see the app's functionality, we could use an already defined location to make that happen]
 
+why do we not have all the reviews
+
+check how we handle the try/except blocks. instead of printing the error we should know what to show the user
+
+in the future: integrate google's authentication during sign up to make the process seamless for our users
+
+FOR SIGNED IN USERS
+if a user goes to the specific place route, maybe add that place to their "recently viewed places"
