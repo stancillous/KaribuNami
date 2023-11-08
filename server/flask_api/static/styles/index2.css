@@ -296,6 +296,11 @@ body {
   padding: 1.8rem 0;
 }
 
+.section-ttl {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
 .about-us-section {
   max-width: 1000px;
   margin: 10rem auto;
@@ -309,10 +314,6 @@ body {
   margin: 1rem;
   font-size: 1.5rem;
   padding: 0.2rem;
-}
-.about-us-section .aus-wrapper .aus-wrp .grid .grid-ttl {
-  font-size: 2.6rem;
-  opacity: 0.9;
 }
 .about-us-section .aus-wrapper .aus-wrp .grid p {
   margin-bottom: 3rem;
@@ -331,7 +332,6 @@ body {
 }
 .team-section .ts-wrapper h4 {
   margin-bottom: 6rem;
-  font-size: 2rem;
   padding: 1rem;
 }
 .team-section .ts-wrapper .ts-wrp .team-member {
@@ -364,10 +364,11 @@ body {
 }
 .features-section {
   background-color: #121315;
+  background-color: whitesmoke;
 }
 .features-section .fs-wrapper {
   max-width: 1200px;
-  color: white;
+  color: black;
   width: 100vw;
   margin: 3rem auto;
 }
@@ -378,10 +379,21 @@ body {
 .features-section .fs-wrapper .fs-wrp .feature-div {
   padding: 9rem 2rem;
 }
+.features-section .fs-wrapper .fs-wrp .feature-div .ft-img {
+  width: 36rem;
+  height: 40rem;
+}
+.features-section .fs-wrapper .fs-wrp .feature-div .ft-img img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
 .features-section .fs-wrapper .fs-wrp .feature-div .fd-ttl {
   font-weight: 400;
   font-size: 1.6rem;
   opacity: 0.7;
+  padding: 2rem 0;
 }
 
 .how-to-use-section {
@@ -389,7 +401,6 @@ body {
   max-width: 1300px;
 }
 .how-to-use-section .htu-wrapper .htu-wrp .htu-ttl h2 {
-  font-size: 3.3rem;
   padding: 3rem;
 }
 .how-to-use-section .htu-wrapper .htu-wrp .htu-grid {
@@ -438,10 +449,20 @@ body {
   color: black;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1240px) {
   .features-section .fs-wrapper .fs-wrp {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
+  .features-section .fs-wrapper .fs-wrp .feature-div {
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .features-section .fs-wrapper .fs-wrp .feature-div .ft-img {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1000px) {
   .features-section .fs-wrapper .fs-wrp .feature-div {
     padding: 5rem 2rem;
   }
