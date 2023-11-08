@@ -299,6 +299,10 @@ body{
     }
 }
 
+.section-ttl{
+    font-size: 2.5rem;
+    opacity: .9;
+}
 
 .about-us-section{
     max-width: 1000px;
@@ -315,10 +319,10 @@ body{
                     font-size: 1.5rem;
                     padding: .2rem;
                 }
-                .grid-ttl{
-                    font-size: 2.6rem;
-                    opacity: .9;
-                }
+                // .grid-ttl{
+                //     font-size: 2.6rem;
+                //     opacity: .9;
+                // }
                 p{
                     margin-bottom: 3rem;
                 }
@@ -344,7 +348,6 @@ body{
 
         h4{
             margin-bottom: 6rem;
-            font-size: 2rem;
             padding: 1rem;
         }
         .ts-wrp{
@@ -391,20 +394,34 @@ body{
 
 .features-section{
     background-color: #121315;
+    background-color: whitesmoke;
     .fs-wrapper{
         max-width: 1200px;
-        color: white;
+        color: black;
         width: 100vw;
         margin: 3rem auto;
         .fs-wrp{
+            // border: 1px solid;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             .feature-div{
                 padding: 9rem 2rem;
+
+                .ft-img{
+                    // border: 2px solid;
+                    width: 36rem;
+                    height: 40rem;
+                    img{
+                        height: 100%;
+                        width: 100%;
+                        object-fit: contain;
+                    }
+                }
                 .fd-ttl{
                     font-weight: 400;
                     font-size: 1.6rem;
                     opacity: .7;
+                    padding: 2rem 0;
                 }
             }
         }
@@ -419,7 +436,6 @@ body{
         .htu-wrp{
             .htu-ttl{
                 h2{
-                    font-size: 3.3rem;
                     padding: 3rem;
                 }
             }
@@ -477,10 +493,28 @@ body{
     }
 }
 
+@media screen and (max-width:1240px) {
+    .features-section .fs-wrapper .fs-wrp{
+        grid-template-columns: 1fr;
+
+        .feature-div{
+            text-align: center;
+            display: flex;
+            flex-direction: column-reverse;
+            .ft-img{
+                width: 100%;
+                // margin: 2rem 0;
+
+            }
+        }
+    }
+    
+}
+
 @media screen and (max-width:1000px) {
 
     .features-section .fs-wrapper .fs-wrp{
-        grid-template-columns: 1fr 1fr;
+        // grid-template-columns: 1fr 1fr;
 
         .feature-div{
             padding: 5rem 2rem;
