@@ -18,5 +18,26 @@ sendForm.addEventListener("submit", (e)=>{
 
 })
 
+//DYNAMICALLY SET THE YEAR (ON THE FOOTER)
+
+let currentYear = new Date().getFullYear()
+
+document.querySelector('.cp-year').textContent = currentYear
 
 
+//ANIMATION
+let tl = gsap.timeline()
+tl.from(".tp-ttl", {y:-10, opacity:0, duration:1, ease:"back.easeOut"})
+tl.from(".tp-p", {y:-10, opacity:0, duration:1, ease:"back.easeOut"})
+
+// gsap.from(".about-app-tag", {
+//   scrollTrigger:{
+//     trigger:".aus-wrp",
+//     markers:true,
+//     start:"center center"
+//   },
+//   opacity:0,
+//   y:33,
+//   stagger:.2,
+
+// })
