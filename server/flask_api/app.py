@@ -6,7 +6,9 @@ import json
 import requests
 import flask
 
-import markupsafe
+# import smtplib, ssl  # for sending emails
+
+# import secrets  # help to generate vefirication link token
 
 from sqlalchemy import ForeignKey, create_engine, Column, Integer
 from sqlalchemy import String, select
@@ -27,7 +29,7 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # Parameters for nearby places api
 
-LOCATION = sample_location["westlands"]
+# LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 
@@ -58,6 +60,30 @@ def checkUserStatus():
 
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
+
+# def sendEmailToUser(receiver_email, verification_link):
+
+#     # twoo lcvm faos mgkd
+
+#     port = 465  # SSL
+#     smtp_server = "smtp.gmail.com"
+#     sender_email = "stancillousray@gmail.com"  # our address
+#     receiver_email = "stancillousr@gmail.com"  # receiver's address
+#     password = input("Type your password and press enter: ")
+#     message = f"""\
+#     Subject: Hi {receiver_email}
+
+#     This message is sent from Karibu Nami.
+#     Click on the link below to verify your email\n
+#     {verification_link}
+#     """
+
+#     context = ssl.create_default_context()
+#     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+#         server.login(sender_email, password)
+#         server.sendmail(sender_email, receiver_email, message)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
@@ -77,12 +103,19 @@ def register():
             return render_template("register.html", error=error)
         
 
+
+        # verification_token = secrets.token_urlsafe()
+        # verification_link = f"karibunami.com/verify/{verification_token}"
+
+
         hashed_password = generate_password_hash(password, method='sha256')
 
         with Session(setup.engine) as session:
             query = select(setup.User).filter_by(username=username)
 
-            user = session.scalars(query).one()
+
+            # user = session.scalars(query).one()
+            user = session.scalars(query).first()
             
             # check if username exists
             if user:
@@ -146,7 +179,7 @@ def get_places():
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
 
-    # LOCATION = "{},{}".format(new_lat, new_long)
+    LOCATION = "{},{}".format(new_lat, new_long)
 
     # print("\t\tnew lat is ", new_lat)
     # print("\t\tnew long is ", new_long)
@@ -242,6 +275,9 @@ def get_places():
         single_place_result["reviews"] = place_reviews
         single_place_result["google_api_place_id"] = place_id
 
+        # add a place's total ratings
+        # single_place_result["total_ratings"] = user_ratings_total
+
         # This field is only availabe for signed in users
         if 'user_id' in flask.session:
             single_place_result["bookmarked"] = 0
@@ -300,8 +336,11 @@ def get_specific_place(place_id):
         places_dict["reviews"] = json.loads(place.reviews)
         places_dict["google_api_place_id"] = place.google_api_place_id
 
-        # check if user is signed in
+        # check if user is signed in or not
         user_authenticated = checkUserStatus()
+
+        # if user is signed in, add this place to the user's recently
+        # viewed places
 
         return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
 
