@@ -15,7 +15,8 @@
 
             <div class="login-main-section">
                 <div class="lms-wrapper">
-    
+
+
                     <h2 class="lg-title">Login</h2>
                     <div class="login-container">
                         <div class="login-content">
@@ -50,10 +51,40 @@
                             <p>Don't have an account? <a href="/register">Sign up.</a> </p>
                         </div>
                     </div> 
+
+                    {% if not email_verified %}
+                    <!-- MODAL TO BE SHOWN TO USER WHO HASN'T VERIFIED THEIR EMAIL -->
+                    <div>
+                        <div class="addmodal">
+                            <div class="adm-lg">
+                                <div class="adm-lg-container">
+                                    <div class="content">
+                                        <div class="close-modal-div">
+                                            <span class="close-modal">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="fr-ec-icon fr-ec-icon--default fr-ec-button-icon__icon"><title>Close</title><g fill-rule="evenodd"><polygon points="21 4.6 19.4 3 12 10.4 4.6 3 3 4.6 10.4 12 3 19.4 4.6 21 12 13.6 19.4 21 21 19.4 13.6 12"></polygon></g>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <h2>Verify Your Email</h2>
+                                        <p>A verification link was sent to your email address. <br>Please cilck on the link in order log in to your account.</p>
+                                        
+                                        <div class="res-l">
+                                            <a href="/resend_link">Click here to get a new verification link</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
                 </div>
             </div>
         </div>
     </main>
     
+    <script src="../static/scripts/login.js"></script>
 </body>
 </html>

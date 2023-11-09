@@ -76,4 +76,76 @@
   opacity: 1;
   color: whitesmoke;
   font-size: 1.2rem;
+}
+
+.addmodal {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  z-index: 23;
+  background-color: rgba(0, 0, 0, 0.552);
+  transition: all 0.4s ease;
+}
+.addmodal .adm-lg {
+  border: 1px solid black;
+  background-color: whitesmoke;
+  color: black;
+  padding: 2rem;
+  margin: 1rem;
+}
+.addmodal .adm-lg .adm-lg-container .content .close-modal-div {
+  border-bottom: 1px solid gainsboro;
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+.addmodal .adm-lg .adm-lg-container .content .close-modal-div .close-modal {
+  font-weight: bolder;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.addmodal .adm-lg .adm-lg-container .content h2 {
+  padding: 1rem;
+  padding-bottom: 0;
+  font-weight: 600;
+}
+.addmodal .adm-lg .adm-lg-container .content p {
+  font-weight: 500;
+  font-size: 1.3rem;
+  opacity: 0.8;
+  padding: 1rem;
+  margin: 3rem 0;
+}
+.addmodal .adm-lg .adm-lg-container .content .res-l {
+  padding: 0 1rem;
+  margin-bottom: 4rem;
+}
+.addmodal .adm-lg .adm-lg-container .content .res-l a {
+  color: black;
+  font-size: 1.3rem;
+}
+.addmodal .adm-lg .adm-lg-container .content .login-container {
+  margin: 2rem 0;
+  display: flex;
+}
+.addmodal .adm-lg .adm-lg-container .content .login-container .modal-btn {
+  all: unset;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+}
+.addmodal .adm-lg .adm-lg-container .content .login-container .modal-btn:hover {
+  opacity: 0.8;
+}
+
+.addmodal.removeModal {
+  opacity: 0;
+  visibility: hidden;
 }/*# sourceMappingURL=login.css.map */

@@ -96,3 +96,92 @@
         }
     }
 }
+
+
+// STYLING FOR MODAL TO BE SHOWN TO USER WHO HASN'T VERIFIED THEIR EMAIL
+
+.addmodal{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    z-index: 23;
+    background-color: rgba(0, 0, 0, 0.552);
+    // opacity: 0;
+    // visibility: hidden;
+    transition: all .4s ease;
+    .adm-lg{
+        border: 1px solid black;
+        background-color: whitesmoke;
+        color: black;
+        padding: 2rem;
+        margin: 1rem;
+        .adm-lg-container{
+            .content{
+                .close-modal-div{
+                    border-bottom: 1px solid gainsboro;
+                    margin-bottom: 0.5rem;
+                    text-align: right;
+                    .close-modal{
+                        font-weight: bolder;
+                        font-size: 2rem;
+                        cursor: pointer;
+
+                    }
+                    
+                }
+                h2{
+                    padding: 1rem;
+                    padding-bottom: 0;
+                    font-weight: 600;
+                    
+                }
+                p{
+                    font-weight: 500;
+                    font-size: 1.3rem;
+                    opacity: 0.8;
+                    padding: 1rem;
+                    margin: 3rem 0;
+                }
+
+                .res-l{
+                    padding: 0 1rem;
+                    margin-bottom: 4rem;
+                    a{
+                        color: black;
+                        font-size: 1.3rem;
+                    }
+                }
+                .login-container{
+                    margin: 2rem 0;
+                    display: flex;
+
+                    .modal-btn{
+                        all: unset;
+                        padding: .8rem 2.5rem;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        text-transform: capitalize;
+                        background-color: black;
+                        cursor: pointer;
+                        color: white;
+
+                        &:hover{
+                            opacity:.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//class to remove modal
+.addmodal.removeModal{
+    opacity: 0;
+    visibility: hidden;
+}
