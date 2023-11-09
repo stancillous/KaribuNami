@@ -1,0 +1,56 @@
+@import url("../styles/common.css");
+
+.rev-f-wrapper{
+    max-width: 500px;
+    margin: 4rem auto;
+}
+.rev-f-wrapper .rwapper{
+
+}
+.rev-f-wrapper .rwrapper form {
+    /* display: grid; */
+    /* place-items: center; */
+}
+
+input{
+    background-color:var(--bgColor);
+    border-bottom: 1px solid whitesmoke;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 1.5rem;
+    background-color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border: 1px solid rgba(241, 221, 221, 0.375);
+    color: black;
+}
+
+input:focus{
+    outline: none;
+}
+h2{
+    color: white;
+    font-size: 2rem;
+    opacity: .9;
+    text-align: center;
+    padding-bottom: 4rem;
+}
+.btn{
+    display: grid;
+    place-items: center;
+    margin-top: 3rem;
+
+}
+button{
+    all: unset;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: whitesmoke;
+    cursor: pointer;
+    color: black;
+    /* width: ; */
+
+
+}
