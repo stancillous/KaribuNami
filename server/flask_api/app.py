@@ -6,9 +6,9 @@ import json
 import requests
 import flask
 
-# import smtplib, ssl  # for sending emails
+import smtplib, ssl  # for sending emails
 
-# import secrets  # help to generate vefirication link token
+import secrets  # help to generate vefirication link token
 
 from sqlalchemy import ForeignKey, create_engine, Column, Integer
 from sqlalchemy import String, select
@@ -69,19 +69,83 @@ maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 #     smtp_server = "smtp.gmail.com"
 #     sender_email = "stancillousray@gmail.com"  # our address
 #     receiver_email = "stancillousr@gmail.com"  # receiver's address
-#     password = input("Type your password and press enter: ")
+#     # password = input("Type your password and press enter: ")
+#     password = "twoo lcvm faos mgkd"
 #     message = f"""\
 #     Subject: Hi {receiver_email}
 
 #     This message is sent from Karibu Nami.
-#     Click on the link below to verify your email\n
+#     Click on the link below to verify your email address\n
 #     {verification_link}
-#     """
+
+#     If you didn’t ask to verify this address, you can ignore this email.
+
+#     Thanks,
+#     Karibu Nami Team"""
+
 
 #     context = ssl.create_default_context()
 #     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
 #         server.login(sender_email, password)
 #         server.sendmail(sender_email, receiver_email, message)
+
+
+
+
+def sendEmailToUser(receiver_email, verification_link):
+    """
+    function to send the verification link to a registered user
+    Don't change the format of the message variable below (ie it's indentation)
+    """
+
+    port = 465  # SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "stancillousray@gmail.com"  # ender's email address
+    password = "twoo lcvm faos mgkd"  # Replace with your actual password
+    message = f"""\
+Subject: [karibu nami] verify your email address
+
+Hi,
+
+This message is sent from Karibu Nami.
+
+Click on the link below to verify your email address:
+{verification_link}
+
+If you did not ask to verify this address, you can ignore this email.
+
+Thanks,
+Karibu Nami Team
+"""
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
+
+@app.route("/verify_user", strict_slashes=False)
+def verify_user():
+    """page to verify user after they click
+    the verification link sent to their email"""
+    verification_link = request.args.get('user_token')
+
+    with Session(setup.engine) as session:
+        query = select(setup.User).filter_by(verification_link=verification_link)
+
+        try:
+            # get user whose verification link matches the verification_link above
+            user = session.scalars(query).one()
+            user.email_verified = 1  # set the value to 1 (True), meaning it's been verified
+            session.commit()
+        
+        except Exception as e:
+            # print("\t\t\texception is => ", e)
+            return "Error. Wrong verification link!"
+            return render_template("login.html", email_verified=False)
+
+    # return redirect(url_for("login"))
+    return render_template("login.html", email_verified=True)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -93,6 +157,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
         confirm_password = request.form['confirm-password']
 
         if password != confirm_password:
@@ -104,38 +169,90 @@ def register():
         
 
 
-        # verification_token = secrets.token_urlsafe()
-        # verification_link = f"karibunami.com/verify/{verification_token}"
+        verification_token = secrets.token_urlsafe()  # generate a 
+        verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+        
 
+        # call the function to send the ver_link to the user
+        sendEmailToUser(email, verification_link)
 
+        
         hashed_password = generate_password_hash(password, method='sha256')
 
+        # check if username exists
         with Session(setup.engine) as session:
             query = select(setup.User).filter_by(username=username)
-
+            emailquery = select(setup.User).filter_by(email=email)
 
             # user = session.scalars(query).one()
             user = session.scalars(query).first()
+
+            emailInDatabase = session.scalars(emailquery).first()
             
-            # check if username exists
+            # check if username/email exists in our database
             if user:
                 error = "Username taken, create a unique username."
                 return render_template("register.html", error=error)
+            if emailInDatabase:
+                error = "Email already in use."
+                return render_template("register.html", error=error)
+                
 
         with Session(setup.engine) as session:
-            newuser = setup.User(username=username, password=hashed_password)
+            newuser = setup.User(
+                username=username,
+                password=hashed_password,
+                email=email,
+                email_verified=False,
+                verification_link=verification_token
+                )
             session.add(newuser)
             session.commit()
-        # print("SIGNUP SUCCESS REDIRECT TO HOME PAGE!!!")
-        return redirect(url_for('login'))
+        return render_template("login.html", email_verified=False)
+        # return redirect(url_for('login'))
     return jsonify("Sign Up Failed!!!")
+
+
+@app.route("/resend_link", strict_slashes=False, methods={"POST", "GET"})
+def resend_verification_link_to_user():
+    """func to handle resending a verification link to the user"""
+
+    if request.method == "GET":
+        return render_template("verify.html")
+    
+    if request.method == "POST":
+        user_email = request.form.get("email")
+        # check for this email in our database, then create a new verification link,
+        # send it to the user and update the vefirication link field in the table
+
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(email=user_email)
+
+            try:
+                user = session.scalars(query).one()
+                # generate a new token for the user and update it in the DB
+                verification_token = secrets.token_urlsafe()  # generate a unique token
+                verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+
+                user.verification_link = verification_token  # update the value in our database
+                session.commit()
+
+                sendEmailToUser(user_email, verification_link)  # send the new verification email to the user
+                return render_template("login.html", email_verifed=False)
+
+
+            except Exception as e:
+                print("error is ", e)         
+                return "error"
+        
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None  # if login fails, update this and send the error to our front-end
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("login.html", email_verified=True)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -146,19 +263,25 @@ def login():
             try:
                 user = session.scalars(query).one()
 
-                if user and check_password_hash(user.password, password):
-                    flask.session['user_id'] = user.id
-                    flask.session['username'] = user.username
-                    
-                    # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
-                    return redirect(url_for('home_page'))
-                else:
-                    error = 'Login failed. Please check your credentials.'            
+                # print("\t\t\tvalue is ", user.email_verified)
+                if not user.email_verified:  # if user email not verified
+                    return render_template("login.html", email_verified=False)
+
+                else:  # user email verified
+                    if user and check_password_hash(user.password, password):
+                        flask.session['user_id'] = user.id
+                        flask.session['username'] = user.username
+                        
+                        # print("LOGIN SUCCESS REDIRECT TO HOME PAGE!!!")
+                        return redirect(url_for('home_page'))
+                    else:
+                        error = 'Login failed. Please check your credentials.'            
+
             except:
                 error = 'Login failed. Please check your credentials.'          
             
                 # return jsonify(error)
-    return render_template("login.html", error=error)
+    return render_template("login.html", error=error, email_verified=True)
 
 
 @app.route('/', strict_slashes = False)
