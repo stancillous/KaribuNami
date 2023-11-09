@@ -272,11 +272,12 @@ def home_page():
     return render_template("index.html", user_authenticated=user_authenticated)
 
 
-places_result = []
+# places_result = []
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
+    places_result = []
     PLACE = request.form.get("place_name")
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
@@ -351,6 +352,8 @@ def get_places():
                         photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={photo['photo_reference']}&key={API_KEY}"
                         photographs.append(photo_url)
                         count += 1
+            else:
+                photographs = None
 
             # get the place's reviews
             place_reviews = []
@@ -365,8 +368,9 @@ def get_places():
                         "review_text": review.get("text", "No comment")
                     })
 
-        except requests.exceptiomyns.RequestException as e:
-            print(f"Request failed: {e}") 
+        except:# requests.exceptiomyns.RequestException as e:
+            # print(f"Request failed: {e}")
+            pass
 
         single_place_result["place_name"] = name
         single_place_result["rating"] = rating
@@ -416,7 +420,8 @@ def get_places():
                     new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
                     session.add(new_bkmk)
                     session.commit()
-    
+            
+    # print(f"\n\tThis is the dictionary you want\n\t{places_result}\n")
     return render_template("places.html", places=places_result)
 
 
