@@ -6,6 +6,8 @@ import json
 import requests
 import flask
 
+from decouple import config
+
 import smtplib, ssl  # for sending emails
 
 import secrets  # help to generate vefirication link token
@@ -61,36 +63,6 @@ def checkUserStatus():
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 
-# def sendEmailToUser(receiver_email, verification_link):
-
-#     # twoo lcvm faos mgkd
-
-#     port = 465  # SSL
-#     smtp_server = "smtp.gmail.com"
-#     sender_email = "stancillousray@gmail.com"  # our address
-#     receiver_email = "stancillousr@gmail.com"  # receiver's address
-#     # password = input("Type your password and press enter: ")
-#     password = "twoo lcvm faos mgkd"
-#     message = f"""\
-#     Subject: Hi {receiver_email}
-
-#     This message is sent from Karibu Nami.
-#     Click on the link below to verify your email address\n
-#     {verification_link}
-
-#     If you didn’t ask to verify this address, you can ignore this email.
-
-#     Thanks,
-#     Karibu Nami Team"""
-
-
-#     context = ssl.create_default_context()
-#     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-#         server.login(sender_email, password)
-#         server.sendmail(sender_email, receiver_email, message)
-
-
-
 
 def sendEmailToUser(receiver_email, verification_link):
     """
@@ -100,8 +72,8 @@ def sendEmailToUser(receiver_email, verification_link):
 
     port = 465  # SSL
     smtp_server = "smtp.gmail.com"
-    sender_email = "stancillousray@gmail.com"  # ender's email address
-    password = "twoo lcvm faos mgkd"  # Replace with your actual password
+    sender_email = "stancillousray@gmail.com" 
+    password = config("mail_key") 
     message = f"""\
 Subject: [karibu nami] verify your email address
 
@@ -124,6 +96,16 @@ Karibu Nami Team
         server.sendmail(sender_email, receiver_email, message)
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("error.html", error="client")
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template("error.html", error="server")
+
+
 @app.route("/verify_user", strict_slashes=False)
 def verify_user():
     """page to verify user after they click
@@ -140,11 +122,8 @@ def verify_user():
             session.commit()
         
         except Exception as e:
-            # print("\t\t\texception is => ", e)
-            return "Error. Wrong verification link!"
-            return render_template("login.html", email_verified=False)
+            return render_template("error.html", error="wrong link")
 
-    # return redirect(url_for("login"))
     return render_template("login.html", email_verified=True)
 
 
