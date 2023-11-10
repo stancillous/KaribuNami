@@ -6,7 +6,7 @@ import json
 import requests
 import flask
 
-from decouple import config
+# from decouple import config
 
 import smtplib, ssl  # for sending emails
 
