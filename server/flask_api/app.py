@@ -276,12 +276,12 @@ def home_page():
     return render_template("index.html", user_authenticated=user_authenticated)
 
 
-# places_result = []
+places_result = []
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
-    places_result = []
+    # places_result = []
     PLACE = request.form.get("place_name")
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
