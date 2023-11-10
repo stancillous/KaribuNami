@@ -35,7 +35,7 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # Parameters for nearby places api
 
-# LOCATION = sample_location["westlands"]
+LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 
@@ -283,10 +283,10 @@ def get_places():
     """Returns results for places near the user"""
     # places_result = []
     PLACE = request.form.get("place_name")
-    new_lat = request.form.get("location-lat")
-    new_long = request.form.get("location-long")
+    # new_lat = request.form.get("location-lat")
+    # new_long = request.form.get("location-long")
 
-    LOCATION = "{},{}".format(new_lat, new_long)
+    # LOCATION = "{},{}".format(new_lat, new_long)
 
     # print("\t\tnew lat is ", new_lat)
     # print("\t\tnew long is ", new_long)
