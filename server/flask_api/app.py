@@ -19,6 +19,10 @@ from sqlalchemy.orm import Session
 import logging
 from sqlalchemy import inspect, update
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
@@ -73,7 +77,7 @@ def sendEmailToUser(receiver_email, verification_link):
     port = 465  # SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "stancillousray@gmail.com" 
-    password = config("mail_key") 
+    password = os.getenv("mail_key") 
     message = f"""\
 Subject: [karibu nami] verify your email address
 
