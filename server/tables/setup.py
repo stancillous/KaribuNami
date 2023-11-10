@@ -9,14 +9,21 @@ from server.tables.places import Place
 from server.tables.bookmarks import Bookmark
 from sqlalchemy import inspect
 from decouple import config
+from dotenv import load_dotenv
+import os
 
 # Base = declarative_base()
+load_dotenv()
 
 # Credentials for connecting to mysql db
-USERNAME = config("MYSQLUSERNAME")
-PASSWORD = config("PASSWORD")
-HOST = config("HOST")
-DB = config("DB")
+USERNAME = os.getenv("MYSQLUSERNAME")
+PASSWORD = os.getenv("PASSWORD")
+HOST = os.getenv("HOST")
+DB = os.getenv("DB")
+
+# Ensure the environment variables are set
+if not all([USERNAME, PASSWORD, HOST, DB]):
+    raise ValueError("Environment variables not set correctly.")
 
 
 
