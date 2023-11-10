@@ -153,7 +153,7 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
         # call the function to send the ver_link to the user
