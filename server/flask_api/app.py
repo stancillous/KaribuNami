@@ -6,7 +6,8 @@ import json
 import requests
 import flask
 
-# from decouple import config
+from decouple import config
+from dotenv import load_dotenv
 
 import smtplib, ssl  # for sending emails
 
@@ -23,7 +24,7 @@ import json
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
 
-
+load_dotenv()
 
 # Temporary location data
 # To be replaced with geolocation api
