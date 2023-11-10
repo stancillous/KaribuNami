@@ -8,7 +8,7 @@ from server.tables.users import User
 from server.tables.places import Place
 from server.tables.bookmarks import Bookmark
 from sqlalchemy import inspect
-from decouple import config
+# from decouple import config
 from dotenv import load_dotenv
 import os
 
