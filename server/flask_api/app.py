@@ -160,7 +160,7 @@ def register():
         sendEmailToUser(email, verification_link)
 
         
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         # check if username exists
         with Session(setup.engine) as session:
