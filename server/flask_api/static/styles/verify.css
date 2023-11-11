@@ -3,6 +3,7 @@
 .rev-f-wrapper{
     max-width: 500px;
     margin: 4rem auto;
+    padding: 2rem;
 }
 
 
@@ -62,4 +63,23 @@ button{
     width: 100%;
     color: red;
     font-weight: 600;
+}
+
+
+.password-input{
+    position: relative;    
+    margin-bottom: 2rem;
+}
+
+.password-input svg{
+    color: white;
+    position: absolute;
+    top: 20%;
+    right: 2%;
+    width: 2rem;
+    cursor: pointer;
+}
+
+.password-input .password-closed-img{
+    display: none;
 }

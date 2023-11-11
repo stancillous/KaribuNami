@@ -43,7 +43,7 @@
   width: 2rem;
   cursor: pointer;
 }
-.main .signup-form-container .signup-form #signup-form div .password-input .password-open-img {
+.main .signup-form-container .signup-form #signup-form div .password-input .password-closed-img {
   display: none;
 }
 .main .signup-form-container .signup-form #signup-form div button {

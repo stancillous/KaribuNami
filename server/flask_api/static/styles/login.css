@@ -31,7 +31,7 @@
   width: 2rem;
   cursor: pointer;
 }
-.login-main-section .lms-wrapper .login-container .password-input .password-open-img {
+.login-main-section .lms-wrapper .login-container .password-input .password-closed-img {
   display: none;
 }
 .login-main-section .lms-wrapper .login-container input {
