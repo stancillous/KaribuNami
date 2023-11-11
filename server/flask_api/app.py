@@ -20,6 +20,10 @@ from sqlalchemy.orm import Session
 import logging
 from sqlalchemy import inspect, update
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
@@ -32,7 +36,7 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # Parameters for nearby places api
 
-# LOCATION = sample_location["westlands"]
+LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
 API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 
@@ -74,7 +78,7 @@ def sendEmailToUser(receiver_email, verification_link):
     port = 465  # SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "stancillousray@gmail.com" 
-    password = config("mail_key") 
+    password = os.getenv("mail_key") 
     message = f"""\
 Subject: [karibu nami] verify your email address
 
@@ -157,14 +161,14 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
         # call the function to send the ver_link to the user
         sendEmailToUser(email, verification_link)
 
         
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         # check if username exists
         with Session(setup.engine) as session:
@@ -332,7 +336,7 @@ def resend_verification_link_to_user():
                 user = session.scalars(query).one()
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+                verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
@@ -393,17 +397,17 @@ def home_page():
     return render_template("index.html", user_authenticated=user_authenticated)
 
 
-# places_result = []
+places_result = []
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
-    places_result = []
+    # places_result = []
     PLACE = request.form.get("place_name")
-    new_lat = request.form.get("location-lat")
-    new_long = request.form.get("location-long")
+    # new_lat = request.form.get("location-lat")
+    # new_long = request.form.get("location-long")
 
-    LOCATION = "{},{}".format(new_lat, new_long)
+    # LOCATION = "{},{}".format(new_lat, new_long)
 
     # print("\t\tnew lat is ", new_lat)
     # print("\t\tnew long is ", new_long)
