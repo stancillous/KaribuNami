@@ -13,5 +13,4 @@ registerForm.addEventListener("submit", (e)=>{
         document.querySelector(".passwords-mismatch").classList.add("showFormErrors")
     }
     
-
 })

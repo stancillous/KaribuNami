@@ -32,6 +32,20 @@
 .main .signup-form-container .signup-form #signup-form div input:focus {
   outline: none;
 }
+.main .signup-form-container .signup-form #signup-form div .password-input {
+  position: relative;
+}
+.main .signup-form-container .signup-form #signup-form div .password-input svg {
+  color: white;
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  width: 2rem;
+  cursor: pointer;
+}
+.main .signup-form-container .signup-form #signup-form div .password-input .password-open-img {
+  display: none;
+}
 .main .signup-form-container .signup-form #signup-form div button {
   all: unset;
   text-align: center;

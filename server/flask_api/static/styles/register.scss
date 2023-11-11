@@ -43,7 +43,21 @@
                         }
                     }
 
-
+                    .password-input{
+                        position: relative;
+                        
+                        svg{
+                            color: white;
+                            position: absolute;
+                            top: 20%;
+                            right: 2%;
+                            width: 2rem;
+                            cursor: pointer;
+                        }
+                        .password-open-img{
+                            display: none;
+                        }
+                    }
 
                     button{
                         all: unset;

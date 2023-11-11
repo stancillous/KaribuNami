@@ -6,7 +6,8 @@ import json
 import requests
 import flask
 
-# from decouple import config
+from decouple import config
+from dotenv import load_dotenv
 
 import smtplib, ssl  # for sending emails
 
@@ -27,7 +28,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
 
-
+load_dotenv()
 
 # Temporary location data
 # To be replaced with geolocation api
@@ -143,6 +144,13 @@ def register():
         email = request.form['email']
         confirm_password = request.form['confirm-password']
 
+        if len(username) < 3:
+            error = "Username should be at least 3 letters long"
+            return render_template("register.html", error=error)
+        
+        if len(username) > 10:
+            error = "Username cannot be more than 10 letters long"
+            return render_template("register.html", error=error)
         if password != confirm_password:
             error = "Both passwords should match"
             return render_template("register.html", error=error)
@@ -196,11 +204,124 @@ def register():
     return jsonify("Sign Up Failed!!!")
 
 
+
+@app.route("/reset_password", strict_slashes=False, methods=["GET", "POST"])
+def reset_password_page():
+    """
+    this func will handle logic when a user wants to reset their password.
+    it will get their email, and send them a link that they will use to do that
+    """
+
+    if request.method == "GET":
+        # the variable below (resetting_password) will help determine what to show to the user in the front end
+        # if it's set to true, it means the user has clicked the 'reset password link' and will be redirected to 
+        # this html so that they can change their password
+        return render_template("reset_password.html", resetting_password=False)
+    
+
+    if request.method == "POST":  # if user enters their email and hits the 'reset password' button
+        user_email = request.form.get("email")
+        # check for this email in our database, then send them a verification link
+        # that they will use to reset their password
+
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(email=user_email)
+
+            try:
+                user = session.scalars(query).one()
+
+                # generate a new token for the user and update it in the DB
+                verification_token = secrets.token_urlsafe()  # generate a unique token
+                verification_link = f"127.0.0.1:5000/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
+
+                user.verification_link = verification_token  # update the value in our database
+                session.commit()
+
+                sendEmailToUser(user_email, verification_link)  # send the new verification email to the user
+                return "Thank you! A password reset request has been sent to your email. Please make sure to check your spam in case you cannot find it."
+
+
+            except Exception as e:
+                error = "Sorry, we couldn't find an account matching the information you provided."
+                return render_template("error.html", error=error)
+
+
+
+@app.route("/reset_password_link", strict_slashes=False, methods=["GET", "POST"])
+def reset_password_func():
+    """func to handle user resetting their password"""
+
+    reset_password_code = None
+    userEmail = None
+    
+    if request.method == "GET":
+        # grab the reset_link_code and userEmail from the url
+        reset_password_code = request.args.get("reset_password_code")
+        userEmail = request.args.get("user_email")
+
+        # set them in session, to be used during the post request
+        flask.session['userEmail'] = userEmail
+        flask.session['reset_password_code'] = reset_password_code
+
+        return render_template("reset_password.html", resetting_password=True)
+        
+    if request.method == "POST":  # when the 'reset password' button is clicked
+        new_password = request.form.get("change-password")
+        confirm_new_password = request.form.get("confirm-change-password")
+
+        # check for len of password
+        if len(new_password) < 6:
+            error = "Password should be at least 6 characters long"
+            return render_template("reset_password.html", error=error, resetting_password=True)
+
+        if new_password != confirm_new_password:
+            error = "Both passwords should match"
+            return render_template("reset_password.html", error=error, resetting_password=True)
+
+
+        reset_password_code = flask.session["reset_password_code"]
+        userEmail = flask.session['userEmail']
+
+        # remove them from our flask session
+        flask.session.pop('userEmail', None)
+        flask.session.pop('reset_password_code', None)
+
+
+        # check if the email and the link align (in our DB)
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(email=userEmail)
+
+            try:
+                user = session.scalars(query).one()
+
+                # if the user verfcn link in our DB is similar to the one in the url(link sent via email)
+                if user.verification_link == reset_password_code:
+
+                    # we know that this is the right user and they can change their password
+                    hashed_password = generate_password_hash(new_password, method='sha256')
+                    user.password = hashed_password
+                    
+                    session.commit()
+                    return render_template("login.html", email_verified=True)
+                
+                else:
+                    error = "Your password could not be reset. You may have followed a wrong link."
+                    return render_template("error.html", error=error)
+
+
+            except Exception as e:
+                error = "Your password could not be reset. You may have followed a wrong link."
+                return render_template("error.html", error=error)
+
+
+
+
 @app.route("/resend_link", strict_slashes=False, methods={"POST", "GET"})
 def resend_verification_link_to_user():
     """func to handle resending a verification link to the user"""
 
     if request.method == "GET":
+
         return render_template("verify.html")
     
     if request.method == "POST":

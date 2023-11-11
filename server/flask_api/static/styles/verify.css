@@ -4,13 +4,7 @@
     max-width: 500px;
     margin: 4rem auto;
 }
-.rev-f-wrapper .rwapper{
 
-}
-.rev-f-wrapper .rwrapper form {
-    /* display: grid; */
-    /* place-items: center; */
-}
 
 input{
     background-color:var(--bgColor);
@@ -52,5 +46,20 @@ button{
     color: black;
     /* width: ; */
 
+}
 
+.login-error{
+    margin: 2rem 0;
+    margin-bottom: 3rem;
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    padding: 1.5rem 0;
+}
+.login-error span{
+    padding: 2rem 0;
+    font-size: 1.3rem;
+    width: 100%;
+    color: red;
+    font-weight: 600;
 }

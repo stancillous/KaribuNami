@@ -20,6 +20,20 @@
 .login-main-section .lms-wrapper .login-container label {
   font-size: 1.2rem;
 }
+.login-main-section .lms-wrapper .login-container .password-input {
+  position: relative;
+}
+.login-main-section .lms-wrapper .login-container .password-input svg {
+  color: white;
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  width: 2rem;
+  cursor: pointer;
+}
+.login-main-section .lms-wrapper .login-container .password-input .password-open-img {
+  display: none;
+}
 .login-main-section .lms-wrapper .login-container input {
   background-color: transparent;
   padding: 1rem 0.4rem;

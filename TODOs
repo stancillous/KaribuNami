@@ -111,3 +111,5 @@ There shouldn't be duplicate emails
 Register an email for karibu nami ( i am currently using mine)
 
 UI FOR our error pages
+
+Check the message sent when sending the user an email for resetting their password (Thank you! A password reset request has been sent to your email. Please make sure to check your spam in case you cannot find it.)
