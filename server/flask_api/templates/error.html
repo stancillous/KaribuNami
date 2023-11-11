@@ -16,6 +16,10 @@
     {% elif error=="server" %}
     <h1>Internal Server Error</h1>
     <h2>Oops... We seem to have made a mistake, sorry!. Click <a href="/">here</a> to go somewhere nice :)</h1>
+
+    {% else %}
+    <h1>Error</h1>
+    <h2>{{error}}</h2>
     {% endif %}
 </body>
 </html>
