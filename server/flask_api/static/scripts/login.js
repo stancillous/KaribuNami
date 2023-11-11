@@ -17,14 +17,14 @@ const seePassword = document.querySelector(".password-open-img")
 const closePassword = document.querySelector(".password-closed-img")
 
 closePassword.addEventListener("click", ()=>{
-    document.querySelector("#passcode-input").type="text"
+    document.querySelector("#passcode-input").type="password"
     seePassword.style.display="block"
     closePassword.style.display="none"
     
 })
 
 seePassword.addEventListener("click", ()=>{
-    document.querySelector("#passcode-input").type="password"
+    document.querySelector("#passcode-input").type="text"
     closePassword.style.display="block"
     seePassword.style.display="none"
 
