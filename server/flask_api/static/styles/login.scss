@@ -24,6 +24,22 @@
             label{
                 font-size: 1.2rem;
             }
+
+            .password-input{
+                position: relative;
+                
+                svg{
+                    color: white;
+                    position: absolute;
+                    top: 20%;
+                    right: 2%;
+                    width: 2rem;
+                    cursor: pointer;
+                }
+                .password-closed-img{
+                    display: none;
+                }
+            }
             input{
                 background-color: transparent;
                 padding: 1rem .4rem;

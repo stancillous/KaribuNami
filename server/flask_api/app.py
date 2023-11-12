@@ -6,7 +6,8 @@ import json
 import requests
 import flask
 
-# from decouple import config
+from decouple import config
+from dotenv import load_dotenv
 
 import smtplib, ssl  # for sending emails
 
@@ -22,12 +23,17 @@ import json
 import os
 from dotenv import load_dotenv
 
+# for sending emails
+import smtplib 
+from email.message import EmailMessage
+
+
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'toosecretive'
 
-
+load_dotenv()
 
 # Temporary location data
 # To be replaced with geolocation api
@@ -52,9 +58,12 @@ PHOTO_REFERENCE = ""
 
 places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={PHOTO_REFERENCE}&key={API_KEY}"
 
+
 #Parameters for google maps location HTTP request
 LATITUDE = ""
 LONGITUDE = ""
+
+maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 # function to check if user is logged in
 def checkUserStatus():
@@ -64,40 +73,22 @@ def checkUserStatus():
     return False
 
 
-maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 
+# function to send the verification link(s) to a user
+def sendEmailToUser(receiver_email, subject, message):
+    EmailAdd = "karibunami@gmail.com"
+    Pass = os.getenv("mail_key") #senders Gmail's Password over here 
+    # Pass = "ezrg zoqj jxot wkvi"
+    msg = EmailMessage()
+    msg['Subject'] =  subject # Subject of Email
+    msg['From'] = EmailAdd
+    msg['To'] =  receiver_email
+    msg.set_content(message) # Email body
 
-def sendEmailToUser(receiver_email, verification_link):
-    """
-    function to send the verification link to a registered user
-    Don't change the format of the message variable below (ie it's indentation)
-    """
-
-    port = 465  # SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = "stancillousray@gmail.com" 
-    password = os.getenv("mail_key") 
-    message = f"""\
-Subject: [karibu nami] verify your email address
-
-Hi,
-
-This message is sent from Karibu Nami.
-
-Click on the link below to verify your email address:
-{verification_link}
-
-If you did not ask to verify this address, you can ignore this email.
-
-Thanks,
-Karibu Nami Team
-"""
-
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+    with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+        smtp.login(EmailAdd,Pass) # logging in to our account
+        smtp.send_message(msg) # send the message
 
 
 @app.errorhandler(404)
@@ -143,6 +134,13 @@ def register():
         email = request.form['email']
         confirm_password = request.form['confirm-password']
 
+        if len(username) < 3:
+            error = "Username should be at least 3 letters long"
+            return render_template("register.html", error=error)
+        
+        if len(username) > 15:
+            error = "Username cannot be more than 10 letters long"
+            return render_template("register.html", error=error)
         if password != confirm_password:
             error = "Both passwords should match"
             return render_template("register.html", error=error)
@@ -156,8 +154,24 @@ def register():
         verification_link = f"0.0.0.0:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
+        subject = "[Karibu Nami] Verify Your Email Address"
+        message = f"""\
+
+        Hi,
+
+        This message is sent from Karibu Nami.
+
+        Click on the link below to verify your email address:
+        {verification_link}
+
+        If you did not ask to verify this address, you can ignore this email.
+
+        Thanks,
+        Karibu Nami Team
+        """
+
         # call the function to send the ver_link to the user
-        sendEmailToUser(email, verification_link)
+        sendEmailToUser(email, subject, message)
 
         
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -196,11 +210,142 @@ def register():
     return jsonify("Sign Up Failed!!!")
 
 
+
+@app.route("/reset_password", strict_slashes=False, methods=["GET", "POST"])
+def reset_password_page():
+    """
+    this func will handle logic when a user wants to reset their password.
+    it will get their email, and send them a link that they will use to do that
+    """
+
+    if request.method == "GET":
+        # the variable below (resetting_password) will help determine what to show to the user in the front end
+        # if it's set to true, it means the user has clicked the 'reset password link' and will be redirected to 
+        # this html so that they can change their password
+        return render_template("reset_password.html", resetting_password=False)
+    
+
+    if request.method == "POST":  # if user enters their email and hits the 'reset password' button
+        user_email = request.form.get("email")
+        # check for this email in our database, then send them a verification link
+        # that they will use to reset their password
+
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(email=user_email)
+
+            try:
+                user = session.scalars(query).one()
+
+                # generate a new token for the user and update it in the DB
+                verification_token = secrets.token_urlsafe()  # generate a unique token
+                verification_link = f"127.0.0.1:5000/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
+
+                user.verification_link = verification_token  # update the value in our database
+                session.commit()
+                
+            
+                subject = "[Karibu Nami] Password Reset"
+                message = f"""\
+                Hi,
+
+                This message is sent from Karibu Nami.
+                
+                We have received a request to reset your Karibu Nami account password.
+
+                Click on the link below to change your account password:
+                {verification_link}
+
+                If you did not ask to change your password, you can ignore this email.
+
+                Thanks,
+                Karibu Nami Team
+                """
+                
+                sendEmailToUser(user_email, subject, message)  # send the new verification email to the user
+                return "Thank you! A password reset request has been sent to your email. Please make sure to check your spam in case you cannot find it."
+
+
+            except Exception as e:
+                error = "Sorry, we couldn't find an account matching the information you provided."
+                return render_template("error.html", error=error)
+
+
+
+@app.route("/reset_password_link", strict_slashes=False, methods=["GET", "POST"])
+def reset_password_func():
+    """func to handle user resetting their password"""
+
+    reset_password_code = None
+    userEmail = None
+    
+    if request.method == "GET":
+        # grab the reset_link_code and userEmail from the url
+        reset_password_code = request.args.get("reset_password_code")
+        userEmail = request.args.get("user_email")
+
+        # set them in session, to be used during the post request
+        flask.session['userEmail'] = userEmail
+        flask.session['reset_password_code'] = reset_password_code
+
+        return render_template("reset_password.html", resetting_password=True)
+        
+    if request.method == "POST":  # when the 'reset password' button is clicked
+        new_password = request.form.get("change-password")
+        confirm_new_password = request.form.get("confirm-change-password")
+
+        # check for len of password
+        if len(new_password) < 6:
+            error = "Password should be at least 6 characters long"
+            return render_template("reset_password.html", error=error, resetting_password=True)
+
+        if new_password != confirm_new_password:
+            error = "Both passwords should match"
+            return render_template("reset_password.html", error=error, resetting_password=True)
+
+
+        reset_password_code = flask.session["reset_password_code"]
+        userEmail = flask.session['userEmail']
+
+        # remove them from our flask session
+        flask.session.pop('userEmail', None)
+        flask.session.pop('reset_password_code', None)
+
+
+        # check if the email and the link align (in our DB)
+        with Session(setup.engine) as session:
+            query = select(setup.User).filter_by(email=userEmail)
+
+            try:
+                user = session.scalars(query).one()
+
+                # if the user verfcn link in our DB is similar to the one in the url(link sent via email)
+                if user.verification_link == reset_password_code:
+
+                    # we know that this is the right user and they can change their password
+                    hashed_password = generate_password_hash(new_password, method='sha256')
+                    user.password = hashed_password
+                    
+                    session.commit()
+                    return render_template("login.html", email_verified=True)
+                
+                else:
+                    error = "Your password could not be reset. You may have followed a wrong link."
+                    return render_template("error.html", error=error)
+
+
+            except Exception as e:
+                error = "Your password could not be reset. You may have followed a wrong link."
+                return render_template("error.html", error=error)
+
+
+
+
 @app.route("/resend_link", strict_slashes=False, methods={"POST", "GET"})
 def resend_verification_link_to_user():
     """func to handle resending a verification link to the user"""
 
     if request.method == "GET":
+
         return render_template("verify.html")
     
     if request.method == "POST":
@@ -220,7 +365,22 @@ def resend_verification_link_to_user():
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
 
-                sendEmailToUser(user_email, verification_link)  # send the new verification email to the user
+                subject = "[Karibu Nami] Verify Your Email Address"
+                message = f"""\
+                Hi,
+
+                This message is sent from Karibu Nami.
+
+                Click on the link below to verify your email address:
+                {verification_link}
+
+                If you did not ask to verify this address, you can ignore this email.
+
+                Thanks,
+                Karibu Nami Team
+                """
+                sendEmailToUser(user_email, subject, message)  # send the new verification email to the user
+                
                 return render_template("login.html", email_verifed=False)
 
 
@@ -276,7 +436,7 @@ def home_page():
     return render_template("index.html", user_authenticated=user_authenticated)
 
 
-places_result = []
+# places_result = []
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
@@ -317,6 +477,7 @@ def get_places():
     for place in nearby_places:
         single_place_result = {}
         name = place["name"]
+        # place_type = place["types"]
         place_id = place["place_id"]
         rating = place["rating"]
         location = place["geometry"]['location']
@@ -372,9 +533,8 @@ def get_places():
                         "review_text": review.get("text", "No comment")
                     })
 
-        except:# requests.exceptiomyns.RequestException as e:
-            # print(f"Request failed: {e}")
-            pass
+        except:
+            print(f"Request failed: {e}")
 
         single_place_result["place_name"] = name
         single_place_result["rating"] = rating
@@ -384,6 +544,7 @@ def get_places():
         single_place_result["photos"] = photographs
         single_place_result["reviews"] = place_reviews
         single_place_result["google_api_place_id"] = place_id
+        # single_place_result["type_of_place"] = place_type
 
         # add a place's total ratings
         # single_place_result["total_ratings"] = user_ratings_total
@@ -394,38 +555,52 @@ def get_places():
         
         places_result.append(single_place_result)
 
-        if 'user_id' in flask.session:
-            # print("\t\tbefore")
-            # print("\t\tuser is ", flask.session['user_id'])
-            # print("\t\tusername is ", flask.session['username'])
 
-            # print("\t\tafter")
+       
 
-            user_id = flask.session['user_id']
-            with Session(setup.engine) as session:
-                query = select(setup.Place).filter_by(google_api_place_id=place_id)
-                try: 
-                    existing_place = session.scalars(query).one()
-                
-                except:
-                    existing_place = None
+        # if 'user_id' in flask.session:
+
+        #     user_id = flask.session['user_id']
+        with Session(setup.engine) as session:
+            query = select(setup.Place).filter_by(google_api_place_id=place_id)
+            try: 
+                existing_place = session.scalars(query).one()
+            
+            except:
+                existing_place = None
 
 
-                if not existing_place:                    
-                    new_place = setup.Place(google_api_place_id=place_id, name=name,   rating=rating, open_now=open_now, mobile_number=contacts, location=maps_url, photos=json.dumps(photographs), reviews=json.dumps(place_reviews))
+            if not existing_place:                    
+                new_place = setup.Place(
+                    google_api_place_id=place_id,
+                    name=name,   rating=rating,
+                    open_now=open_now,
+                    mobile_number=contacts,
+                    location=maps_url,
+                    photos=json.dumps(photographs),
+                    reviews=json.dumps(place_reviews),
+                    # type_of_place=json.dumps(place_type)
+                    )
 
-                    session.add(new_place)
-                    session.flush()
-                    new_place_id = new_place.google_api_place_id
+                session.add(new_place)
+                session.flush()
+                new_place_id = new_place.google_api_place_id
 
-                    # query = select(setup.User).filter_by(id='user_id')
-                    # user = session.scalars(query).one()
+                # query = select(setup.User).filter_by(id='user_id')
+                # user = session.scalars(query).one()
+
+                if 'user_id' in flask.session:
+
+                    user_id = flask.session['user_id']
 
                     new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
                     session.add(new_bkmk)
-                    session.commit()
-            
-    # print(f"\n\tThis is the dictionary you want\n\t{places_result}\n")
+                
+                session.commit()
+
+        
+    print("\n\n\t len of res => ", len(places_result))
+    
     return render_template("places.html", places=places_result)
 
 
@@ -433,32 +608,33 @@ def get_places():
 def get_specific_place(place_id):
     # specific_place = [place for place in homeplaces_result if place.get("place_name")==place_name]
 
-    if 'user_id' in flask.session:
-        with Session(setup.engine) as session:
-            query = select(setup.Place).filter_by(google_api_place_id=place_id)
+    # if 'user_id' in flask.session:
+    with Session(setup.engine) as session:
+        query = select(setup.Place).filter_by(google_api_place_id=place_id)
 
-            place = session.scalars(query).one()
+        place = session.scalars(query).one()
 
-            places_dict = {}
-            places_dict["place_name"] = place.name
-            places_dict["rating"] = place.rating
-            places_dict["open_now"] = place.open_now
-            places_dict["mobile_number"] = place.mobile_number
-            places_dict["location"] = place.location
-            places_dict["photos"] = json.loads(place.photos)
-            places_dict["reviews"] = json.loads(place.reviews)
-            places_dict["google_api_place_id"] = place.google_api_place_id
+        places_dict = {}
+        places_dict["place_name"] = place.name
+        places_dict["rating"] = place.rating
+        places_dict["open_now"] = place.open_now
+        places_dict["mobile_number"] = place.mobile_number
+        places_dict["location"] = place.location
+        places_dict["photos"] = json.loads(place.photos)
+        places_dict["reviews"] = json.loads(place.reviews)
+        places_dict["google_api_place_id"] = place.google_api_place_id
 
-            # check if user is signed in or not
-            user_authenticated = checkUserStatus()
+        # check if user is signed in or not
+        user_authenticated = checkUserStatus()
 
-            # if user is signed in, add this place to the user's recently
-            # viewed places
+        # if user is signed in, add this place to the user's recently
+        # viewed places
 
-            return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
-    else:
-        print(f'\n***{places_result}***\n')
+        return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
+    # else:
+    #     print(f'\n***{places_result}***\n')
         return render_template("place_details.html", place=places_result[0], user_authenticated=user_authenticated)
+
 
 
 @app.route("/saved_places", strict_slashes=False)

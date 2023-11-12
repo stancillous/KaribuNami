@@ -117,10 +117,11 @@ section .pts-container .pts-content .place-details .place-info .place-name {
 }
 section .pts-container .pts-content .place-details .place-info p {
   padding: 0.9rem 0;
-  opacity: 0.9;
+  opacity: 0.96;
 }
 section .pts-container .pts-content .place-details .place-info .btns-wrp {
   margin-top: 2rem;
+  max-width: 600px;
   margin-left: -1rem;
   display: flex;
   justify-content: space-between;
@@ -189,6 +190,15 @@ section .pts-container .pts-content .place-details .place-info .btns-wrp .topbtn
   left: 0;
   top: 0;
   border-radius: 10px;
+}
+section .pts-container .pts-content .place-details .place-info .place-tags-wrp {
+  margin: 1rem 0;
+}
+section .pts-container .pts-content .place-details .place-info .place-tags-wrp .pt-wrapper span {
+  color: white;
+  opacity: 0.5;
+  text-decoration: underline;
+  padding-right: 1.8rem;
 }
 section .pts-container .pts-content .the-place-reviews {
   padding-top: 5rem;

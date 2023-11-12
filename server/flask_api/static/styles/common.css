@@ -45,8 +45,21 @@ body::-webkit-scrollbar-thumb{
     background-color: #504b4b;
 }
 
+/* FOR OUR ERROR PAGE (error.html) */
+
+
 
 /* FOR THE MODALS */
+
+.error-page-wrp{
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 2rem;
+  opacity: .9;
+}
+.error-page-wrp .error-info{
+  padding: 2rem 0;
+}
 
 .addmodal {
     position: fixed;

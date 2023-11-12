@@ -153,11 +153,12 @@ section{
                     }
                     p{
                         padding: .9rem 0;
-                        opacity: .9;
+                        opacity: .96;
                     }
 
                     .btns-wrp{
                         margin-top:2rem;
+                        max-width: 600px;
                         margin-left: -1rem;
                         display: flex;
                         justify-content: space-between;
@@ -232,6 +233,18 @@ section{
                                     top: 0;
                                     border-radius: 10px;
                                 }
+                            }
+                        }
+                    }
+
+                    .place-tags-wrp{
+                        margin: 1rem 0;
+                        .pt-wrapper{
+                            span{
+                                color: white;
+                                opacity: .5;
+                                text-decoration: underline;
+                                padding-right: 1.8rem;
                             }
                         }
                     }
