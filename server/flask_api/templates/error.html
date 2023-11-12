@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Page</title>
+    <title>Karibu Nami | Error Page</title>
+    <link rel="stylesheet" href="../static/styles/common.css">
+
 </head>
 <body>
-    {% if error=="wrong link" %}
-    <h1>The verification link is wrong or has expired. Click <a href="/resend_link">here</a> to generate a new one.</h1>
-    
-    {% elif error=="client" %}
-    <h1>Page Not Found</h1>
-    <h2>Oops... The page you're looking for does not exist. Click <a href="/">here</a> to go somewhere nice :)</h2>
-    
-    {% elif error=="server" %}
-    <h1>Internal Server Error</h1>
-    <h2>Oops... We seem to have made a mistake, sorry!. Click <a href="/">here</a> to go somewhere nice :)</h1>
+    <main class="error-page-wrp">
 
-    {% else %}
-    <h1>Error</h1>
-    <h2>{{error}}</h2>
-    {% endif %}
+        {% if error=="wrong link" %}
+        <h2 class="error-info">The verification link is wrong or has expired. Click <a href="/resend_link">here</a> to generate a new one.</h2>
+        
+        {% elif error=="client" %}
+        <h1>Page Not Found</h1>
+        <h2 class="error-info">Oops... The page you're looking for does not exist. Click <a href="/">here</a> to go somewhere nice :)</h2>
+        
+        {% elif error=="server" %}
+        <h1>Internal Server Error</h1>
+        <h2 class="error-info">Oops... We seem to have made a mistake, sorry!. Click <a href="/">here</a> to go somewhere nice :)</h1>
+    
+        {% else %}
+        <h1>Error</h1>
+        <h2 class="error-info">{{error}}</h2>
+        {% endif %}
+    </main>
 </body>
 </html>
