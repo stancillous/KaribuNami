@@ -113,3 +113,11 @@ Register an email for karibu nami ( i am currently using mine)
 UI FOR our error pages
 
 Check the message sent when sending the user an email for resetting their password (Thank you! A password reset request has been sent to your email. Please make sure to check your spam in case you cannot find it.)
+
+Error when non-signed in users click on a specific place
+
+Should we have a 'give feedback' option. Like anyone can give us feedback about the app.
+
+The google api is only giving us a max of 5 reviews for each place
+
+default pics for places without any
