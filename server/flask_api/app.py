@@ -151,7 +151,7 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"https//www.botontapwater.tech/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"https://www.botontapwater.tech/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
         subject = "[Karibu Nami] Verify Your Email Address"
@@ -238,7 +238,7 @@ def reset_password_page():
 
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"https//www.botontapwater.tech/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
+                verification_link = f":/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
@@ -360,7 +360,7 @@ def resend_verification_link_to_user():
                 user = session.scalars(query).one()
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"https//www.botontapwater.tech/verify_user?user_token={verification_token}"  # link to be sent to the user
+                verification_link = f":/verify_user?user_token={verification_token}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
