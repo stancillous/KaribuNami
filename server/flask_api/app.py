@@ -153,7 +153,7 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"0.0.0.0:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
         # call the function to send the ver_link to the user
@@ -215,7 +215,7 @@ def resend_verification_link_to_user():
                 user = session.scalars(query).one()
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+                verification_link = f"0.0.0.0:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
@@ -281,7 +281,7 @@ places_result = []
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
     """Returns results for places near the user"""
-    # places_result = []
+    places_result = []
     PLACE = request.form.get("place_name")
     # new_lat = request.form.get("location-lat")
     # new_long = request.form.get("location-long")
@@ -432,28 +432,33 @@ def get_places():
 @app.route("/place/<string:place_id>", strict_slashes=False)
 def get_specific_place(place_id):
     # specific_place = [place for place in homeplaces_result if place.get("place_name")==place_name]
-    with Session(setup.engine) as session:
-        query = select(setup.Place).filter_by(google_api_place_id=place_id)
 
-        place = session.scalars(query).one()
+    if 'user_id' in flask.session:
+        with Session(setup.engine) as session:
+            query = select(setup.Place).filter_by(google_api_place_id=place_id)
 
-        places_dict = {}
-        places_dict["place_name"] = place.name
-        places_dict["rating"] = place.rating
-        places_dict["open_now"] = place.open_now
-        places_dict["mobile_number"] = place.mobile_number
-        places_dict["location"] = place.location
-        places_dict["photos"] = json.loads(place.photos)
-        places_dict["reviews"] = json.loads(place.reviews)
-        places_dict["google_api_place_id"] = place.google_api_place_id
+            place = session.scalars(query).one()
 
-        # check if user is signed in or not
-        user_authenticated = checkUserStatus()
+            places_dict = {}
+            places_dict["place_name"] = place.name
+            places_dict["rating"] = place.rating
+            places_dict["open_now"] = place.open_now
+            places_dict["mobile_number"] = place.mobile_number
+            places_dict["location"] = place.location
+            places_dict["photos"] = json.loads(place.photos)
+            places_dict["reviews"] = json.loads(place.reviews)
+            places_dict["google_api_place_id"] = place.google_api_place_id
 
-        # if user is signed in, add this place to the user's recently
-        # viewed places
+            # check if user is signed in or not
+            user_authenticated = checkUserStatus()
 
-        return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
+            # if user is signed in, add this place to the user's recently
+            # viewed places
+
+            return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
+    else:
+        print(f'\n***{places_result}***\n')
+        return render_template("place_details.html", place=places_result[0], user_authenticated=user_authenticated)
 
 
 @app.route("/saved_places", strict_slashes=False)
