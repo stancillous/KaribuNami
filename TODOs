@@ -95,19 +95,19 @@ It's exposed. Set it somewhere else. like a .env file
 FILE LENGTH
 our app.py file is more than 400 lines long. should we put other functionality in new files?
 
-SEND EMAIL FUNCTION (PASSWORD)
-the password is exposed. set it somewhere else
+<!-- SEND EMAIL FUNCTION (PASSWORD)
+the password is exposed. set it somewhere else -->
 
 VERIFIED
-Maybe after user clicks the link to verify their email, we should show them a "email verified" popup instead of sending themto the login page
+Maybe after user clicks the link to verify their email, we should show them a "email verified" popup instead of sending them to the login page
 
 
 TEAM
-on landing page, include links to the author's github, linkedin, etc
+on landing page, include links to the team members github, linkedin, etc
 
 
 EMAIL DURING REGISTRATION
-There shouldn't be duplicate emails
+<!-- There shouldn't be duplicate emails -->
 Register an email for karibu nami ( i am currently using mine)
 
 UI FOR our error pages
