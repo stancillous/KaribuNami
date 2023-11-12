@@ -23,6 +23,11 @@ import json
 import os
 from dotenv import load_dotenv
 
+# for sending emails
+import smtplib 
+from email.message import EmailMessage
+
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -53,9 +58,12 @@ PHOTO_REFERENCE = ""
 
 places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={PHOTO_REFERENCE}&key={API_KEY}"
 
+
 #Parameters for google maps location HTTP request
 LATITUDE = ""
 LONGITUDE = ""
+
+maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 # function to check if user is logged in
 def checkUserStatus():
@@ -65,40 +73,38 @@ def checkUserStatus():
     return False
 
 
-maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 
+# def sendEmailToUser(receiver_email, verification_link, message):
+#     """
+#     function to send the verification link to a registered user
+#     Don't change the format of the message variable below (ie it's indentation)
+#     """
 
-def sendEmailToUser(receiver_email, verification_link):
-    """
-    function to send the verification link to a registered user
-    Don't change the format of the message variable below (ie it's indentation)
-    """
+#     port = 465  # SSL
+#     smtp_server = "smtp.gmail.com"
+#     sender_email = "stancillousray@gmail.com" 
+#     password = os.getenv("mail_key") 
 
-    port = 465  # SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = "stancillousray@gmail.com" 
-    password = os.getenv("mail_key") 
-    message = f"""\
-Subject: [karibu nami] verify your email address
+#     context = ssl.create_default_context()
+#     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+#         server.login(sender_email, password)
+#         server.sendmail(sender_email, receiver_email, message)
 
-Hi,
+def sendEmailToUser(receiver_email, subject, message):
+    EmailAdd = "karibunami@gmail.com" #senders Gmail id over here
+    # Pass = os.getenv("mail_key") #senders Gmail's Password over here 
+    Pass = "ezrg zoqj jxot wkvi"
+    msg = EmailMessage()
+    msg['Subject'] =  subject # Subject of Email
+    msg['From'] = EmailAdd
+    msg['To'] =  receiver_email # Reciver of the Mail
+    msg.set_content(message) # Email body or Content
 
-This message is sent from Karibu Nami.
-
-Click on the link below to verify your email address:
-{verification_link}
-
-If you did not ask to verify this address, you can ignore this email.
-
-Thanks,
-Karibu Nami Team
-"""
-
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+    #### >> Code from here will send the message << ####
+    with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp: #Added Gmails SMTP Server
+        smtp.login(EmailAdd,Pass) #This command Login SMTP Library using your GMAIL
+        smtp.send_message(msg) #This Sends the message
 
 
 @app.errorhandler(404)
@@ -161,11 +167,27 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
+        subject = "[Karibu Nami] Verify Your Email Address"
+        message = f"""\
+
+        Hi,
+
+        This message is sent from Karibu Nami.
+
+        Click on the link below to verify your email address:
+        {verification_link}
+
+        If you did not ask to verify this address, you can ignore this email.
+
+        Thanks,
+        Karibu Nami Team
+        """
+
         # call the function to send the ver_link to the user
-        sendEmailToUser(email, verification_link)
+        sendEmailToUser(email, subject, message)
 
         
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -236,8 +258,26 @@ def reset_password_page():
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
+                
+            
+                subject = "[Karibu Nami] Password Reset"
+                message = f"""\
+                Hi,
 
-                sendEmailToUser(user_email, verification_link)  # send the new verification email to the user
+                This message is sent from Karibu Nami.
+                
+                We have received a request to reset your Karibu Nami account password.
+
+                Click on the link below to change your account password:
+                {verification_link}
+
+                If you did not ask to change your password, you can ignore this email.
+
+                Thanks,
+                Karibu Nami Team
+                """
+                
+                sendEmailToUser(user_email, subject, message)  # send the new verification email to the user
                 return "Thank you! A password reset request has been sent to your email. Please make sure to check your spam in case you cannot find it."
 
 
@@ -336,12 +376,27 @@ def resend_verification_link_to_user():
                 user = session.scalars(query).one()
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"54.175.136.149:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
+                verification_link = f"127.0.0.1:5000/verify_user?user_token={verification_token}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
 
-                sendEmailToUser(user_email, verification_link)  # send the new verification email to the user
+                subject = "[Karibu Nami] Verify Your Email Address"
+                message = f"""\
+                Hi,
+
+                This message is sent from Karibu Nami.
+
+                Click on the link below to verify your email address:
+                {verification_link}
+
+                If you did not ask to verify this address, you can ignore this email.
+
+                Thanks,
+                Karibu Nami Team
+                """
+                sendEmailToUser(user_email, subject, message)  # send the new verification email to the user
+                
                 return render_template("login.html", email_verifed=False)
 
 
