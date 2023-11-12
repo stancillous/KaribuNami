@@ -595,6 +595,7 @@ def get_places():
 
                     new_bkmk = setup.Bookmark(user_id=user_id, place_id=new_place_id, bookmarked=0)
                     session.add(new_bkmk)
+            
                 
                 session.commit()
 

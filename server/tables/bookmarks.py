@@ -22,7 +22,7 @@ class Bookmark(Base):
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     user_id = Column(Integer, ForeignKey(User.id), nullable=False)
     place_id = Column(String(256), ForeignKey(Place.google_api_place_id), nullable=False)
-    created_at = Column(DateTime, default=datetime.now)
+    # created_at = Column(DateTime, default=datetime.now)
     bookmarked = Column(Integer, nullable=False)
 
     __table_args__ = (CheckConstraint('bookmarked IN (0, 1)', name='check_bookmarked'),)

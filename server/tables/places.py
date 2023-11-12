@@ -1,9 +1,10 @@
-from sqlalchemy import ForeignKey, create_engine, Column, Integer, CheckConstraint
+from sqlalchemy import ForeignKey, create_engine, Column, Integer, CheckConstraint, DateTime
 from sqlalchemy import String, Text
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 import logging
 from sqlalchemy import inspect
+from datetime import datetime
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
@@ -23,4 +24,5 @@ class Place(Base):
     location = Column(String(256), nullable=False)
     photos = Column(Text, nullable=True)
     reviews = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.now)
     # type_of_place = Column(Text, nullable=True)
