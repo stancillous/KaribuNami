@@ -23,3 +23,4 @@ class Place(Base):
     location = Column(String(256), nullable=False)
     photos = Column(Text, nullable=True)
     reviews = Column(Text, nullable=True)
+    # type_of_place = Column(Text, nullable=True)

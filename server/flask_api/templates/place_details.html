@@ -26,7 +26,21 @@
                                     <img id="place-image" src={{place.photos[0]}} alt="image of the place">
                                     <div class="place-info">
                                         <h1 class="place-name">{{place.place_name}}</h1>
+
+                                        <!-- i was thinking of adding 'tags' of a place  -->
+                                        <!-- <div class="place-tags-wrp">
+                                            <div class="pt-wrapper">
+                                                {% for type in place.type_of_place %}
+                                                <span> {{type.replace("_", " ")}}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div> -->
+
+                                        {% if place.mobile_number %}
                                         <p>Contact: {{place.mobile_number}}</p>
+                                        {%else %}
+                                        <p>Contact: Not provided</p>
+                                        {% endif %}
                                         {% if place.open_now %}
                                         <p>Is now open</p>            
                                         {% else %}
@@ -71,7 +85,16 @@
                                                 </button>
                                                 </a>
                                             </div>
-                                        </div>       
+                                        </div>      
+                                        
+                                        <!-- <div class="place-tags-wrp">
+                                            <div class="pt-wrapper">
+                                                {% for type in place.type_of_place %}
+                                                <span> {{type.replace("_", " ")}}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div> -->
+                                        
                                     </div>
                                 </div>
 

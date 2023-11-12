@@ -8,24 +8,20 @@
 
 
 input{
-    background-color:var(--bgColor);
-    border-bottom: 1px solid whitesmoke;
     width: 100%;
     font-size: 1.3rem;
     padding: 1.5rem;
     background-color: whitesmoke;
-    border: 1px solid whitesmoke;
     border: 1px solid rgba(241, 221, 221, 0.375);
     color: black;
+    border-radius: .2rem;
 }
 
-input:focus{
-    outline: none;
-}
+
 h2{
     color: white;
-    font-size: 2rem;
-    opacity: .9;
+    font-size: 2.6rem;
+    /* opacity: .9; */
     text-align: center;
     padding-bottom: 4rem;
 }
@@ -42,6 +38,7 @@ button{
     font-size: 1.2rem;
     font-weight: 500;
     text-transform: capitalize;
+    border-radius: 2rem;
     background-color: whitesmoke;
     cursor: pointer;
     color: black;
@@ -65,6 +62,12 @@ button{
     font-weight: 600;
 }
 
+.resend-p-info{
+    opacity: .9;
+    padding-bottom: 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
 
 .password-input{
     position: relative;    
