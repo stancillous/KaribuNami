@@ -24,16 +24,14 @@
   border-bottom: 1px solid whitesmoke;
   width: 100%;
   font-size: 1.3rem;
+  border-radius: 0.2rem;
   padding: 1rem;
-  border: 1px solid whitesmoke;
   border: 1px solid rgba(241, 221, 221, 0.375);
   color: whitesmoke;
 }
-.main .signup-form-container .signup-form #signup-form div input:focus {
-  outline: none;
-}
 .main .signup-form-container .signup-form #signup-form div .password-input {
   position: relative;
+  margin: unset;
 }
 .main .signup-form-container .signup-form #signup-form div .password-input svg {
   color: white;

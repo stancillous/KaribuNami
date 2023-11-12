@@ -33,18 +33,15 @@
                         border-bottom: 1px solid whitesmoke;
                         width: 100%;
                         font-size: 1.3rem;
+                        border-radius: .2rem;
                         padding: 1rem;
-                        border: 1px solid whitesmoke;
                         border: 1px solid rgba(241, 221, 221, 0.375);
                         color: whitesmoke;
-                        &:focus{
-                            outline: none;
-                            // border-bottom: 1px solid whitesmoke;
-                        }
                     }
 
                     .password-input{
                         position: relative;
+                        margin: unset;
                         
                         svg{
                             color: white;
