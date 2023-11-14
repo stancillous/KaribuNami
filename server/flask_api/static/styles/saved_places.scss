@@ -35,15 +35,12 @@ $padding-top:7rem;
                 padding-right: 4rem;
                 
                 h1{
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     text-transform: capitalize;
                     padding: 2rem;
-                    font-weight: 500;
+                    font-weight: 400;
 
-                    span{
-                        text-decoration: dotted;
-                        text-decoration: underline;
-                    }
+                    
                 }
                 
                 //the text to be shown if user has no saved places
@@ -95,24 +92,25 @@ $padding-top:7rem;
                         color: white;
                     }
    
-                    
-                    .date-saved{
-                        font-size: 1.2rem;
-                        position: absolute;
-                        top:30% ;
-                        right: 4rem;
-                        opacity: .9;
-                    }
 
                     .place-details{
                         padding-left: 1.7rem;
+                        width: 100%;
                         .place-name{
                             display: block;
-                            font-size: 1.5rem;
+                            font-size: 1.4rem;
                             text-transform: capitalize;
                             font-weight: $bold;
+                            font-weight: 400;
                             padding-bottom: .5rem;
 
+                        }
+                        .rating-date-saved{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            width: 100;
+                          
                         }
                         .place-rating{
                             padding-top:1rem;

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/styles/saved_places.css" />
     <title>Karibu Nami | Saved Places</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+
   </head>
   <body>
     <noscript>You must enable JavaScript in your browser to use this app!</noscript>
@@ -12,7 +14,6 @@
     <main>
       <div class="saved-places-root-div">
         <section class="saved-places-section">
-          <!-- spotify attribution logo -->
           <div class="logo-image-div">
             <!-- <a href="/" class="logo" >Karibu Nami</a> -->
           </div>
@@ -42,9 +43,13 @@
                   />
                   <div class="place-details">
                     <p class="place-name">{{place.place_name}}</p>
-                    <p class="place-rating">{{place.rating}}/5</p>
+                    
+                    <div class="rating-date-saved">
+                      <p class="place-rating">{{place.rating}}/5</p>
+                      <p class="date-saved">Date saved: 10/11/2023</p>
+
+                    </div>
                   </div>
-                  <p class="date-saved">Date saved: 10/11/2023</p>
                 </a>
 
                 {% endfor %}
