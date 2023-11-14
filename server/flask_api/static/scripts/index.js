@@ -6,16 +6,18 @@ sendForm.addEventListener("submit", (e)=>{
     navigator.geolocation.getCurrentPosition(function (position) {
         const { latitude, longitude } = position.coords;
 
-
         document.querySelector(".location-lat").value = latitude
         document.querySelector(".location-long").value = longitude
 
-        console.log(document.querySelector(".location-lat").value)
-        console.log(document.querySelector(".location-long").value)
         sendForm.submit()   // submit the form
-
-      });
-
+      },
+      function (error) {
+        if (error.code === error.PERMISSION_DENIED) {
+            // Handle permission denied
+            alert("Please allow location access to submit the form.");
+        }
+    }
+      );
 })
 
 //DYNAMICALLY SET THE YEAR (ON THE FOOTER)
