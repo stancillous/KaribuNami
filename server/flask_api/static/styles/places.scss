@@ -19,7 +19,6 @@ $web-color:rgb(23, 20, 20);
     width: 100%;
     padding:3rem 1rem;
 
-   //SPOTIFY ATTRIBUTION IMAGE
    .place-image-div{
         margin: 0 auto;
         display: flex;
@@ -56,12 +55,12 @@ $web-color:rgb(23, 20, 20);
         .yp-content{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    
-
+            place-items: center;
             .place{
                 text-align: center;
                 width: 22rem;
-                margin: 3rem;
+                // margin: 3rem;
+                margin: 3rem 1.8rem;
                 text-align: center;
                 display: flex;
                 flex-direction: column;
@@ -116,18 +115,20 @@ $web-color:rgb(23, 20, 20);
         // padding: 3rem;
         // border: 2px solid;
 
-        //hiding the spotify attribution icon on smaller screens
         .place-image-div{
             display: none;
         }
 
         .yp-container .yp-content{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            // display: flex;
+            // flex-wrap: wrap;
+            // justify-content: center;
 
             .place{
                 width: 20rem;
+                // width: 100%;
 
             }
         } 
@@ -141,6 +142,7 @@ $web-color:rgb(23, 20, 20);
         .yp-container .yp-content{
             .place #place-image{
                 width: 18rem;
+                // width: 100%;
             }
         } 
     }
@@ -155,20 +157,42 @@ $web-color:rgb(23, 20, 20);
             h1{
                 font-size: 1.4rem;
             }
-        } .yp-content .place{
-            width: 15rem;
-            margin: unset;
-            margin:3rem .3rem;
-            #place-image{
-                width: 12rem;
-                height: 12rem;
-                
-            }
-            #place-name{
-                font-size: 1.9rem;
-            }
-
+            .yp-content .place{
+                // width: 15rem;
+                margin: unset;
+                margin:3rem .2rem;
+                width: 100%;
+                #place-image{
+                    width: 12rem;
+                    width: 15rem;
+                    height: 12rem;
+                    
+                }
+                #place-name{
+                    font-size: 1.rem;
+                }
+    
+            } 
         } 
     }
 
+}
+
+@media screen and (max-width:350px) {
+    .places-section .yp-container .yp-content .place #place-image{
+        width: 11rem;
+    }
+    
+}
+
+@media screen and (max-width:338px) {
+    .places-section .yp-container .yp-content{
+        grid-template-columns: 1fr;
+
+        .place #place-image{
+            width: 20rem;
+            height: 20rem;
+        }
+    }
+    
 }

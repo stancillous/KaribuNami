@@ -37,11 +37,12 @@
 .places-section .yp-container .yp-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  place-items: center;
 }
 .places-section .yp-container .yp-content .place {
   text-align: center;
   width: 22rem;
-  margin: 3rem;
+  margin: 3rem 1.8rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -85,9 +86,8 @@
     display: none;
   }
   .places-section .yp-container .yp-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   .places-section .yp-container .yp-content .place {
     width: 20rem;
@@ -102,16 +102,31 @@
   .places-section .yp-container h1 {
     font-size: 1.4rem;
   }
-  .places-section .yp-content .place {
-    width: 15rem;
+  .places-section .yp-container .yp-content .place {
     margin: unset;
-    margin: 3rem 0.3rem;
+    margin: 3rem 0.2rem;
+    width: 100%;
   }
-  .places-section .yp-content .place #place-image {
+  .places-section .yp-container .yp-content .place #place-image {
     width: 12rem;
+    width: 15rem;
     height: 12rem;
   }
-  .places-section .yp-content .place #place-name {
-    font-size: 1.9rem;
+  .places-section .yp-container .yp-content .place #place-name {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .places-section .yp-container .yp-content .place #place-image {
+    width: 11rem;
+  }
+}
+@media screen and (max-width: 338px) {
+  .places-section .yp-container .yp-content {
+    grid-template-columns: 1fr;
+  }
+  .places-section .yp-container .yp-content .place #place-image {
+    width: 20rem;
+    height: 20rem;
   }
 }/*# sourceMappingURL=places.css.map */

@@ -16,15 +16,10 @@
   padding-right: 4rem;
 }
 .saved-places-section .tts-container .tts-content .tts-header h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: capitalize;
   padding: 2rem;
-  font-weight: 500;
-}
-.saved-places-section .tts-container .tts-content .tts-header h1 span {
-  -webkit-text-decoration: dotted;
-          text-decoration: dotted;
-  text-decoration: underline;
+  font-weight: 400;
 }
 .saved-places-section .tts-container .tts-content .tts-header .no-saved-places {
   padding: 2rem;
@@ -63,22 +58,23 @@
      object-fit: cover;
   color: white;
 }
-.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .date-saved {
-  font-size: 1.2rem;
-  position: absolute;
-  top: 30%;
-  right: 4rem;
-  opacity: 0.9;
-}
 .saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details {
   padding-left: 1.7rem;
+  width: 100%;
 }
 .saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details .place-name {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-transform: capitalize;
   font-weight: 700;
+  font-weight: 400;
   padding-bottom: 0.5rem;
+}
+.saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details .rating-date-saved {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100;
 }
 .saved-places-section .tts-container .tts-content .tt-section-div .saved-place .place-details .place-rating {
   padding-top: 1rem;
