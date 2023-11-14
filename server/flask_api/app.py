@@ -63,6 +63,11 @@ places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={
 LATITUDE = ""
 LONGITUDE = ""
 
+
+domain_name = "https://www.botontapwater.tech"  # to be used in verification links
+# domain_name = "127.0.0.1:5000"
+
+
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 # function to check if user is logged in
@@ -151,7 +156,7 @@ def register():
 
 
         verification_token = secrets.token_urlsafe()  # generate a 
-        verification_link = f"https://www.botontapwater.tech/verify_user?user_token={verification_token}"  # link to be sent to the user
+        verification_link = f"{domain_name}/verify_user?user_token={verification_token}"  # link to be sent to the user
         
 
         subject = "[Karibu Nami] Verify Your Email Address"
@@ -238,7 +243,7 @@ def reset_password_page():
 
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"https://www.botontapwater.tech/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
+                verification_link = f"{domain_name}/reset_password_link?source=email&reset_password_code={verification_token}&user_email={user_email}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
@@ -360,7 +365,7 @@ def resend_verification_link_to_user():
                 user = session.scalars(query).one()
                 # generate a new token for the user and update it in the DB
                 verification_token = secrets.token_urlsafe()  # generate a unique token
-                verification_link = f"https://www.botontapwater.tech/verify_user?user_token={verification_token}"  # link to be sent to the user
+                verification_link = f"{domain_name}/verify_user?user_token={verification_token}"  # link to be sent to the user
 
                 user.verification_link = verification_token  # update the value in our database
                 session.commit()
@@ -533,7 +538,7 @@ def get_places():
                         "review_text": review.get("text", "No comment")
                     })
 
-        except:
+        except Exception as e:
             print(f"Request failed: {e}")
 
         single_place_result["place_name"] = name
@@ -702,19 +707,17 @@ def bookmark_place(place_id):
                 bkmk.bookmarked = 1
                 session.commit()
                 return redirect(url_for('saved_places'))
-                return redirect(location="/saved_places")
-                return jsonify("Place added to saved places")
+                # return render_template("place_details.html", saved_message="Place added successfully")
             
             else:
                 # print(f"Place already BOOKMARKED!!!")
                 bkmk.bookmarked = 0
                 session.commit()
                 return redirect(url_for('saved_places'))
-                return redirect(location="/saved_places")
-                return jsonify("Place removed from saved places")
+                # return render_template("place_details.html", saved_message="Place removed successfully")
     
 
-    return jsonify(f"Sign in to use this feature!!!")
+    return jsonify("Please sign in to use this feature!!!")
 
         
 @app.route('/logout', strict_slashes=False)
