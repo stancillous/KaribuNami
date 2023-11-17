@@ -1,22 +1,29 @@
 
 ## Karibu Nami
+##### [Web app link](https://www.botontapwater.tech/)
+
 <h5>Karibu Nami is a web application that is designed to assist travelers, tourists, and anyone exploring new areas who seek quick and user-friendly access to information about local establishments. 
 </h5>
 <h5>The app aims to address the challenge of efficiently accessing and understanding information about local businesses and services when one visits an unfamiliar place. Current search methods provide information that is often not well visualized and challenging for users to digest and utilize effectively.
 </h5>
 
 <h3>Video Demo</h3>
-<video src="karibunami.mp4" controls title="Title"></video>
+
+
+https://github.com/stancillous/KaribuNami/assets/99094257/8cf1b291-42b7-4c5a-870f-50f98e3b99a0
+
 
 <h3>How to Insall and Run the app</h3>
 <h5>The app uses MySQL as the primary database. Before running the app, there are environment variables (all strings), that the app uses and should be kept in a .env file. These are:
 </h5>
 
 ```
-mail_key = password of email used  # This is the app key needed in order to send verification links to users after they register.
+mail_key = password of email used  # This is the app key needed in order to send verification links to users after they register. You can change the email used in the app.py file and include yours, then use the passowrd of that email
+
 The ones below are credentials needed to log in to your MySQL database.
-MYSQLUSERNAME =  username
-PASSWORD = password
+
+MYSQLUSERNAME =  your MySQL username
+PASSWORD = your MYSQL password
 HOST = eg localhost
 DB = name of the database
 
@@ -24,7 +31,10 @@ DB = name of the database
 
 <h5>With those in place, you can run the app with the following command</h5>
 
-`python3 -m server.flask_api.app`
+```
+python3 -m server.flask_api.app
+```
+
 
 <h5>The server/flask_api/app.py file is the entry point of our app and where our flask routes lie.</h5>
 <h5>The different routes available are:</h5>
@@ -45,14 +55,24 @@ DB = name of the database
 <h3>Tests</h3>
 <h5>The unittests are in the /tests directory. You can run the tests with the following command</h5>
 
-`python3 -m unittest discover tests`
+```
+python3 -m unittest discover tests
+```
 
-<h3>How to contribute to the project</h3>
+<h3>How to contribute</h3>
+
+<h5>If you want to contribute to the project and make it better, your help is welcome. Follow the necessary steps when doing that. I'll list them below, but they won't be too detailed.</h5>
+<h5> 1. Fork the repository</h5>
+<h5> 2. Clone the repo on your local machine</h5>
+<h5> 3. Create a branch from which you'll make the changes</h5>
+<h5> 4. Make necessary changes and commit them</h5>
+<h5> 5. Push your changes to github.</h5>
+<h5> 6. Submit a pull request</h5>
+<h5> The team will review and merge the changes into the main branch of this project. You will get a notification email once the changes have been merged.</h5>
+
 
 <h3>Team</h3>
-Brandon Munda
-Stancillous Raymond
-<h5></h5>
-<h5></h5>
-<h5></h5>
-<h5></h5>
+
+##### [Brandon Munda](https://github.com/Bot-on-Tapwater)
+##### [Stancillous Raymond](https://github.com/stancillous)
+
