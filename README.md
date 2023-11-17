@@ -2,7 +2,7 @@
 ## Karibu Nami
 ##### [Web app link](https://www.botontapwater.tech/)
 
-<h5>Karibu Nami is a web application that is designed to assist travelers, tourists, and anyone exploring new areas who seek quick and user-friendly access to information about local establishments. 
+<h5>Karibu Nami is a web application that is designed to assist travellers, tourists, and anyone exploring new areas who seek quick and user-friendly access to information about local establishments. 
 </h5>
 <h5>The app aims to address the challenge of efficiently accessing and understanding information about local businesses and services when one visits an unfamiliar place. Current search methods provide information that is often not well visualized and challenging for users to digest and utilize effectively.
 </h5>
