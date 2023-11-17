@@ -89,7 +89,7 @@ FOR SIGNED IN USERS
 if a user goes to the specific place route, maybe add that place to their "recently viewed places"
 
 
-API KEY
+GOOGLEAPI KEY
 It's exposed. Set it somewhere else. like a .env file
 
 FILE LENGTH
@@ -122,4 +122,4 @@ The google api is only giving us a max of 5 reviews for each place
 
 default pics for places without any
 
-favicon for our site
+<!-- favicon for our site -->
