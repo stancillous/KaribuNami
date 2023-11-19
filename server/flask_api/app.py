@@ -523,7 +523,10 @@ def get_places():
                         photographs.append(photo_url)
                         count += 1
             else:
-                photographs = None
+                # set a default image for places with none
+                photographs = ["https://media.istockphoto.com/id/1392182937/vector/no-image-available-photo-coming-soon.jpg?s=612x612&w=0&k=20&c=3vGh4yj0O2b4tPtjpK-q-Qg0wGHsjseL2HT-pIyJiuc="]
+                # photographs = None
+
 
             # get the place's reviews
             place_reviews = []
@@ -575,7 +578,7 @@ def get_places():
                 existing_place = None
 
 
-            if not existing_place:                    
+            if not existing_place:        
                 new_place = setup.Place(
                     google_api_place_id=place_id,
                     name=name,   rating=rating,
@@ -605,7 +608,6 @@ def get_places():
                 session.commit()
 
         
-    print("\n\n\t len of res => ", len(places_result))
     
     return render_template("places.html", places=places_result)
 
@@ -633,13 +635,10 @@ def get_specific_place(place_id):
         # check if user is signed in or not
         user_authenticated = checkUserStatus()
 
-        # if user is signed in, add this place to the user's recently
+        # TO-DO: if user is signed in, add this place to the user's recently
         # viewed places
 
         return render_template("place_details.html", place=places_dict, user_authenticated=user_authenticated)
-    # else:
-    #     print(f'\n***{places_result}***\n')
-        return render_template("place_details.html", place=places_result[0], user_authenticated=user_authenticated)
 
 
 
