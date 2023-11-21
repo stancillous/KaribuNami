@@ -20,6 +20,7 @@ https://github.com/stancillous/KaribuNami/assets/99094257/8cf1b291-42b7-4c5a-870
 ```
 mail_key = password of email used  # This is the app key needed in order to send verification links to users after they register. You can change the email used in the app.py file and include yours, then use the passowrd of that email
 
+API_KEY = you need one from google before you use their api
 The ones below are credentials needed to log in to your MySQL database.
 
 MYSQLUSERNAME =  your MySQL username
