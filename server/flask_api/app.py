@@ -43,7 +43,8 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
-API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
+# API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
+API_KEY = os.getenv("API_KEY")
 
 # nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
@@ -445,6 +446,7 @@ def home_page():
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
+
     """Returns results for places near the user"""
     places_result = []
     PLACE = request.form.get("place_name")
