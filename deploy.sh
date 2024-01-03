@@ -10,21 +10,21 @@ yes | sudo apt-get install mysql-server
 
 yes | sudo apt install nginx
 
-# cd
+cd
 
-# git clone https://github.com/Bot-on-Tapwater/KaribuNami.git
+git clone https://github.com/Bot-on-Tapwater/KaribuNami.git
 
-# cd ~/Karibunami
+cd ~/Karibunami
 
 # pip freeze > requirements.txt
 
-# pip install requirements.txt
+pip install requirements.txt
 
-# env_file=".env"
+env_file=".env"
 
-# env_content="MYSQLUSERNAME='botontapwater'\nPASSWORD='TwoGreen1.'\nHOST='localhost'\nDB='karibunami'"
+env_content="MYSQLUSERNAME='botontapwater'\nPASSWORD='TwoGreen1.'\nHOST='localhost'\nDB='karibunami'"
 
-# echo -e "$env_content" > "$env_file"
+echo -e "$env_content" > "$env_file"
 
 pip install Flask
 
@@ -36,17 +36,17 @@ pip install mysql-connector-python
 
 pip install gunicorn
 
-# sudo mysql
+sudo mysql
 
-# CREATE DATABASE karibunami
+CREATE DATABASE karibunami
 
-# CREATE USER 'botontapwater'@'localhost' IDENTIFIED BY 'TwoGreen1.';
+CREATE USER 'botontapwater'@'localhost' IDENTIFIED BY 'TwoGreen1.';
 
-# GRANT ALL PRIVILEGES ON karibunami.* TO 'botontapwater'@'localhost';
+GRANT ALL PRIVILEGES ON karibunami.* TO 'botontapwater'@'localhost';
 
-# FLUSH PRIVILEGES;
+FLUSH PRIVILEGES;
 
-# exit;
+exit;
 
 file_path="/etc/nginx/sites-available/karibunami"
 
@@ -115,4 +115,5 @@ sudo systemctl enable karibunami
 
 sudo systemctl status karibunami
 
+echo "Completed all Steps Successfully"
 
