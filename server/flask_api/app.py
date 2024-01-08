@@ -479,12 +479,11 @@ def get_places():
         nearby_places_data = response.json()
         # print(f"nearby_places_data: {nearby_places_data}")
     except requests.exceptions.RequestException as e:
-        # print(f"Request failed: {e}")
+        print(f"Request failed: {e}")
 
     # Filter results
     nearby_places = nearby_places_data["results"]
 
-    # print(f"nearby_places: {nearby_places}")
 
     for place in nearby_places:
         single_place_result = {}
