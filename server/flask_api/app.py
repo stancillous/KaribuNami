@@ -453,6 +453,8 @@ def get_places():
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
 
+    print(f"PLACE: {PLACE} new_lat: {new_lat} new_long: {new_long}")
+
     LOCATION = "{},{}".format(new_lat, new_long)
 
     # print("\t\tnew lat is ", new_lat)
@@ -475,13 +477,14 @@ def get_places():
         response = requests.get(nearby_places_url, params=params)
         response.raise_for_status()
         nearby_places_data = response.json()
+        print(f"nearby_places_data: {nearby_places_data}")
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
 
     # Filter results
     nearby_places = nearby_places_data["results"]
 
-    print(nearby_places)
+    print(f"nearby_places: {nearby_places}")
 
     for place in nearby_places:
         single_place_result = {}
