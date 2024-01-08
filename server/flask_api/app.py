@@ -107,7 +107,7 @@ def server_error(error):
     return render_template("error.html", error="server")
 
 
-@app.route("/verify_user", strict_slashes=False)
+@app.route("/karibunami/verify_user", strict_slashes=False)
 def verify_user():
     """page to verify user after they click
     the verification link sent to their email"""
@@ -128,7 +128,7 @@ def verify_user():
     return render_template("login.html", email_verified=True)
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/karibunami/register', methods=['GET', 'POST'])
 def register():
 
     error = None
@@ -217,7 +217,7 @@ def register():
 
 
 
-@app.route("/reset_password", strict_slashes=False, methods=["GET", "POST"])
+@app.route("/karibunami/reset_password", strict_slashes=False, methods=["GET", "POST"])
 def reset_password_page():
     """
     this func will handle logic when a user wants to reset their password.
@@ -277,7 +277,7 @@ def reset_password_page():
 
 
 
-@app.route("/reset_password_link", strict_slashes=False, methods=["GET", "POST"])
+@app.route("/karibunami/reset_password_link", strict_slashes=False, methods=["GET", "POST"])
 def reset_password_func():
     """func to handle user resetting their password"""
 
@@ -346,7 +346,7 @@ def reset_password_func():
 
 
 
-@app.route("/resend_link", strict_slashes=False, methods={"POST", "GET"})
+@app.route("/karibunami/resend_link", strict_slashes=False, methods={"POST", "GET"})
 def resend_verification_link_to_user():
     """func to handle resending a verification link to the user"""
 
@@ -397,7 +397,7 @@ def resend_verification_link_to_user():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/karibunami/login', methods=['GET', 'POST'])
 def login():
     error = None  # if login fails, update this and send the error to our front-end
     if request.method == "GET":
@@ -433,7 +433,7 @@ def login():
     return render_template("login.html", error=error, email_verified=True)
 
 
-@app.route('/', strict_slashes = False)
+@app.route('/karibunami/', strict_slashes = False)
 def home_page():
     """Default home page and more landing page features"""
 
@@ -443,8 +443,8 @@ def home_page():
 
 
 # places_result = []
-# @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
-@app.route('/place', strict_slashes=False, methods=["POST"])
+# @app.route('/karibunami/place', strict_slashes=False, methods=["POST", "GET"])
+@app.route('/karibunami/place', strict_slashes=False, methods=["POST"])
 def get_places():
 
     """Returns results for places near the user"""
@@ -614,7 +614,7 @@ def get_places():
     return render_template("places.html", places=places_result)
 
 
-@app.route("/place/<string:place_id>", strict_slashes=False)
+@app.route("/karibunami/place/<string:place_id>", strict_slashes=False)
 def get_specific_place(place_id):
     # specific_place = [place for place in homeplaces_result if place.get("place_name")==place_name]
 
@@ -644,7 +644,7 @@ def get_specific_place(place_id):
 
 
 
-@app.route("/saved_places", strict_slashes=False)
+@app.route("/karibunami/saved_places", strict_slashes=False)
 def saved_places():
     """this should return the places that a signed in user has saved/bookmarked
     """
@@ -690,7 +690,7 @@ def saved_places():
 
 
 
-@app.route("/bookmark/<place_id>", strict_slashes=False)
+@app.route("/karibunami/bookmark/<place_id>", strict_slashes=False)
 def bookmark_place(place_id):
     """Allows user to bookmark a place for future reference"""
     # Check if user is logged in
@@ -721,7 +721,7 @@ def bookmark_place(place_id):
     return jsonify("Please sign in to use this feature!!!")
 
         
-@app.route('/logout', strict_slashes=False)
+@app.route('/karibunami/logout', strict_slashes=False)
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('home_page'))
