@@ -38,7 +38,7 @@ pip install gunicorn
 
 sudo mysql
 
-CREATE DATABASE karibunami
+CREATE DATABASE karibunami;
 
 CREATE USER 'botontapwater'@'localhost' IDENTIFIED BY 'TwoGreen1.';
 
