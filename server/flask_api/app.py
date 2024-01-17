@@ -37,39 +37,39 @@ load_dotenv()
 
 # Temporary location data
 # To be replaced with geolocation api
-sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
+# sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyali": "-4.022369424127242, 39.71599235637819", "nakuru": "-0.2889319590806711, 36.06197866570238"}
 
 # Parameters for nearby places api
 
 # LOCATION = sample_location["westlands"]
-SEARCH_RADIUS = 2000
+SEARCH_RADIUS = 1000
 # API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 API_KEY = os.getenv("API_KEY")
 
 # nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
 # Parameters for place details api
-PLACE_ID = ""
+# PLACE_ID = ""
 
-place_details_url = f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"
+# place_details_url = f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"
 
 #Parameters for places photos api
 MAXWIDTH = 400
 PHOTO_REFERENCE = ""
 
-places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={PHOTO_REFERENCE}&key={API_KEY}"
+# places_photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={MAXWIDTH}&photo_reference={PHOTO_REFERENCE}&key={API_KEY}"
 
 
 #Parameters for google maps location HTTP request
-LATITUDE = ""
-LONGITUDE = ""
+# LATITUDE = ""
+# LONGITUDE = ""
 
 
 domain_name = "https://www.botontapwater.tech"  # to be used in verification links
 # domain_name = "127.0.0.1:5000"
 
 
-maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
+# maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
 
 # function to check if user is logged in
 def checkUserStatus():
