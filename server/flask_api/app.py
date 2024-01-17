@@ -616,7 +616,7 @@ def get_places():
                 session.commit()
 
         
-    print(f"SEND TO FRONTEND\n{places_result}")
+    # print(f"SEND TO FRONTEND\n{places_result}")
     return render_template("places.html", places=places_result)
 
 
