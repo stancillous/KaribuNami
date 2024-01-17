@@ -465,6 +465,8 @@ def get_places():
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
+    print(f"nearby_places_url: {nearby_places_url}")
+    print(f"LOCATION: {LOCATION}")
 
     # limit results for now to avoid visual clutter
     params = {'limit': 3}
