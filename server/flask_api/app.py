@@ -43,7 +43,6 @@ sample_location = {"westlands": "-1.2519923507234287, 36.805050379582305", "nyal
 
 # LOCATION = sample_location["westlands"]
 SEARCH_RADIUS = 2000
-# API_KEY = "AIzaSyA8SGadbzIoWAW2dMVpL1ktZOIZDMI4QOk"
 API_KEY = os.getenv("API_KEY")
 
 # nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
@@ -66,7 +65,6 @@ LONGITUDE = ""
 
 
 domain_name = "https://www.botontapwater.tech"  # to be used in verification links
-# domain_name = "127.0.0.1:5000"
 
 
 maps_url = f'https://www.google.com/maps?q={LATITUDE},{LONGITUDE}'
@@ -83,20 +81,22 @@ def checkUserStatus():
 
 # function to send the verification link(s) to a user
 def sendEmailToUser(receiver_email, subject, message):
-    EmailAdd = "karibunami@gmail.com"
+    EmailAdd = os.getenv("email_address")
     Pass = os.getenv("mail_key") #senders Gmail's Password over here 
-    # Pass = "ezrg zoqj jxot wkvi"
     msg = EmailMessage()
     msg['Subject'] =  subject # Subject of Email
     msg['From'] = EmailAdd
     msg['To'] =  receiver_email
     msg.set_content(message) # Email body
 
-    with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-        smtp.login(EmailAdd,Pass) # logging in to our account
-        smtp.send_message(msg) # send the message
+    try:
 
+        with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+            smtp.login(EmailAdd,Pass) # logging in to our account
+            smtp.send_message(msg) # send the message
 
+    except Exception as error:
+        print(f"\n\n\t\tCan't send email because: {error}")
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("error.html", error="client")
@@ -115,7 +115,6 @@ def verify_user():
 
     with Session(setup.engine) as session:
         query = select(setup.User).filter_by(verification_link=verification_link)
-
         try:
             # get user whose verification link matches the verification_link above
             user = session.scalars(query).one()
@@ -344,8 +343,6 @@ def reset_password_func():
                 return render_template("error.html", error=error)
 
 
-
-
 @app.route("/resend_link", strict_slashes=False, methods={"POST", "GET"})
 def resend_verification_link_to_user():
     """func to handle resending a verification link to the user"""
@@ -394,8 +391,6 @@ def resend_verification_link_to_user():
                 print("error is ", e)         
                 return "error"
         
-
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -446,7 +441,6 @@ def home_page():
 # @app.route('/place', strict_slashes=False, methods=["POST", "GET"])
 @app.route('/place', strict_slashes=False, methods=["POST"])
 def get_places():
-
     """Returns results for places near the user"""
     places_result = []
     PLACE = request.form.get("place_name")
@@ -454,12 +448,6 @@ def get_places():
     new_long = request.form.get("location-long")
 
     LOCATION = "{},{}".format(new_lat, new_long)
-
-    # print("\t\tnew lat is ", new_lat)
-    # print("\t\tnew long is ", new_long)
-    # print("\t\t\tlocation is ", LOCATION)
-
-
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
@@ -480,6 +468,7 @@ def get_places():
 
     # Filter results
     nearby_places = nearby_places_data["results"]
+    # print("\n\n\t\tnearby places ", nearby_places)
 
     for place in nearby_places:
         single_place_result = {}
@@ -564,6 +553,7 @@ def get_places():
             single_place_result["bookmarked"] = 0
         
         places_result.append(single_place_result)
+        # print("\n\n\t\tplaces res => ", places_result)
 
 
        
@@ -610,7 +600,6 @@ def get_places():
                 session.commit()
 
         
-    
     return render_template("places.html", places=places_result)
 
 
@@ -683,7 +672,6 @@ def saved_places():
             username=flask.session['username'],
             bookmarks=all_bookmarks,
             len_bookmarks=len(all_bookmarks))
-            return jsonify(all_bookmarks)
         
     # if non signed in user tries to access this route, redirect them here
     return redirect(url_for('login'))
