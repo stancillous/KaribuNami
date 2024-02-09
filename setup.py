@@ -1,0 +1,29 @@
+from setuptools import setup, find_packages
+
+setup(
+    name='karibunami',
+    version='1.0',
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=[
+        'blinker==1.7.0',
+        'certifi==2023.11.17',
+        'charset-normalizer==3.3.2',
+        'click==8.1.7',
+        'Flask==3.0.0',
+        'greenlet==3.0.3',
+        'idna==3.6',
+        'itsdangerous==2.1.2',
+        'Jinja2==3.1.2',
+        'MarkupSafe==2.1.3',
+        'mysql-connector-python==8.2.0',
+        'parameterized==0.9.0',
+        'protobuf==4.21.12',
+        'python-dotenv==1.0.0',
+        'requests==2.31.0',
+        'SQLAlchemy==2.0.25',
+        'typing_extensions==4.9.0',
+        'urllib3==2.1.0',
+        'Werkzeug==3.0.1'
+    ],
+)
