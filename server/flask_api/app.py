@@ -27,6 +27,8 @@ from dotenv import load_dotenv
 import smtplib 
 from email.message import EmailMessage
 
+print("***FLASK APPLICATION START***")
+
 
 load_dotenv()
 
