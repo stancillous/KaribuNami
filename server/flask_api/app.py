@@ -30,8 +30,14 @@ from email.message import EmailMessage
 
 load_dotenv()
 
-app = Flask(__name__)
-app.secret_key = 'toosecretive'
+def create_app():
+
+    app = Flask(__name__)
+    app.secret_key = 'toosecretive'
+
+    return app
+
+app = create_app()
 
 # load_dotenv()
 
