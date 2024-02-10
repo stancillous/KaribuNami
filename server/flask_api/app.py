@@ -27,7 +27,12 @@ from dotenv import load_dotenv
 import smtplib 
 from email.message import EmailMessage
 
-print("***FLASK APPLICATION START***")
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+logging.debug('Start of Flask app')
 
 
 load_dotenv()
@@ -461,15 +466,7 @@ def get_places():
     new_lat = request.form.get("location-lat")
     new_long = request.form.get("location-long")
 
-    # print(f"PLACE: {PLACE} new_lat: {new_lat} new_long: {new_long}")
-
     LOCATION = "{},{}".format(new_lat, new_long)
-
-    # print("\t\tnew lat is ", new_lat)
-    # print("\t\tnew long is ", new_long)
-    # print("\t\t\tlocation is ", LOCATION)
-
-
 
     nearby_places_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={PLACE}&location={LOCATION}&radius={SEARCH_RADIUS}&type=&key={API_KEY}"
 
@@ -487,7 +484,7 @@ def get_places():
         response = requests.get(nearby_places_url, params=params)
         response.raise_for_status()
         nearby_places_data = response.json()
-        # print(f"nearby_places_data: {nearby_places_data}")
+        print(f"nearby_places_data: {nearby_places_data}")
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
 
