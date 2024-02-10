@@ -13,6 +13,13 @@ import smtplib, ssl  # for sending emails
 
 import secrets  # help to generate vefirication link token
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+logging.debug('Start of Flask app')
+
 from sqlalchemy import ForeignKey, create_engine, Column, Integer
 from sqlalchemy import String, select
 from sqlalchemy.orm import declarative_base
@@ -26,14 +33,6 @@ from dotenv import load_dotenv
 # for sending emails
 import smtplib 
 from email.message import EmailMessage
-
-import logging
-
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
-logging.debug('Start of Flask app')
-
 
 load_dotenv()
 
@@ -565,6 +564,8 @@ def get_places():
         single_place_result["photos"] = photographs
         single_place_result["reviews"] = place_reviews
         single_place_result["google_api_place_id"] = place_id
+
+        print(f"single_place_result: {single_place_result}")
         # single_place_result["type_of_place"] = place_type
 
         # add a place's total ratings
@@ -621,7 +622,7 @@ def get_places():
                 session.commit()
 
         
-    # print(f"SEND TO FRONTEND\n{places_result}")
+    print(f"SEND TO FRONTEND\n{places_result}")
     return render_template("places.html", places=places_result)
 
 
@@ -738,4 +739,5 @@ def logout():
     return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0') #, port=5000, debug=True)
+    # app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000, debug=True)
