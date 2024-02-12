@@ -46,6 +46,8 @@ def create_app():
 
 app = create_app()
 
+curl_path = '/usr/bin/curl'
+
 # load_dotenv()
 
 # Temporary location data
@@ -484,7 +486,7 @@ def get_places():
     try:
         # response = requests.get(nearby_places_url, params=params)
 
-        output = subprocess.check_output(['curl', nearby_places_url])
+        output = subprocess.check_output([curl_path, nearby_places_url])
 
         output_str = output.decode('utf-8')  # Decode bytes to string
         output_dict = json.loads(output_str)  # Convert string to dictionary
@@ -522,7 +524,7 @@ def get_places():
             # response.raise_for_status()
             # place_id_data = response.json()
 
-            output = subprocess.check_output(['curl', f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"])
+            output = subprocess.check_output([curl_path, f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"])
 
             output_str = output.decode('utf-8')  # Decode bytes to string
             place_id_data = json.loads(output_str)  # Convert string to dictionary
