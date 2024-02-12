@@ -518,9 +518,14 @@ def get_places():
             PLACE_ID = place_id
 
             # This is a repetition of the URL provided above, resolve duplicates
-            response = requests.get(f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}")
-            response.raise_for_status()
-            place_id_data = response.json()
+            # response = requests.get(f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}")
+            # response.raise_for_status()
+            # place_id_data = response.json()
+
+            output = subprocess.check_output(['curl', f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"])
+
+            output_str = output.decode('utf-8')  # Decode bytes to string
+            place_id_data = json.loads(output_str)  # Convert string to dictionary
 
             if "formatted_phone_number" in place_id_data["result"]:
                 contacts = place_id_data["result"]["formatted_phone_number"]
