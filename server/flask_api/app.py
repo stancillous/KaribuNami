@@ -5,6 +5,7 @@ from server.tables import setup
 import json
 import requests
 import flask
+import subprocess
 
 # from decouple import config
 from dotenv import load_dotenv
@@ -62,6 +63,7 @@ API_KEY = os.getenv("API_KEY")
 
 # Parameters for place details api
 # PLACE_ID = ""
+
 
 # place_details_url = f"https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&fields=&key={API_KEY}"
 
@@ -480,8 +482,13 @@ def get_places():
 
     # Make a GET request to API
     try:
-        response = requests.get(nearby_places_url, params=params)
-        response.raise_for_status()
+        # response = requests.get(nearby_places_url, params=params)
+
+        output = subprocess.check_output(['curl', nearby_places_url])
+        print(type(output))
+        print(output)
+
+        # response.raise_for_status()
         nearby_places_data = response.json()
         print(f"nearby_places_data: {nearby_places_data}")
     except requests.exceptions.RequestException as e:
