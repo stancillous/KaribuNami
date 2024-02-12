@@ -484,9 +484,13 @@ def get_places():
     try:
         # response = requests.get(nearby_places_url, params=params)
 
-        output = subprocess.check_output(['curl', nearby_places_url])
+        output = subprocess.check_output(['curl', params, nearby_places_url])
+
+        output_str = output.decode('utf-8')  # Decode bytes to string
+        output_dict = json.loads(output_str)  # Convert string to dictionary
+
         print(type(output))
-        print(output)
+        print(output_dict)
 
         # response.raise_for_status()
         nearby_places_data = response.json()
