@@ -489,17 +489,17 @@ def get_places():
         output_str = output.decode('utf-8')  # Decode bytes to string
         output_dict = json.loads(output_str)  # Convert string to dictionary
 
-        print(type(output))
-        print(output_dict)
+        # print(type(output))
+        # print(output_dict)
 
         # response.raise_for_status()
-        nearby_places_data = response.json()
-        print(f"nearby_places_data: {nearby_places_data}")
+        # nearby_places_data = response.json()
+        # print(f"nearby_places_data: {nearby_places_data}")
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
 
     # Filter results
-    nearby_places = nearby_places_data["results"]
+    nearby_places = output_dict["results"]
 
 
     for place in nearby_places:
